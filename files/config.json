@@ -1,6 +1,6 @@
 {
   "host": "localhost",
-  "datebaseName": "sql7709341",
+  "datebaseName": "parkingdpoodb",
   "username": "root",
   "password": "1234",
   "port": 3306,
