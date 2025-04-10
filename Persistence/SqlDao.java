@@ -1,5 +1,6 @@
 package Persistence;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.*;
 
@@ -11,7 +12,7 @@ public class SqlDao {
     private Connection connection;
     private final String iniciUrl = "jdbc:mysql://";
 
-    public SqlDao(SqlConfigurationDao configurationDao) {
+    public SqlDao(SqlConfigurationDao configurationDao) throws FileNotFoundException {
         this.username = configurationDao.readJson().getDatabaseUsername();
         this.password = configurationDao.readJson().getDatabasePassword();
         this.url = iniciUrl + configurationDao.readJson().getDatabaseHost() + ":" + configurationDao.readJson().getDatabasePort() + "/" + configurationDao.readJson().getDatebaseName();

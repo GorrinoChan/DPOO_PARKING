@@ -15,22 +15,21 @@ public class SqlConfigurationDao {
     private static Gson gson;
 
 
-    void ConfigurationDao() {
+    public SqlConfigurationDao() throws FileNotFoundException {
         if (!new File(path).exists()) {
-            //HAY QUE LANZAR UNA EXCEPCIÓN
+            throw new FileNotFoundException();
 
         }else {
             gson = new GsonBuilder().setPrettyPrinting().create();
         }
     }
 
-    public Configuration readJson() {
+    public Configuration readJson() throws FileNotFoundException {
         try {
             return gson.fromJson(gson.newJsonReader(new FileReader(path)), new TypeToken<Configuration>(){}.getType());
         } catch (FileNotFoundException e) {
-            //HAY QUE PILLAR LA EXCEPCION DE LECTURA
+           throw new FileNotFoundException();
         }
-        return null;
     }
 
 

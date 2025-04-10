@@ -1,9 +1,9 @@
 {
-  "host": "localhost",
+  "databaseHost": "localhost",
   "datebaseName": "parkingdpoodb",
-  "username": "root",
-  "password": "1234",
-  "port": 3306,
+  "databaseUsername": "root",
+  "databasePassword": "1234",
+  "databasePort": 3306,
   "timeVehicle": 2.2
 }
 
