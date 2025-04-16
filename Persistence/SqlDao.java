@@ -14,8 +14,11 @@ public class SqlDao {
 
     public SqlDao(SqlConfigurationDao configurationDao) throws FileNotFoundException {
         this.username = configurationDao.readJson().getDatabaseUsername();
+        System.out.println(this.username);
         this.password = configurationDao.readJson().getDatabasePassword();
+        System.out.println(this.password);
         this.url = iniciUrl + configurationDao.readJson().getDatabaseHost() + ":" + configurationDao.readJson().getDatabasePort() + "/" + configurationDao.readJson().getDatebaseName();
+        System.out.println(this.url);
     }
 
 
@@ -33,15 +36,21 @@ public class SqlDao {
 
     public void connect() {
         try {
-            connection = DriverManager.getConnection(url, username, password);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            this.connection = DriverManager.getConnection(url, username, password);
         }  catch (SQLException e) {
-            //HAY QUE MANDAR EXCEPCIÓN
+            System.out.println("No funciona");
+            System.out.println(e);
+
+        } catch (ClassNotFoundException e) {
+
+            System.out.println(e);
         }
     }
 
     public void disconnect() {
         try {
-            connection.close();
+            this.connection.close();
         }  catch (SQLException e) {
             //HAY QUE MANDAR EXCEPCIÓN
         }
@@ -107,7 +116,7 @@ public class SqlDao {
             statement.executeUpdate(consult);
 
         }  catch (SQLException e) {
-            //HAY QUE MANDAR EXCEPCIÓN
+            System.out.println("No funciona");
         }
     }
 

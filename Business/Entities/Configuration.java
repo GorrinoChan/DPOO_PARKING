@@ -2,7 +2,7 @@ package Business.Entities;
 
 public class Configuration {
     private String databaseHost;
-    private String datebaseName;
+    private String databaseName;
     private String databaseUsername;
     private String databasePassword;
     private int databasePort;
@@ -10,7 +10,7 @@ public class Configuration {
 
     public Configuration(String databaseHost, String datebaseName, String databaseUsername, String databasePassword, int databasePort, double timeVehicle) {
         this.databaseHost = databaseHost;
-        this.datebaseName = datebaseName;
+        this.databaseName = datebaseName;
         this.databaseUsername = databaseUsername;
         this.databasePassword = databasePassword;
         this.databasePort = databasePort;
@@ -22,7 +22,7 @@ public class Configuration {
     }
 
     public String getDatebaseName() {
-        return datebaseName;
+        return databaseName;
     }
 
     public String getDatabaseUsername() {

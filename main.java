@@ -1,5 +1,6 @@
 import Business.Entities.Configuration;
 import Persistence.SqlConfigurationDao;
+import Persistence.SqlDao;
 
 import java.io.FileNotFoundException;
 
@@ -23,12 +24,19 @@ public class main {
             System.out.println(configuration.getDatabasePort() + "\n");
             System.out.println(configuration.getTimeVehicle() + "\n");
 
+            SqlDao sqlDAo = new SqlDao(sqlconf);
+            sqlDAo.connect();
+            sqlDAo.updateString("vehicle", "typeOfVehicle","Motorcycle", "Dani", "nameOfUserAccount");
+
         } catch (FileNotFoundException e) {
             System.out.println("Hay un problema");
+
         }
 
 
-        
+
+
+
 
 
     }
