@@ -3,22 +3,16 @@ package Presentation.Views;
 import javax.swing.*;
 import java.awt.*;
 
-public class AdminSlotAvaliableView extends JFrame {
+public class AdminGraphView extends JFrame {
     private JButton returnButton;
-
-
-
-    private JButton infoButton;
     private JLabel titleLabel;
 
     public JButton getReturnButton() {
         return returnButton;
     }
 
-    public JButton getInfoButton() { return infoButton; }
-
-    public AdminSlotAvaliableView() {
-        setTitle("Parking LS - AdminSlotAvaliableView");
+    public AdminGraphView() {
+        setTitle("Parking LS - GraphView");
         setSize(500, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -46,10 +40,6 @@ public class AdminSlotAvaliableView extends JFrame {
         gbc.gridwidth = 3;
         panel.add(titleLabel, gbc);
 
-        infoButton = new JButton("Informacion");
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        panel.add(infoButton, gbc);
 
         c.add(panel, BorderLayout.CENTER);
     }

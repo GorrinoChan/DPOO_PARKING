@@ -6,24 +6,21 @@ import java.awt.*;
 public class AdminCreateSlot extends JFrame {
     private JButton returnButton, CreateButton;
     private JLabel numberLabel, floatLabel, tipeLabel,titleLabel;
-    private JTextField userTextField, mailTextField;
-    private JPasswordField passwordTextField;
+    private JTextField numberTextField, floatTextField,tipeTextField;
 
     public JButton getReturnButton() {
         return returnButton;
     }
 
-    public JButton getSignInButton() {
+    public JButton getCreateButton() {
         return CreateButton;
     }
 
-    public String getUsername() {
-        return userTextField.getText();
-    }
+    public String getnumber() { return numberTextField.getText(); }
 
-    public String getEmail() {
-        return mailTextField.getText();
-    }
+    public String getfloaat() { return floatTextField.getText(); }
+
+    public String gettipe() { return tipeTextField.getText(); }
 
 
     public AdminCreateSlot() {
@@ -61,30 +58,30 @@ public class AdminCreateSlot extends JFrame {
         gbc.gridwidth = 1;
         panel.add(numberLabel, gbc);
 
-        userTextField = new JTextField(20);
+        numberTextField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 2;
-        panel.add(userTextField, gbc);
+        panel.add(numberTextField, gbc);
 
         floatLabel = new JLabel("Piso");
         gbc.gridx = 1;
         gbc.gridy = 3;
         panel.add(floatLabel, gbc);
 
-        mailTextField = new JTextField(20);
+        floatTextField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 4;
-        panel.add(mailTextField, gbc);
+        panel.add(floatTextField, gbc);
 
         tipeLabel = new JLabel("Tipo de vehiculo");
         gbc.gridx = 1;
         gbc.gridy = 5;
         panel.add(tipeLabel, gbc);
 
-        passwordTextField = new JPasswordField(20);
+        tipeTextField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 6;
-        panel.add(passwordTextField, gbc);
+        panel.add(tipeTextField, gbc);
 
         CreateButton = new JButton("Crear");
         gbc.gridx = 1;

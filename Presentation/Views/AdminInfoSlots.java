@@ -4,12 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AdminInfoSlots extends JFrame {
-    private JButton returnButton,cancelButton;
+    private JButton returnButton;
+
+
+    private JButton cancelButton;
     private JLabel titleLabel;
 
     public JButton getReturnButton() {
         return returnButton;
     }
+
+    public JButton getCancelButton() { return cancelButton; }
 
     public AdminInfoSlots() {
         setTitle("Parking LS - AdminInfoSlots");

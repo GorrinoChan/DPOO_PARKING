@@ -4,12 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AdminDeleteSlots extends JFrame {
-    private JButton returnButton,confirmButton;
+    private JButton returnButton,DeleteButton;
     private JLabel titleLabel;
 
     public JButton getReturnButton() {
         return returnButton;
     }
+
+    public JButton getDeleteButton() {
+        return DeleteButton;
+    }
+
 
     public AdminDeleteSlots() {
         setTitle("Parking LS - AdminDeleteSlots");
@@ -40,10 +45,10 @@ public class AdminDeleteSlots extends JFrame {
         gbc.gridwidth = 3;
         panel.add(titleLabel, gbc);
 
-        confirmButton = new JButton("Confirmar");
+        DeleteButton = new JButton("Eliminar");
         gbc.gridx = 1;
         gbc.gridy = 2;
-        panel.add(confirmButton, gbc);
+        panel.add(DeleteButton, gbc);
 
         c.add(panel, BorderLayout.CENTER);
     }

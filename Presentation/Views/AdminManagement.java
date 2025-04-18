@@ -3,22 +3,18 @@ package Presentation.Views;
 import javax.swing.*;
 import java.awt.*;
 
-public class AdminSlotAvaliableView extends JFrame {
-    private JButton returnButton;
+public class AdminManagement extends JFrame {
+    private JButton create, Edit, Delete,returnButton;
+    private JLabel titleLabel, subTitleLabel;
+
+    public JButton getcreate() { return create; }
+    public JButton getEdit() { return Edit; }
+    public JButton getDelete() { return Delete; }
+    public JButton getReturnButton() { return returnButton; }
 
 
-
-    private JButton infoButton;
-    private JLabel titleLabel;
-
-    public JButton getReturnButton() {
-        return returnButton;
-    }
-
-    public JButton getInfoButton() { return infoButton; }
-
-    public AdminSlotAvaliableView() {
-        setTitle("Parking LS - AdminSlotAvaliableView");
+    public AdminManagement() {
+        setTitle("Parking LS - AdminManagament");
         setSize(500, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -46,10 +42,27 @@ public class AdminSlotAvaliableView extends JFrame {
         gbc.gridwidth = 3;
         panel.add(titleLabel, gbc);
 
-        infoButton = new JButton("Informacion");
+        subTitleLabel = new JLabel("Managament", SwingConstants.CENTER);
+        subTitleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridwidth = 3;
+        panel.add(subTitleLabel, gbc);
+
+        create = new JButton("Crear");
         gbc.gridx = 1;
         gbc.gridy = 2;
-        panel.add(infoButton, gbc);
+        panel.add(create, gbc);
+
+        Edit = new JButton("Editar");
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        panel.add(Edit, gbc);
+
+        Delete = new JButton("Eliminar");
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        panel.add(Delete, gbc);
 
         c.add(panel, BorderLayout.CENTER);
     }

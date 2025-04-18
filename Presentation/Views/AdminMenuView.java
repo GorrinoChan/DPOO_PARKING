@@ -4,10 +4,23 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AdminMenuView extends JFrame {
-    private JButton Slots, Simulate, slotAvaliableButton, graphButton, userProfileButton;
+
+    private JButton Slots, Simulate, slotAvaliableButton, graphButton;
     private JLabel titleLabel, subTitleLabel;
 
+    public JButton getSlots() {
+        return Slots;
+    }
 
+    public JButton getSimulate() {
+        return Simulate;
+    }
+    public JButton getslotAvaliableButton() {
+        return slotAvaliableButton;
+    }
+    public JButton getgraphButton() {
+        return graphButton;
+    }
 
     public AdminMenuView() {
         setTitle("Parking LS - AdminMenuView");
