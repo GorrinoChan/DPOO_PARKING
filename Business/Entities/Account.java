@@ -10,16 +10,16 @@ public class Account {
     private int numberOfReservations;
     private int slotCancelations;
     private boolean admin;
-    private ArrayList<Vehicle> vehicles;
 
-    public Account(String nameOfTheAccount, String emailOfTheAccount, String password, int numberOfReservations, int slotCancelations, boolean admin, ArrayList<Vehicle> vehicles) {
+
+    public Account(String nameOfTheAccount, String emailOfTheAccount, String password, int numberOfReservations, int slotCancelations, boolean admin) {
         this.nameOfTheAccount = nameOfTheAccount;
         this.emailOfTheAccount = emailOfTheAccount;
         this.password = password;
         this.numberOfReservations = numberOfReservations;
         this.slotCancelations = slotCancelations;
         this.admin = admin;
-        this.vehicles = vehicles;
+
     }
     public String getNameOfTheAccount() {
         return nameOfTheAccount;
@@ -57,12 +57,7 @@ public class Account {
     public void setAdmin(boolean admin) {
         this.admin = admin;
     }
-    public ArrayList<Vehicle> getVehicles() {
-        return vehicles;
-    }
-    public void setVehicles(ArrayList<Vehicle> vehicles) {
-        this.vehicles = vehicles;
-    }
+
 
 
 }
