@@ -14,11 +14,6 @@ import java.util.List;
 
 public class ReservationDao {
 
-    private SlotDAO slotDao;
-
-    public ReservationDao(SlotDAO slotDao) {
-        this.slotDao = slotDao;
-    }
 
     public void deleteSpecificReservation(String slotNumber) throws FileNotFoundException {
         SqlDao.getInstance().deleteObject("reservation", "slotNumber", slotNumber);
