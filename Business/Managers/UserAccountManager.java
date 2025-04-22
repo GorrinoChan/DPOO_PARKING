@@ -40,5 +40,17 @@ public class UserAccountManager {
         return correct;
     }
 
+    public void createNewAccount(String userName, String emailOfTheAccount, String password) throws SQLException {
+        accountDao.insertNewAccountInDb(userName,emailOfTheAccount,password);
+    }
+
+    public List<Account> getAllAccountsCanceled () {
+        try {
+            return accountDao.readAllAccountContentInDb();
+        }catch (SQLException | FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
