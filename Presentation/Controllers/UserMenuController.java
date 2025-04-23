@@ -1,14 +1,9 @@
 package Presentation.Controllers;
-
-import Presentation.Views.UserMenuView;
-import Presentation.Views.UserProfileView;
-import Presentation.Views.EnterParkingView;
-import Presentation.Views.GraphView;
-import Presentation.Views.SlotAvaliableView;
-import Presentation.Views.SlotControlView;
+import Presentation.Views.*;
 
 public class UserMenuController {
     private UserMenuView userMenuView;
+    private boolean running = false;
 
     public UserMenuController(UserMenuView userMenuView) {
         this.userMenuView = userMenuView;
@@ -18,7 +13,17 @@ public class UserMenuController {
         userMenuView.getSlotAvaliableButton().addActionListener(e -> openSlotAvaliableView());
         userMenuView.getGraphButton().addActionListener(e -> openGraphView());
         userMenuView.getUserProfileButton().addActionListener(e -> openUserProfileView());
+        userMenuView.getPlayPauseButton().addActionListener(e -> playPauseTraficSim());
 
+    }
+
+    private void playPauseTraficSim() {
+        running = !running;
+        if (running) {
+            userMenuView.getPlayPauseButton().setText("Stop");
+        } else {
+            userMenuView.getPlayPauseButton().setText("Play");
+        }
     }
 
     private void openUserProfileView() {

@@ -1,9 +1,5 @@
 package Presentation.Controllers;
-
-import Presentation.Views.LogInView;
-import Presentation.Views.SignInView;
-import Presentation.Views.StartView;
-import Presentation.Views.UserMenuView;
+import Presentation.Views.*;
 
 public class LogInController {
     private LogInView logInView;

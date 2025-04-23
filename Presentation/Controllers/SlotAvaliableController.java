@@ -1,8 +1,5 @@
 package Presentation.Controllers;
-
-import Presentation.Views.SlotAvaliableView;
-import Presentation.Views.UserMenuView;
-import Presentation.Views.UserProfileView;
+import Presentation.Views.*;
 
 public class SlotAvaliableController {
     private SlotAvaliableView slotAvaliableView;
