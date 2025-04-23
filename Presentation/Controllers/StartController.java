@@ -1,7 +1,5 @@
 package Presentation.Controllers;
-
-import Presentation.Views.StartView;
-import Presentation.Views.LogInView;
+import Presentation.Views.*;
 
 public class StartController {
     private StartView startView;
