@@ -1,11 +1,6 @@
 package Presentation.Controllers;
 
-import Presentation.Views.AdminMenuView;
-import Presentation.Views.AdminManagement;
-import Presentation.Views.AdminSimulation;
-import Presentation.Views.AdminSlotAvaliableView;
-import Presentation.Views.AdminGraphView;
-
+import Presentation.Views.*;
 
 
 public class AdminMenuController {
@@ -18,8 +13,18 @@ public class AdminMenuController {
         adminMenuView.getSimulate().addActionListener(e -> openSimulateView());
         adminMenuView.getslotAvaliableButton().addActionListener(e -> openSlotAvaliableView());
         adminMenuView.getgraphButton().addActionListener(e -> openGraphView());
+        adminMenuView.getUserProfileButton().addActionListener(e -> openUserProfileView());
+
 
     }
+
+    private void openUserProfileView() {
+        adminMenuView.dispose();
+        AdminProfileView adminProfileView = new AdminProfileView();
+        new AdminProfileController(adminProfileView);
+        adminProfileView.setVisible(true);
+    }
+
     private void openManagementView() {
         adminMenuView.dispose();
         AdminManagement adminManagement = new AdminManagement();

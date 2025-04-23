@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class AdminMenuView extends JFrame {
 
-    private JButton Slots, Simulate, slotAvaliableButton, graphButton;
+    private JButton Slots, Simulate, slotAvaliableButton, graphButton,userProfileButton;
     private JLabel titleLabel, subTitleLabel;
 
     public JButton getSlots() {
@@ -18,9 +18,11 @@ public class AdminMenuView extends JFrame {
     public JButton getslotAvaliableButton() {
         return slotAvaliableButton;
     }
-    public JButton getgraphButton() {
-        return graphButton;
+    public JButton getgraphButton() {return graphButton;}
+    public JButton getUserProfileButton() {
+        return userProfileButton;
     }
+
 
     public AdminMenuView() {
         setTitle("Parking LS - AdminMenuView");
@@ -36,6 +38,12 @@ public class AdminMenuView extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(4, 0, 4, 0);
 
+        userProfileButton = new JButton("User");
+        gbc.gridx = 4;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(4, 20, 4, 0);
+        panel.add(userProfileButton, gbc);
 
         gbc.insets = new Insets(4, 0, 4, 0);
         titleLabel = new JLabel("PARKING LS", SwingConstants.CENTER);

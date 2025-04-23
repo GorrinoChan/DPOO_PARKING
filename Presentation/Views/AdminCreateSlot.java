@@ -4,13 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AdminCreateSlot extends JFrame {
-    private JButton returnButton, CreateButton;
+    private JButton returnButton, CreateButton,userProfileButton;
     private JLabel numberLabel, floatLabel, tipeLabel,titleLabel;
     private JTextField numberTextField, floatTextField,tipeTextField;
 
     public JButton getReturnButton() {
         return returnButton;
     }
+
+    public JButton getUserProfileButton() {
+        return userProfileButton;
+    }
+
 
     public JButton getCreateButton() {
         return CreateButton;
@@ -43,6 +48,13 @@ public class AdminCreateSlot extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(returnButton, gbc);
+
+        userProfileButton = new JButton("User");
+        gbc.gridx = 4;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(4, 20, 4, 0);
+        panel.add(userProfileButton, gbc);
 
         gbc.insets = new Insets(4, 0, 4, 0);
         titleLabel = new JLabel("PARKING LS", SwingConstants.CENTER);
