@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SlotControlView extends JFrame {
-    private JButton returnButton, userProfileButton;
-    private JLabel titleLabel;
+    private JButton returnButton, userProfileButton, reserveSlotButton, removeReservationButton;
+    private JLabel titleLabel, subTitleLabel;
 
     public JButton getReturnButton() {
         return returnButton;
@@ -13,6 +13,14 @@ public class SlotControlView extends JFrame {
 
     public JButton getUserProfileButton() {
         return userProfileButton;
+    }
+
+    public JButton getreserveSlotButton() {
+        return reserveSlotButton;
+    }
+
+    public JButton getremoveReservationButton() {
+        return removeReservationButton;
     }
 
     public SlotControlView() {
@@ -34,6 +42,7 @@ public class SlotControlView extends JFrame {
         returnButton.setContentAreaFilled(false);
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 1;
         panel.add(returnButton, gbc);
 
         userProfileButton = new JButton("User");
@@ -51,6 +60,36 @@ public class SlotControlView extends JFrame {
         gbc.gridwidth = 3;
         panel.add(titleLabel, gbc);
 
+        subTitleLabel = new JLabel("Control de plaza", SwingConstants.CENTER);
+        subTitleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridwidth = 3;
+        panel.add(subTitleLabel, gbc);
+
+        subTitleLabel = new JLabel(" ");
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.gridwidth = 1;
+        panel.add(subTitleLabel, gbc);
+
+        subTitleLabel = new JLabel(" ");
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.gridwidth = 1;
+        panel.add(subTitleLabel, gbc);
+
+        reserveSlotButton = new JButton("Reservar Plaza");
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.gridwidth = 1;
+        panel.add(reserveSlotButton, gbc);
+
+        removeReservationButton = new JButton("Retirar Reserva");
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        gbc.gridwidth = 1;
+        panel.add(removeReservationButton, gbc);
 
         c.add(panel, BorderLayout.CENTER);
     }

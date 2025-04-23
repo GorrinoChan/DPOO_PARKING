@@ -4,8 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class UserMenuView extends JFrame {
-    private JButton enterButton, slotControlButton, slotAvaliableButton, graphButton, userProfileButton;
+    private JButton playPauseButton, enterButton, slotControlButton, slotAvaliableButton, graphButton, userProfileButton;
     private JLabel titleLabel, subTitleLabel;
+
+    public JButton getPlayPauseButton() {
+        return playPauseButton;
+    }
 
     public JButton getEnterButton() {
         return enterButton;
@@ -41,6 +45,12 @@ public class UserMenuView extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(4, 0, 4, 0);
 
+        playPauseButton = new JButton("Play");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(4, 0, 4, 20);
+        panel.add(playPauseButton, gbc);
 
         userProfileButton = new JButton("User");
         gbc.gridx = 4;

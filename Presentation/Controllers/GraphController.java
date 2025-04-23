@@ -1,8 +1,5 @@
 package Presentation.Controllers;
-
-import Presentation.Views.GraphView;
-import Presentation.Views.UserMenuView;
-import Presentation.Views.UserProfileView;
+import Presentation.Views.*;
 
 public class GraphController {
     private GraphView graphView;

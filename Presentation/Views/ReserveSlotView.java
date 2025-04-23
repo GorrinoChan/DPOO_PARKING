@@ -4,9 +4,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class SlotAvaliableView extends JFrame {
-    private JButton returnButton, userProfileButton;
-    private JLabel titleLabel, subTitleLabel;
+public class ReserveSlotView extends JFrame {
+    private JButton returnButton, userProfileButton, confirmButton;
+    private JLabel titleLabel, subTitleLabel, plateLabel, errorLabel, typeVehicleLabel;
+    private JTextField plateTextField, typeVehicleTextField;
     private JTable slotsAvaliableTable;
     private DefaultTableModel tableModel;
 
@@ -14,12 +15,28 @@ public class SlotAvaliableView extends JFrame {
         return userProfileButton;
     }
 
+    public JButton getConfirmButton() {
+        return confirmButton;
+    }
+
     public JButton getReturnButton() {
         return returnButton;
     }
 
-    public SlotAvaliableView() {
-        setTitle("Parking LS - SlotAvaliable");
+    public String getPlateTextField() {
+        return plateTextField.getText();
+    }
+
+    public String getTypeVehicleTextField() {
+        return typeVehicleLabel.getText();
+    }
+
+    public void setErrorMessage(String message) {
+        errorLabel.setText(message);
+    }
+
+    public ReserveSlotView() {
+        setTitle("Parking LS - ReserveSlot");
         setSize(500, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -54,21 +71,52 @@ public class SlotAvaliableView extends JFrame {
         gbc.insets = new Insets(4, 0, 4, 0);
         panel.add(titleLabel, gbc);
 
-        subTitleLabel = new JLabel("Plazas Disponibles", SwingConstants.CENTER);
+        subTitleLabel = new JLabel("Reservar", SwingConstants.CENTER);
         subTitleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
         panel.add(subTitleLabel, gbc);
 
-        slotsAvaliableTable = new JTable(tableModel);
+        plateLabel = new JLabel("Matrícula");
         gbc.gridx = 1;
         gbc.gridy = 2;
+        panel.add(plateLabel, gbc);
+
+        plateTextField = new JTextField(20);
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        panel.add(plateTextField, gbc);
+
+        typeVehicleLabel = new JLabel("Tipo de Vehículo");
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        panel.add(typeVehicleLabel, gbc);
+
+        typeVehicleTextField = new JTextField(20);
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        panel.add(typeVehicleTextField, gbc);
+
+        slotsAvaliableTable = new JTable(tableModel);
+        gbc.gridx = 1;
+        gbc.gridy = 6;
         gbc.gridwidth = 2;
         panel.add(slotsAvaliableTable, gbc);
         slotsAvaliableTable.setFillsViewportHeight(true);
         JScrollPane scrollPane = new JScrollPane(slotsAvaliableTable);
         panel.add(scrollPane, gbc);
+
+        errorLabel = new JLabel("", SwingConstants.CENTER);
+        errorLabel.setForeground(Color.RED);
+        gbc.gridx = 1;
+        gbc.gridy = 7;
+        panel.add(errorLabel, gbc);
+
+        confirmButton = new JButton("Confirmar");
+        gbc.gridx = 1;
+        gbc.gridy = 8;
+        panel.add(confirmButton, gbc);
 
         c.add(panel, BorderLayout.CENTER);
     }

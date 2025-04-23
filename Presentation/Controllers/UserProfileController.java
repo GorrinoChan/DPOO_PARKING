@@ -1,9 +1,5 @@
 package Presentation.Controllers;
-
-import Presentation.Views.UserMenuView;
-import Presentation.Views.UserProfileView;
-import Presentation.Views.DeleteAccountView;
-import Presentation.Views.LogOutView;
+import Presentation.Views.*;
 
 public class UserProfileController {
     private UserProfileView userProfileView;
