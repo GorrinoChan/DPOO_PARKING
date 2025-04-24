@@ -8,7 +8,7 @@ public class AdminSlotAvaliableView extends JFrame {
 
 
 
-    private JButton infoButton;
+    private JButton infoButton,userProfileButton;
     private JLabel titleLabel;
 
     public JButton getReturnButton() {
@@ -16,6 +16,10 @@ public class AdminSlotAvaliableView extends JFrame {
     }
 
     public JButton getInfoButton() { return infoButton; }
+
+    public JButton getUserProfileButton() {
+        return userProfileButton;
+    }
 
     public AdminSlotAvaliableView() {
         setTitle("Parking LS - AdminSlotAvaliableView");
@@ -37,6 +41,13 @@ public class AdminSlotAvaliableView extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(returnButton, gbc);
+
+        userProfileButton = new JButton("User");
+        gbc.gridx = 4;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(4, 20, 4, 0);
+        panel.add(userProfileButton, gbc);
 
         gbc.insets = new Insets(4, 0, 4, 0);
         titleLabel = new JLabel("PARKING LS", SwingConstants.CENTER);

@@ -7,7 +7,7 @@ public class AdminInfoSlots extends JFrame {
     private JButton returnButton;
 
 
-    private JButton cancelButton;
+    private JButton cancelButton,userProfileButton;
     private JLabel titleLabel;
 
     public JButton getReturnButton() {
@@ -15,6 +15,10 @@ public class AdminInfoSlots extends JFrame {
     }
 
     public JButton getCancelButton() { return cancelButton; }
+
+    public JButton getUserProfileButton() {
+        return userProfileButton;
+    }
 
     public AdminInfoSlots() {
         setTitle("Parking LS - AdminInfoSlots");
@@ -36,6 +40,13 @@ public class AdminInfoSlots extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(returnButton, gbc);
+
+        userProfileButton = new JButton("User");
+        gbc.gridx = 4;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(4, 20, 4, 0);
+        panel.add(userProfileButton, gbc);
 
         gbc.insets = new Insets(4, 0, 4, 0);
         titleLabel = new JLabel("PARKING LS", SwingConstants.CENTER);

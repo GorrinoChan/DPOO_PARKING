@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AdminDeleteSlots extends JFrame {
-    private JButton returnButton,DeleteButton;
+    private JButton returnButton,DeleteButton,userProfileButton;
     private JLabel titleLabel;
 
     public JButton getReturnButton() {
@@ -13,6 +13,10 @@ public class AdminDeleteSlots extends JFrame {
 
     public JButton getDeleteButton() {
         return DeleteButton;
+    }
+
+    public JButton getUserProfileButton() {
+        return userProfileButton;
     }
 
 
@@ -36,6 +40,13 @@ public class AdminDeleteSlots extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(returnButton, gbc);
+
+        userProfileButton = new JButton("User");
+        gbc.gridx = 4;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(4, 20, 4, 0);
+        panel.add(userProfileButton, gbc);
 
         gbc.insets = new Insets(4, 0, 4, 0);
         titleLabel = new JLabel("PARKING LS", SwingConstants.CENTER);

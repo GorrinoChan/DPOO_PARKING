@@ -1,8 +1,6 @@
 package Presentation.Controllers;
 
-import Presentation.Views.AdminCreateSlot;
-import Presentation.Views.AdminMenuView;
-import Presentation.Views.AdminManagement;
+import Presentation.Views.*;
 
 
 public class AdminCreateSlotController {
@@ -12,6 +10,14 @@ public class AdminCreateSlotController {
         this.adminCreateSlot = adminCreateSlot;
         adminCreateSlot.getReturnButton().addActionListener(e -> returnToMenu());
         adminCreateSlot.getCreateButton().addActionListener(e -> opencreateButton());
+        adminCreateSlot.getUserProfileButton().addActionListener(e -> openUserProfileView());
+
+    }
+    private void openUserProfileView() {
+        adminCreateSlot.dispose();
+        AdminProfileView adminProfileView = new AdminProfileView();
+        new AdminProfileController(adminProfileView);
+        adminProfileView.setVisible(true);
     }
 
     private void opencreateButton() {

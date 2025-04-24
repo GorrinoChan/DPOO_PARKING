@@ -1,11 +1,6 @@
 package Presentation.Controllers;
 
-import Presentation.Views.AdminMenuView;
-import Presentation.Views.AdminManagement;
-import Presentation.Views.AdminCreateSlot;
-import Presentation.Views.AdminEditSlots;
-import Presentation.Views.AdminDeleteSlots;
-
+import Presentation.Views.*;
 
 
 public class AdminManagementController {
@@ -18,8 +13,17 @@ public class AdminManagementController {
         adminManagement.getEdit().addActionListener(e -> openAdminEdit());
         adminManagement.getDelete().addActionListener(e -> openAdminDelete());
         adminManagement.getReturnButton().addActionListener(e -> returnToMenu());
+        adminManagement.getUserProfileButton().addActionListener(e -> openUserProfileView());
+
 
     }
+    private void openUserProfileView() {
+        adminManagement.dispose();
+        AdminProfileView adminProfileView = new AdminProfileView();
+        new AdminProfileController(adminProfileView);
+        adminProfileView.setVisible(true);
+    }
+
     private void openAdminCreate() {
         adminManagement.dispose();
         AdminCreateSlot adminCreateSlot = new AdminCreateSlot();

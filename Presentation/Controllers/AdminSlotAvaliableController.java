@@ -1,5 +1,6 @@
 package Presentation.Controllers;
 
+import Presentation.Views.AdminProfileView;
 import Presentation.Views.AdminSlotAvaliableView;
 import Presentation.Views.AdminInfoSlots;
 import Presentation.Views.AdminMenuView;
@@ -12,6 +13,15 @@ public class AdminSlotAvaliableController {
         this.adminslotAvaliableView = adminslotAvaliableView;
         adminslotAvaliableView.getReturnButton().addActionListener(e -> returnToMenu());
         adminslotAvaliableView.getInfoButton().addActionListener(e -> opengetInfoButton());
+        adminslotAvaliableView.getUserProfileButton().addActionListener(e -> openUserProfileView());
+
+    }
+
+    private void openUserProfileView() {
+        adminslotAvaliableView.dispose();
+        AdminProfileView adminProfileView = new AdminProfileView();
+        new AdminProfileController(adminProfileView);
+        adminProfileView.setVisible(true);
     }
 
     private void opengetInfoButton() {

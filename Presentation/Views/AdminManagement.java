@@ -4,13 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AdminManagement extends JFrame {
-    private JButton create, Edit, Delete,returnButton;
+    private JButton create, Edit, Delete,returnButton,userProfileButton;
     private JLabel titleLabel, subTitleLabel;
 
     public JButton getcreate() { return create; }
     public JButton getEdit() { return Edit; }
     public JButton getDelete() { return Delete; }
     public JButton getReturnButton() { return returnButton; }
+    public JButton getUserProfileButton() {
+        return userProfileButton;
+    }
 
 
     public AdminManagement() {
@@ -33,6 +36,13 @@ public class AdminManagement extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(returnButton, gbc);
+
+        userProfileButton = new JButton("User");
+        gbc.gridx = 4;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(4, 20, 4, 0);
+        panel.add(userProfileButton, gbc);
 
         gbc.insets = new Insets(4, 0, 4, 0);
         titleLabel = new JLabel("PARKING LS", SwingConstants.CENTER);
