@@ -16,11 +16,4 @@ public class UserSlotManager {
         this.slotDao = new SlotDAO();
     }
 
-    public Boolean setNewVehicleOccupation (String licensePlate){
-        Boolean succes = false;
-        
-
-        return succes;
-    }
-
 }
