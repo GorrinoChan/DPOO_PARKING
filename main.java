@@ -34,7 +34,6 @@ public class main {
             sqlDAo.updateString("vehicle", "typeOfVehicle","Motorcycle", "Dani", "nameOfUserAccount");
             List<Account> specificSqlAccount = accountDao.readSpecificAccountOfDb("nameOfUserAccount", "Bernat");
             System.out.println(specificSqlAccount.get(0).getNameOfTheAccount());
-            accountDao.insertNewAccountInDb("Gerard", "daniel.morera@gmail.com", "1234");
 
         } catch (FileNotFoundException e) {
             System.out.println("Hay un problema");

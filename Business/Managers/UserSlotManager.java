@@ -17,7 +17,6 @@ public class UserSlotManager {
     ReservationDao reservedParkingSlotsDao;
     VehicleDao  vehicleDao;
     SlotDAO slotDao;
-
     SqlDao sqlDao;
 
     public UserSlotManager() {
@@ -75,6 +74,21 @@ public class UserSlotManager {
         }
         return correct;
     }
+
+
+    public List<Slot> readAllFreeSlot () throws SQLException {
+        List<Slot> allFreeSlotsInDB;
+        try{
+            allFreeSlotsInDB = this.slotDao.readAllSlotsContentInDb();
+        }catch (SQLException e) {
+            throw new SQLException(e);
+        }catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return allFreeSlotsInDB;
+    }
+
+
 
 
 
