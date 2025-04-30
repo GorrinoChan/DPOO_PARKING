@@ -40,7 +40,7 @@ public class UserSlotManager {
     public boolean markVehicleAsNotOccupyingSlot(String licensePlate){
         boolean correct = false;
         try {
-            SqlDao.getInstance().updateIntAndBolean("vehicle", "ocupationStatus", "0", "licencePlate", licensePlate);
+            SqlDao.getInstance().updateIntAndBolean("reservation", "ocupationStatus", "0", "licencePlate", licensePlate);
             correct = true;
         }catch(SQLException e){
             correct = false;
@@ -87,6 +87,8 @@ public class UserSlotManager {
         }
         return allFreeSlotsInDB;
     }
+
+
 
 
 

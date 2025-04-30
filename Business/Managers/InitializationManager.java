@@ -12,6 +12,7 @@ public class InitializationManager {
     SqlConfigurationDao sqlConfigurationDao;
     SqlDao sqlDao;
 
+
     public InitializationManager() {
     }
 
@@ -35,6 +36,8 @@ public class InitializationManager {
         this.sqlDao.disconnect();
 
     }
+
+
 
 
 
