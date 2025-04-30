@@ -120,7 +120,7 @@ public class SqlDao {
         }
     }
 
-    public void updateIntAndBolean(String object, String informationToChange, String change, String reference, String typeOfReference) {
+    public void updateIntAndBolean(String object, String informationToChange, String change, String reference, String typeOfReference) throws SQLException {
 
         //Si quieres hacer un update de un Boolean tiene que pasarle el true y false en minusculas, y si es un int tienes que pasar el valor int en formato string
         String consult = "UPDATE ".concat(object).concat(" SET ").concat(informationToChange).concat("=").concat(change).concat(" WHERE ").concat(" ").concat(typeOfReference).concat("=").concat("'").concat(reference).concat("'").concat(";");
@@ -129,7 +129,7 @@ public class SqlDao {
             statement = getInstance().getConnection().createStatement();
             statement.executeUpdate(consult);
         }  catch (SQLException e) {
-            //HAY QUE MANDAR EXCEPCIÓN
+            throw new SQLException();
         }
     }
 }

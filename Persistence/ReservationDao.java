@@ -86,7 +86,7 @@ public class ReservationDao {
         return allSqlReservationsInDb;
     }
 
-    public void insertNewVehicleInDb (String licencePlate, String date, String userName, int slotNumber, int floorNumber, int canceledStatus, int reservationStatus, int occupationStatus, String typeOfPlace) throws SQLException {
+    public void insertNewReservationInDb (String licencePlate, String date, String userName, int slotNumber, int floorNumber, int canceledStatus, int reservationStatus, int occupationStatus, String typeOfPlace) throws SQLException {
         PreparedStatement orderToDb = null;
         String codeLineInDb = "INSERT INTO " + "reservation" + " (licencePlate,date,userName,slotNumber,floorNumber,canceledStatus,reservationStatus,ocupationStatus, typeOfPlace) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         orderToDb = SqlDao.getInstance().getConnection().prepareStatement(codeLineInDb);
