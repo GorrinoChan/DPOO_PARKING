@@ -30,4 +30,12 @@ public class InitializationManager {
         this.sqlDao = new SqlDao(this.sqlConfigurationDao);
         this.sqlDao.connect();
     }
+
+    public void tryToDisconectDB(){
+        this.sqlDao.disconnect();
+
+    }
+
+
+
 }

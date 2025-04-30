@@ -14,8 +14,8 @@ public class VehicleDao {
 
     private AccountDao accountDao;
 
-    public VehicleDao(AccountDao accountDao) {
-        this.accountDao = accountDao;
+    public VehicleDao() {
+        this.accountDao = new AccountDao();
     }
 
     public void deleteSpecificVehicle(String plate)throws FileNotFoundException {
