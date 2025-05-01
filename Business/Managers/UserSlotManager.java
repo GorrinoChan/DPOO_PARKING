@@ -181,14 +181,19 @@ public class UserSlotManager {
     public boolean deleteAReservation (int slotCode){
         boolean actionCorrect = false;
         Reservation reservationFound;
-        int occupation;
-        int reserved;
+        int occupation = 0;
+        int reserved = 0;
         try{
             List<Reservation> reservationToCancelInDB = this.reservedParkingSlotsDao.readSpecificReservationOfDb("slotNumber", String.valueOf(slotCode));
             reservationFound = reservationToCancelInDB.get(0);
             this.reservedParkingSlotsDao.deleteSpecificReservation(String.valueOf(slotCode));
-
-            this.slotDao.insertNewSlotInDb(reservationFound.getNumber(), reservationFound.getFloor());
+            if(reservationFound.isOccupation()){
+                occupation = 1;
+            }
+            if(reservationFound.isReservation()){
+                reserved = 1;
+            }
+            this.slotDao.insertNewSlotInDb(reservationFound.getNumber(), reservationFound.getFloor(), occupation, reserved, reservationFound.getTypeOfPlace());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
