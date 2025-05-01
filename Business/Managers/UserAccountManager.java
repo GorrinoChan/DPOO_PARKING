@@ -1,7 +1,10 @@
 package Business.Managers;
 
 import Business.Entities.Account;
+import Business.Entities.Vehicle;
 import Persistence.AccountDao;
+import Persistence.SqlDao;
+import Persistence.VehicleDao;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
@@ -10,11 +13,12 @@ import java.util.List;
 public class UserAccountManager {
 
     AccountDao accountDao;
-    String userName;
+    VehicleDao vehicleDao;
 
     public UserAccountManager(String userName) {
         this.accountDao = new AccountDao();
-        this.userName = userName;
+        this.vehicleDao = new VehicleDao();
+
     }
 
     public boolean accountUsernameExistByUsername(String userName) {
@@ -110,11 +114,91 @@ public class UserAccountManager {
         return numeric;
     }
 
-    public void deleteExistingAccount (String userName){
+    public boolean deleteExistingAccount (String userName){
+        boolean correctAction;
         try{
             accountDao.deleteSpecificAccount(userName);
+            correctAction = true;
+        } catch (FileNotFoundException e) {
+            correctAction = false;
+        }
+        return correctAction;
+    }
+
+    public boolean augmentInOneTheNumberOfReservationsOfUserAccount(String userName){
+        boolean actionCorrect;
+        try{
+            List<Account> account = accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
+            int numberOfReservations = account.get(0).getNumberOfReservations();
+            SqlDao.getInstance().updateIntAndBolean("account", "slotReservations", String.valueOf(numberOfReservations + 1), userName, "nameOfUserAccount");
+            actionCorrect = true;
+        } catch (SQLException e) {
+            actionCorrect = false;
+        } catch (FileNotFoundException e) {
+            actionCorrect = false;
+        }
+        return actionCorrect;
+    }
+
+    public boolean reduceInOneTheNumberOfReservationsOfUserAccount(String userName){
+        boolean actionCorrect;
+
+        try{
+            List<Account> account = accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
+            int numberOfReservations = account.get(0).getNumberOfReservations();
+            SqlDao.getInstance().updateIntAndBolean("account", "slotReservations", String.valueOf(numberOfReservations - 1), userName, "nameOfUserAccount");
+            actionCorrect = true;
+        } catch (SQLException e) {
+            actionCorrect = false;
+        } catch (FileNotFoundException e) {
+            actionCorrect = false;
+        }
+        return actionCorrect;
+    }
+
+    public boolean augmentInOneTheNumberOfCancellationsOfUserAccount(String userName){
+        boolean actionCorrect;
+
+        try{
+            List<Account> account = accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
+            int numberOfCancellation = account.get(0).getSlotCancelations();
+            SqlDao.getInstance().updateIntAndBolean("account", "slotCancelations", String.valueOf(numberOfCancellation + 1), userName, "nameOfUserAccount");
+            actionCorrect = true;
+        } catch (SQLException e) {
+            actionCorrect = false;
+        } catch (FileNotFoundException e) {
+            actionCorrect = false;
+        }
+        return actionCorrect;
+    }
+
+    public boolean reduceInOneTheNumberOfCancellationsOfUserAccount(String userName){
+        boolean actionCorrect;
+
+        try{
+            List<Account> account = accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
+            int numberOfCancellation = account.get(0).getSlotCancelations();
+            SqlDao.getInstance().updateIntAndBolean("account", "slotCancelations", String.valueOf(numberOfCancellation - 1), userName, "nameOfUserAccount");
+            actionCorrect = true;
+        } catch (SQLException e) {
+            actionCorrect = false;
+        } catch (FileNotFoundException e) {
+            actionCorrect = false;
+        }
+        return actionCorrect;
+    }
+
+    public List<Vehicle> getAllUserVehicles(String userName){
+        List<Vehicle> userVehicles;
+        try{
+            userVehicles = this.vehicleDao.readSpecificVehicleOfDb("nameOfUserAccount", userName);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        return userVehicles;
     }
+
+
 }
