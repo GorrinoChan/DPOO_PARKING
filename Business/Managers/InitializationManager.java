@@ -2,7 +2,9 @@ package Business.Managers;
 
 import Business.Entities.Account;
 import Business.Entities.Configuration;
+import Business.Entities.Reservation;
 import Persistence.AccountDao;
+import Persistence.ReservationDao;
 import Persistence.SqlConfigurationDao;
 import Persistence.SqlDao;
 
@@ -18,9 +20,12 @@ public class InitializationManager {
     SqlDao sqlDao;
     AccountDao  accountDao;
 
+    ReservationDao reservationDao;
+
 
     public InitializationManager() {
         this.accountDao = new AccountDao();
+        this.reservationDao = new ReservationDao();
     }
 
     public void prepareReadJson(){
@@ -84,6 +89,30 @@ public class InitializationManager {
         }
 
         return arrayWithAllInfoInLogInAnalysis;
+    }
+
+    public List<Reservation> getAllReservationOfUserThatHaveBeenCanceledByAdmin(String userName){
+        List<Reservation> allCanceledReservationsUser;
+        try{
+            allCanceledReservationsUser = this.reservationDao.readSpecificReservationOfDb("userName", userName);
+
+            for(Reservation reservation : allCanceledReservationsUser){
+                if(!reservation.isCancelled()){
+                    allCanceledReservationsUser.remove(reservation);
+                }
+            }
+            if(!allCanceledReservationsUser.isEmpty()) {
+                for (Reservation reservation : allCanceledReservationsUser) {
+                    this.reservationDao.deleteSpecificReservation(String.valueOf(reservation.getNumber()));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return allCanceledReservationsUser;
     }
 
 
