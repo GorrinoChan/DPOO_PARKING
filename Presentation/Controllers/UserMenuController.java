@@ -1,6 +1,5 @@
 package Presentation.Controllers;
 import Presentation.Views.*;
-
 public class UserMenuController {
     private UserMenuView userMenuView;
     private boolean running = false;

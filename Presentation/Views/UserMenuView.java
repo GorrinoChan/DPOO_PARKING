@@ -32,7 +32,7 @@ public class UserMenuView extends JFrame {
     }
 
     public UserMenuView() {
-        setTitle("Parking LS - UserMenuView");
+        setTitle("Parking LS - Presentation.Views.UserMenuView");
         setSize(500, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

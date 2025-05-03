@@ -16,7 +16,7 @@ public class EnterParkingView extends JFrame {
     }
 
     public EnterParkingView() {
-        setTitle("Parking LS - EnterParkingView");
+        setTitle("Parking LS - Presentation.Views.EnterParkingView");
         setSize(500, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

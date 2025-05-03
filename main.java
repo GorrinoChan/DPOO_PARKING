@@ -3,13 +3,22 @@ import Business.Entities.Configuration;
 import Persistence.AccountDao;
 import Persistence.SqlConfigurationDao;
 import Persistence.SqlDao;
+import Presentation.Controllers.*;
+import Presentation.Views.*;
 
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class main {
     public static void main(String[] args) {
+
+        SwingUtilities.invokeLater(() -> {
+            StartView startView = new StartView();
+            new StartController(startView);
+            startView.setVisible(true);
+        });
 
         System.out.println("Hola");
         SqlConfigurationDao sqlconf = null;

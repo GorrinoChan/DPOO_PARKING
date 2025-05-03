@@ -1,5 +1,9 @@
 package Presentation.Controllers;
-import Presentation.Views.*;
+
+import Presentation.Views.DeleteAccountView;
+import Presentation.Views.StartView;
+import Presentation.Views.UserProfileView;
+
 import javax.swing.*;
 
 public class DeleteAccountController {

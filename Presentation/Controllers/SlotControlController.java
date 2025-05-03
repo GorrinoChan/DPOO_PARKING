@@ -1,6 +1,5 @@
 package Presentation.Controllers;
 import Presentation.Views.*;
-
 public class SlotControlController {
     private SlotControlView slotControlView;
 

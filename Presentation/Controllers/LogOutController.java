@@ -1,5 +1,8 @@
 package Presentation.Controllers;
-import Presentation.Views.*;
+
+import Presentation.Views.LogOutView;
+import Presentation.Views.StartView;
+import Presentation.Views.UserProfileView;
 
 import javax.swing.*;
 

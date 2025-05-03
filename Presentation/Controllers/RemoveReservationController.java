@@ -1,5 +1,8 @@
 package Presentation.Controllers;
-import Presentation.Views.*;
+
+import Presentation.Views.RemoveReservationView;
+import Presentation.Views.SlotControlView;
+import Presentation.Views.UserMenuView;
 
 import javax.swing.*;
 

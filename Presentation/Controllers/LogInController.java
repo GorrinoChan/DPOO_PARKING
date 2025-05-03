@@ -1,5 +1,8 @@
 package Presentation.Controllers;
+import Business.Managers.InitializationManager;
 import Presentation.Views.*;
+
+import java.util.ArrayList;
 
 public class LogInController {
     private LogInView logInView;
@@ -12,27 +15,32 @@ public class LogInController {
     }
 
     private void validateLogin() {
+        InitializationManager initializationManager = new InitializationManager();
+
         String username = logInView.getUsername();
         String password = logInView.getPassword();
+        ArrayList<Boolean> checkLogIn = initializationManager.logIn(username, password);
 
-        if (username.equals("admin") && password.equals("admin")) {
-            /*logInView.dispose();
+        System.out.println(checkLogIn.get(0));
+        System.out.println(checkLogIn.get(1));
+        System.out.println(checkLogIn.get(2));
+        if (checkLogIn.get(0) && checkLogIn.get(1) && !checkLogIn.get(2)) {
+            logInView.dispose();
+            UserMenuView userMenuView = new UserMenuView();
+            new UserMenuController(userMenuView);
+            userMenuView.setVisible(true);
+        } else {
+            logInView.setErrorMessage("Usuario o contraseña incorrectos.");
+        }
+        if (checkLogIn.get(2)) {
+            logInView.dispose();
             AdminMenuView adminMenuView = new AdminMenuView();
             new AdminMenuController(adminMenuView);
-            adminMenuView.setVisible(true);*/
-        } else if (username.isEmpty() || password.isEmpty()){
-            logInView.setErrorMessage("Todos los campos son obligatorios.");
-        }else {
-            if (username.equals("user") && password.equals("user")){
-                logInView.dispose();
-                UserMenuView userMenuView = new UserMenuView();
-                new UserMenuController(userMenuView);
-                userMenuView.setVisible(true);
-            } else {
-            logInView.setErrorMessage("Usuario o contraseña incorrectos.");
-            }
+            adminMenuView.setVisible(true);
         }
+
     }
+
     private void openSignInView() {
         logInView.dispose();
         SignInView signInView = new SignInView();
