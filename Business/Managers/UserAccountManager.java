@@ -261,5 +261,22 @@ public class UserAccountManager {
         return arrayWithAllInfoInSignUpAnalysis;
     }
 
+    public boolean addAVehicleToUserAccount (String licensePlate, String userName, String typeOfVehicle){
+        boolean correctAction = false;
+        try{
+            List<Vehicle> vehicleExist = this.vehicleDao.readSpecificVehicleOfDb("licencePlate",licensePlate);
+            if(vehicleExist.isEmpty()){
+               this.vehicleDao.insertNewVehicleInDb(licensePlate, typeOfVehicle, userName);
+               correctAction = true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return correctAction;
+    }
+
 
 }

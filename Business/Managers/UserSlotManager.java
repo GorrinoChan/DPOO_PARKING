@@ -167,18 +167,6 @@ public class UserSlotManager {
         return allReservedSlotsThatHaveBeenCanceled;
     }
 
-    public List<Vehicle> getAllUserVehicles (String userName){
-        List<Vehicle> allUserVehicles;
-        try{
-            allUserVehicles = this.vehicleDao.readSpecificVehicleOfDb("nameOfUserAccount", userName);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        return allUserVehicles;
-    }
-
     public boolean deleteAReservation (int slotCode){
         boolean actionCorrect = false;
         Reservation reservationFound;
