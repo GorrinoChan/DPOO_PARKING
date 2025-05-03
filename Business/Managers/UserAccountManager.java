@@ -69,7 +69,7 @@ public class UserAccountManager {
         accountDao.insertNewAccountInDb(userName,emailOfTheAccount,password);
     }
 
-    public List<Account> getAllAccountsIn () {
+    public List<Account> getAllAccountsInDb () {
         try {
             return accountDao.readAllAccountContentInDb();
         }catch (SQLException | FileNotFoundException e) {

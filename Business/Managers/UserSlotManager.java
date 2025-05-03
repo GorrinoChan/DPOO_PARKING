@@ -136,7 +136,7 @@ public class UserSlotManager {
         boolean actionCorrect = false;
         try{
             List<Vehicle> vehicleOfUser = this.vehicleDao.readSpecificVehicleOfDb("licencePlate", licensePlate);
-            List<Slot> slotThatIsGoingToCheck= this.slotDao.readSpecificSlotOfDb("slotNumber", String.valueOf(slotCode));
+            List<Slot> slotThatIsGoingToCheck= this.slotDao.readSpecificSlotOfDb("typeOfPlace", vehicleOfUser.get(0).getVehicleType());
             if(!slotThatIsGoingToCheck.isEmpty()){
                 actionCorrect = true;
             }
