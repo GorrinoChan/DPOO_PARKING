@@ -106,7 +106,7 @@ public class SignInView extends JFrame {
         gbc.gridy = 8;
         panel.add(passwordConfirmTextField, gbc);
 
-        errorLabel = new JLabel("", SwingConstants.CENTER);
+        errorLabel = new JLabel(" ", SwingConstants.CENTER);
         errorLabel.setForeground(Color.RED);
         gbc.gridx = 1;
         gbc.gridy = 9;

@@ -65,7 +65,7 @@ public class UserAccountManager {
         return correct;
     }
 
-    public void createNewAccount(String userName, String emailOfTheAccount, String password) throws SQLException {
+    public void createNewAccount(String userName, String emailOfTheAccount, String password) {
         accountDao.insertNewAccountInDb(userName,emailOfTheAccount,password);
     }
 

@@ -2,6 +2,7 @@ package Presentation.Controllers;
 
 import Presentation.Views.LogInView;
 import Presentation.Views.SignInView;
+import Business.Managers.UserAccountManager;
 
 import javax.swing.*;
 
@@ -19,15 +20,22 @@ public class SignInController {
         String email = signInView.getEmail();
         String password = signInView.getPassword();
         String confirmPassword = signInView.getPasswordConfirmation();
+        UserAccountManager userAccountManager = new UserAccountManager(username);
+        boolean checkUserName = userAccountManager.accountUsernameExistByUsername(username);
+        boolean checkUserMail = userAccountManager.accountUsernameExistByMail(email);
+        boolean checkPassword = userAccountManager.passwordIsCorrect(password, confirmPassword);
 
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             signInView.setErrorMessage("Todos los campos son obligatorios.");
-        } else if (!password.equals(confirmPassword)) {
+        } else if (!checkUserName) {
+            signInView.setErrorMessage("El nombre de usuario ya está en uso.");
+        } else if (!checkUserMail) {
+            signInView.setErrorMessage("El mail del usuario ya está en uso.");
+        } else if (!checkPassword) {
             signInView.setErrorMessage("Las contraseñas no coinciden.");
-        } /*else if () { //Comprobacion base datos
-
-        }*/ else {
+        } else {
             signInView.setErrorMessage("");
+            userAccountManager.createNewAccount(username, email, password);
             JOptionPane.showMessageDialog(null, "Usuario registrado correctamente.");
             signInView.dispose();
             LogInView loginView = new LogInView();

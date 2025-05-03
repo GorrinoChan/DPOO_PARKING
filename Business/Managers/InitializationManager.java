@@ -70,7 +70,7 @@ public class InitializationManager {
                 arrayWithAllInfoInLogInAnalysis.add(true);
                 if(account.get(0).getPassword().equals(password)){
                     arrayWithAllInfoInLogInAnalysis.add(true);
-                    if(account.get(0).getNameOfTheAccount().equals("admin")){
+                    if(account.get(0).getNameOfTheAccount().equals("Admin")){
                         arrayWithAllInfoInLogInAnalysis.add(true);
                     }else{
                         arrayWithAllInfoInLogInAnalysis.add(false);

@@ -72,14 +72,20 @@ public class AccountDao {
         return allSqlAccountsInDb;
     }
 
-    public void insertNewAccountInDb (String nameOfTheAccount, String emailOfTheAccount, String password) throws SQLException {
+    public void insertNewAccountInDb (String nameOfTheAccount, String emailOfTheAccount, String password) {
         PreparedStatement orderToDb = null;
         String codeLineInDb = "INSERT INTO " + "account" + " (nameOfUserAccount,emailOfUserAccount, passwordOfUserAccount, slotReservations, slotCancelations, itIsAdmin) VALUES (?, ?, ?, 0, 0, 0)";
-        orderToDb = SqlDao.getInstance().getConnection().prepareStatement(codeLineInDb);
-        orderToDb.setString(1, nameOfTheAccount);
-        orderToDb.setString(2, emailOfTheAccount);
-        orderToDb.setString(3, password);
-        orderToDb.executeUpdate();
+        try {
+            orderToDb = SqlDao.getInstance().getConnection().prepareStatement(codeLineInDb);
+            orderToDb.setString(1, nameOfTheAccount);
+            orderToDb.setString(2, emailOfTheAccount);
+            orderToDb.setString(3, password);
+            orderToDb.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
 
         if(orderToDb == null){
 

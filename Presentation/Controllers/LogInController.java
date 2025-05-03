@@ -21,18 +21,16 @@ public class LogInController {
         String password = logInView.getPassword();
         ArrayList<Boolean> checkLogIn = initializationManager.logIn(username, password);
 
-        System.out.println(checkLogIn.get(0));
-        System.out.println(checkLogIn.get(1));
-        System.out.println(checkLogIn.get(2));
-        if (checkLogIn.get(0) && checkLogIn.get(1) && !checkLogIn.get(2)) {
+        if (username.isEmpty() || password.isEmpty()) {
+            logInView.setErrorMessage("Todos los campos son obligatorios.");
+        } else if (!checkLogIn.get(0) || !checkLogIn.get(1)){
+            logInView.setErrorMessage("Usuario o contraseña incorrectos.");
+        } else if (checkLogIn.get(0) && checkLogIn.get(1) && !checkLogIn.get(2)) {
             logInView.dispose();
             UserMenuView userMenuView = new UserMenuView();
             new UserMenuController(userMenuView);
             userMenuView.setVisible(true);
-        } else {
-            logInView.setErrorMessage("Usuario o contraseña incorrectos.");
-        }
-        if (checkLogIn.get(2)) {
+        } else if (checkLogIn.get(2)) {
             logInView.dispose();
             AdminMenuView adminMenuView = new AdminMenuView();
             new AdminMenuController(adminMenuView);
