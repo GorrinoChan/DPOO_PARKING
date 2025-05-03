@@ -8,6 +8,7 @@ import Persistence.VehicleDao;
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserAccountManager {
@@ -76,7 +77,7 @@ public class UserAccountManager {
         }
     }
 
-    public boolean verifyLengthInPassword (String password){
+    private boolean verifyLengthInPassword (String password){
         boolean length = false;
         if(password.length() >= 8){
             length = true;
@@ -84,7 +85,7 @@ public class UserAccountManager {
         return length;
     }
 
-    public boolean verifyIfThereIsMayusInPassword (String password){
+    private boolean verifyIfThereIsMayusInPassword (String password){
         boolean mayus = false;
         for (char c : password.toCharArray()) {
             if (Character.isUpperCase(c)) {
@@ -94,7 +95,7 @@ public class UserAccountManager {
         return mayus;
     }
 
-    public boolean verifyIfThereIsMinusInPassword (String password){
+    private boolean verifyIfThereIsMinusInPassword (String password){
         boolean minus = false;
         for (char c : password.toCharArray()) {
             if (Character.isLowerCase(c)) {
@@ -104,7 +105,7 @@ public class UserAccountManager {
         return minus;
     }
 
-    public boolean verifyIfThereIsNumberInPassword (String password){
+    private boolean verifyIfThereIsNumberInPassword (String password){
         boolean numeric = false;
         for (char c : password.toCharArray()) {
             if (Character.isDigit(c)) {
@@ -198,6 +199,66 @@ public class UserAccountManager {
             throw new RuntimeException(e);
         }
         return userVehicles;
+    }
+
+    public ArrayList<Boolean> signUp (String userName, String email, String password, String secondPassword ){
+        ArrayList<Boolean> arrayWithAllInfoInSignUpAnalysis = new ArrayList<>();
+        //Primer boolean si el usuario es correcto, password tiene más de 8 caracteres, si tiene almenos una mayuscula, si tiene almenos una minuscula, si tiene al menos un numero, mirar si las contraseñass coinciden, si el correo es correcto(minimo tiene un arroba)
+
+        try{
+            List<Account> accountThatAlreadyExist = this.accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
+
+            if(accountThatAlreadyExist.isEmpty()){
+                arrayWithAllInfoInSignUpAnalysis.add(true);
+            }else{
+                arrayWithAllInfoInSignUpAnalysis.add(false);
+            }
+
+            if(verifyLengthInPassword(password)){
+                arrayWithAllInfoInSignUpAnalysis.add(true);
+            }else{
+                arrayWithAllInfoInSignUpAnalysis.add(false);
+            }
+
+            if(verifyIfThereIsMayusInPassword(password)){
+                arrayWithAllInfoInSignUpAnalysis.add(true);
+            }else{
+                arrayWithAllInfoInSignUpAnalysis.add(false);
+            }
+
+            if(verifyIfThereIsMinusInPassword(password)){
+                arrayWithAllInfoInSignUpAnalysis.add(true);
+            }else{
+                arrayWithAllInfoInSignUpAnalysis.add(false);
+            }
+
+            if(verifyIfThereIsNumberInPassword(password)){
+                arrayWithAllInfoInSignUpAnalysis.add(true);
+            }else{
+                arrayWithAllInfoInSignUpAnalysis.add(false);
+            }
+
+            if(password.equals(secondPassword)){
+                arrayWithAllInfoInSignUpAnalysis.add(true);
+            }else{
+                arrayWithAllInfoInSignUpAnalysis.add(false);
+            }
+
+            int itIsEmail = email.indexOf("@");
+            if(itIsEmail == -1) {
+                arrayWithAllInfoInSignUpAnalysis.add(false);
+            }else{
+                arrayWithAllInfoInSignUpAnalysis.add(true);
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return arrayWithAllInfoInSignUpAnalysis;
     }
 
 

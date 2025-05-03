@@ -12,6 +12,7 @@ import Persistence.VehicleDao;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserSlotManager {
@@ -202,4 +203,6 @@ public class UserSlotManager {
         }
         return actionCorrect;
     }
+
+
 }
