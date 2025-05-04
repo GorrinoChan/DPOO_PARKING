@@ -45,7 +45,12 @@ public class Slot {
     public void setReservation(boolean reservation) {
         this.reservation = reservation;
     }
-
+    public boolean getOccupation() {
+            return occupation;
+    }
+    public boolean getReservation() {
+            return reservation;
+    }
     public String getTypeOfPlace() {
         return typeOfPlace;
     }

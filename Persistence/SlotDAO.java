@@ -55,6 +55,7 @@ public class SlotDAO {
         }
         return allSqlSlotTransformToObjectSlot;
     }
+
     public List<Slot> readSpecificSlotOfDb(String column, String reference) throws FileNotFoundException, SQLException {
         List<Slot> specificSqlSlot;
         ResultSet sqlInfoOfDB;
