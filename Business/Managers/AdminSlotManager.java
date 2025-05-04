@@ -1,44 +1,51 @@
 package Business.Managers;
 
-import Business.Entities.Slot;
+import Business.Entities.Account;
+import Business.Entities.Vehicle;
+import Persistence.AccountDao;
+import Persistence.SqlDao;
+import Persistence.VehicleDao;
 import Persistence.SlotDAO;
+
 
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdminSlotManager   {
-    SlotDAO slotDAO;
 
-    public AdminSlotManager(SlotDAO slotDAO) {
-        this.slotDAO = this.slotDAO;
+    SlotDAO slotDAO;
+    VehicleDao vehicleDao;
+
+    public AdminSlotManager(String userName) {
+        this.slotDAO = new SlotDAO();
+        this.vehicleDao = new VehicleDao();
+
     }
-    
-    /*******************
-    * Comentario sobre la funcion de Bernat
-    *
-    * Por el momento, como no se como Dani consedera el true or false de occupation y reservation,
-    * Lo he puesto en 0 para false y 1 para true en caso de que no sea asi se ha de canviar
-    * ***************/
-    public void addParkingSlot(Slot slot) throws SQLException {
+
+    public boolean deleteParkingSlot(int slotNumber) {
+        boolean wasDeleted = false;
+
+        try {
+            SqlDao.getInstance().deleteObject("slot", "slotNumber", String.valueOf(slotNumber));
+            wasDeleted = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return wasDeleted;
+    }
+    public boolean createNewParkingSlot(int floor, int slotNumber, String typeOfPlace) {
+        boolean slotCreated = false;
+        SlotDAO slotDao = new SlotDAO();
         int occupation = 0;
         int reservation = 0;
-        if(slot.getOccupation() == true){
-            occupation = 1;
+        try {
+            slotDao.insertNewSlotInDb(floor, slotNumber, occupation, reservation, typeOfPlace);
+            slotCreated = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        if(slot.getReservation() == true){
-            reservation = 1;
-        }
-
-        slotDAO.insertNewSlotInDb(slot.getNumber(), slot.getFloor(), occupation, reservation, slot.getTypeOfPlace());
+        return slotCreated;
     }
-
-    public List<Slot> getAllParkingSlots() throws SQLException, FileNotFoundException {
-        return slotDAO.readAllSlotsContentInDb();
-    }
-
-    public void deleteParkingSlot(Slot slot) throws FileNotFoundException {
-        slotDAO.deleteSpecificSlot(slot.getNumber());
-    }
-
 }
