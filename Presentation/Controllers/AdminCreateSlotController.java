@@ -1,6 +1,9 @@
 package Presentation.Controllers;
 
+import Business.Managers.AdminSlotManager;
 import Presentation.Views.*;
+
+import javax.swing.*;
 
 
 public class AdminCreateSlotController {
@@ -13,6 +16,42 @@ public class AdminCreateSlotController {
         adminCreateSlot.getUserProfileButton().addActionListener(e -> openUserProfileView());
 
     }
+    private void createSlot() {
+        String slotNumberText = adminCreateSlot.getnumber();
+        String floorNumberText = adminCreateSlot.getfloaat();
+        String typeOfPlace = adminCreateSlot.gettipe();
+
+        if (slotNumberText.isEmpty() || floorNumberText.isEmpty() || typeOfPlace == null || typeOfPlace.isEmpty()) {
+            adminCreateSlot.setErrorMessage("Todos los campos son obligatorios.");
+            return;
+        }
+
+        try {
+            int slotNumber = Integer.parseInt(slotNumberText.trim());
+            int floorNumber = Integer.parseInt(floorNumberText.trim());
+
+            AdminSlotManager slotManager = new AdminSlotManager("admin");
+
+            if (slotManager.parkingSlotAlreadyExists(slotNumber)) {
+                adminCreateSlot.setErrorMessage("Ya existe una plaza con ese número.");
+            } else {
+                boolean created = slotManager.createNewParkingSlot(floorNumber, slotNumber, typeOfPlace);
+                if (created) {
+                    adminCreateSlot.setErrorMessage("");
+                    JOptionPane.showMessageDialog(adminCreateSlot, "Plaza creada correctamente.");
+                    adminCreateSlot.dispose();
+                    AdminMenuView menuView = new AdminMenuView();
+                    new AdminMenuController(menuView);
+                    menuView.setVisible(true);
+                } else {
+                    adminCreateSlot.setErrorMessage("Error al crear la plaza.");
+                }
+            }
+        } catch (NumberFormatException e) {
+            adminCreateSlot.setErrorMessage("Los campos numéricos deben contener números válidos.");
+        }
+    }
+
     private void openUserProfileView() {
         adminCreateSlot.dispose();
         AdminProfileView adminProfileView = new AdminProfileView();

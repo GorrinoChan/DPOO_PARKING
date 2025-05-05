@@ -1,6 +1,7 @@
 package Business.Managers;
 
 import Business.Entities.Account;
+import Business.Entities.Slot;
 import Business.Entities.Vehicle;
 import Persistence.AccountDao;
 import Persistence.SqlDao;
@@ -47,5 +48,19 @@ public class AdminSlotManager   {
             e.printStackTrace();
         }
         return slotCreated;
+    }
+
+    public boolean parkingSlotAlreadyExists(int slotNumber) {
+        boolean exists = false;
+        try {
+            List<Slot> result = slotDAO.readSpecificSlotOfDb("slotNumber", String.valueOf(slotNumber));
+            if (!result.isEmpty()) {
+                exists = true;
+            }
+        } catch (SQLException | FileNotFoundException e) {
+            exists = false;
+        }
+
+        return exists;
     }
 }

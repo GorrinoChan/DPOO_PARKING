@@ -191,6 +191,16 @@ public class UserSlotManager {
         }
         return actionCorrect;
     }
-
+    public boolean isSlotOccupied(int slotNumber) {
+        try {
+            List<Slot> result = this.slotDao.readSpecificSlotOfDb("slotNumber", String.valueOf(slotNumber));
+            if (!result.isEmpty()) {
+                return result.get(0).isOccupation();
+            }
+        } catch (SQLException | FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }

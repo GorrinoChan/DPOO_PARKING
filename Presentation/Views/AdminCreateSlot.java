@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class AdminCreateSlot extends JFrame {
     private JButton returnButton, CreateButton,userProfileButton;
-    private JLabel numberLabel, floatLabel, tipeLabel,titleLabel;
+    private JLabel numberLabel, floatLabel, tipeLabel,titleLabel,errorLabel;
     private JTextField numberTextField, floatTextField,tipeTextField;
 
     public JButton getReturnButton() {
@@ -27,6 +27,9 @@ public class AdminCreateSlot extends JFrame {
 
     public String gettipe() { return tipeTextField.getText(); }
 
+    public void setErrorMessage(String message) {
+        errorLabel.setText(message);
+    }
 
     public AdminCreateSlot() {
         setTitle("Parking LS - AdminCreateSlot");
@@ -94,6 +97,12 @@ public class AdminCreateSlot extends JFrame {
         gbc.gridx = 1;
         gbc.gridy = 6;
         panel.add(tipeTextField, gbc);
+
+        errorLabel = new JLabel(" ", SwingConstants.CENTER);
+        errorLabel.setForeground(Color.RED);
+        gbc.gridx = 1;
+        gbc.gridy = 7;
+        panel.add(errorLabel, gbc);
 
         CreateButton = new JButton("Crear");
         gbc.gridx = 1;
