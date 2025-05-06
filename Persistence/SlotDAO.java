@@ -93,5 +93,14 @@ public class SlotDAO {
             }
         }
     }
-
+    public void updateSlotInDb(int existingSlotNumber, int newFloor, int newSlotNumber, String newTypeOfPlace) throws SQLException {
+        String sql = "UPDATE slot SET floorNumber = ?, slotNumber = ?, typeOfPlace = ? WHERE slotNumber = ?";
+        PreparedStatement stmt = SqlDao.getInstance().getConnection().prepareStatement(sql);
+        stmt.setInt(1, newFloor);
+        stmt.setInt(2, newSlotNumber);
+        stmt.setString(3, newTypeOfPlace);
+        stmt.setInt(4, existingSlotNumber);
+        stmt.executeUpdate();
+        stmt.close();
+    }
 }

@@ -63,4 +63,14 @@ public class AdminSlotManager   {
 
         return exists;
     }
+    public boolean updateParkingSlot(int existingSlotNumber, int newFloor, int newSlotNumber, String newTypeOfPlace) {
+        boolean slotUpdated = false;
+        try {
+            slotDAO.updateSlotInDb(existingSlotNumber, newFloor, newSlotNumber, newTypeOfPlace);
+            slotUpdated = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return slotUpdated;
+    }
 }
