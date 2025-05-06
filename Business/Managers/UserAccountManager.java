@@ -21,7 +21,7 @@ public class UserAccountManager {
         this.vehicleDao = new VehicleDao();
 
     }
-
+    //Esta por arreglar
     public boolean accountUsernameExistByUsername(String userName) {
         boolean exist = true;
         List<Account> specificSqlAccount = null;
@@ -36,6 +36,7 @@ public class UserAccountManager {
             return exist;
     }
 
+    //Esta por arreglar
     public boolean accountUsernameExistByMail(String mailOfUser) {
         boolean exist = true;
         List<Account> specificSqlAccount = null;
