@@ -12,7 +12,7 @@ public class AdminCreateSlotController {
     public AdminCreateSlotController(AdminCreateSlot adminCreateSlot) {
         this.adminCreateSlot = adminCreateSlot;
         adminCreateSlot.getReturnButton().addActionListener(e -> returnToMenu());
-        adminCreateSlot.getCreateButton().addActionListener(e -> opencreateButton());
+        adminCreateSlot.getCreateButton().addActionListener(e -> createSlot());
         adminCreateSlot.getUserProfileButton().addActionListener(e -> openUserProfileView());
 
     }
@@ -40,9 +40,9 @@ public class AdminCreateSlotController {
                     adminCreateSlot.setErrorMessage("");
                     JOptionPane.showMessageDialog(adminCreateSlot, "Plaza creada correctamente.");
                     adminCreateSlot.dispose();
-                    AdminMenuView menuView = new AdminMenuView();
-                    new AdminMenuController(menuView);
-                    menuView.setVisible(true);
+                    AdminManagement adminManagement = new AdminManagement();
+                    new AdminManagementController(adminManagement);
+                    adminManagement.setVisible(true);
                 } else {
                     adminCreateSlot.setErrorMessage("Error al crear la plaza.");
                 }
@@ -59,12 +59,7 @@ public class AdminCreateSlotController {
         adminProfileView.setVisible(true);
     }
 
-    private void opencreateButton() {
-        adminCreateSlot.dispose();
-        AdminManagement adminManagement = new AdminManagement();
-        new AdminManagementController(adminManagement);
-        adminManagement.setVisible(true);
-    }
+
     private void returnToMenu() {
         adminCreateSlot.dispose();
         AdminMenuView adminMenuView = new AdminMenuView();
