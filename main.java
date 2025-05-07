@@ -144,7 +144,11 @@ public class main {
             sqlDAo.connect();
             SlotDAO slotDao = new SlotDAO();
             AdminSlotManager adminSlotManager = new AdminSlotManager();
-            adminSlotManager.createNewParkingSlot(1,8,"Car");
+            if(adminSlotManager.parkingSlotAlreadyExists(7)){
+                System.out.println("Funciona");
+            }else{
+                System.out.println("NO Funciona");
+            }
 
 
         } catch (FileNotFoundException e) {

@@ -29,7 +29,7 @@ public class AdminSlotManager   {
         boolean wasDeleted = false;
 
         try {
-            SqlDao.getInstance().deleteObject("slot", "slotNumber", String.valueOf(slotNumber));
+            this.slotDAO.deleteSpecificSlot(slotNumber);
             wasDeleted = true;
         } catch (Exception e) {
             e.printStackTrace();
