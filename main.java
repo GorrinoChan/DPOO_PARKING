@@ -1,10 +1,12 @@
 import Business.Entities.Account;
 import Business.Entities.Configuration;
 import Business.Entities.Vehicle;
+import Business.Managers.AdminSlotManager;
 import Business.Managers.InitializationManager;
 import Business.Managers.UserAccountManager;
 import Business.Managers.UserSlotManager;
 import Persistence.AccountDao;
+import Persistence.SlotDAO;
 import Persistence.SqlConfigurationDao;
 import Persistence.SqlDao;
 import Presentation.Controllers.*;
@@ -25,7 +27,7 @@ import java.util.Scanner;
 public class main {
     public static void main(String[] args) {
 
-        //Testeo:
+        /**********
         Scanner sc = new Scanner(System.in);
         int t = 0;
         while (t != 5) {
@@ -38,6 +40,9 @@ public class main {
             System.out.println("Enter a num: ");
             t = sc.nextInt();
             int cont = 0;
+
+
+            /**********
             switch (t) {
                 case 1:
                     UserSlotManager usm = new UserSlotManager();
@@ -54,6 +59,8 @@ public class main {
                     * Notas para algunas funciones:
                     * Para la funcion: augmentInOneTheNumberOfReservationsOfUserAccount, se tiene que revisar que el usuario existe, si no peta el codigo
                     * */
+
+            /**********
                     UserAccountManager uam = new UserAccountManager("Berna");
 
                     boolean f1 = uam.augmentInOneTheNumberOfCancellationsOfUserAccount("Bernat");
@@ -91,7 +98,7 @@ public class main {
                                 );
                         i++;
                     }
-                    uam.signUp()
+
                 case 3:
                     InitializationManager im = new InitializationManager();
 
@@ -104,12 +111,16 @@ public class main {
             }
 
         }
+        ******/
+
         /**********
         SwingUtilities.invokeLater(() -> {
             StartView startView = new StartView();
             new StartController(startView);
             startView.setVisible(true);
         });
+
+         ******/
 
         System.out.println("Hola");
         SqlConfigurationDao sqlconf = null;
@@ -131,17 +142,15 @@ public class main {
 
             SqlDao sqlDAo = new SqlDao(sqlconf);
             sqlDAo.connect();
-            sqlDAo.updateString("vehicle", "typeOfVehicle","Motorcycle", "Dani", "nameOfUserAccount");
-            List<Account> specificSqlAccount = accountDao.readSpecificAccountOfDb("nameOfUserAccount", "Bernat");
-            System.out.println(specificSqlAccount.get(0).getNameOfTheAccount());
+            SlotDAO slotDao = new SlotDAO();
+            AdminSlotManager adminSlotManager = new AdminSlotManager();
+            adminSlotManager.createNewParkingSlot(1,8,"Car");
+
 
         } catch (FileNotFoundException e) {
             System.out.println("Hay un problema");
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
 
-         ******/
     }
 }

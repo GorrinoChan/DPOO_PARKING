@@ -33,6 +33,9 @@ public class UserAccountManager {
         if (specificSqlAccount == null){
             exist = false;
         }
+        if(specificSqlAccount.isEmpty()){
+            exist = false;
+        }
             return exist;
     }
 
@@ -46,6 +49,9 @@ public class UserAccountManager {
             exist = false;
         }
         if (specificSqlAccount == null) {
+            exist = false;
+        }
+        if(specificSqlAccount.isEmpty()){
             exist = false;
         }
         return exist;

@@ -1,6 +1,6 @@
 package Business.Entities;
 
-import Persistence.SqlDao;
+import Persistence  .SqlDao;
 
 import java.io.FileNotFoundException;
 import java.sql.ResultSet;

@@ -30,7 +30,7 @@ public class AdminCreateSlotController {
             int slotNumber = Integer.parseInt(slotNumberText.trim());
             int floorNumber = Integer.parseInt(floorNumberText.trim());
 
-            AdminSlotManager slotManager = new AdminSlotManager("admin");
+            AdminSlotManager slotManager = new AdminSlotManager();
 
             if (slotManager.parkingSlotAlreadyExists(slotNumber)) {
                 adminCreateSlot.setErrorMessage("Ya existe una plaza con ese número.");

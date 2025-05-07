@@ -19,7 +19,7 @@ public class AdminSlotManager   {
     SlotDAO slotDAO;
     VehicleDao vehicleDao;
 
-    public AdminSlotManager(String userName) {
+    public AdminSlotManager() {
         this.slotDAO = new SlotDAO();
         this.vehicleDao = new VehicleDao();
 
@@ -38,11 +38,10 @@ public class AdminSlotManager   {
     }
     public boolean createNewParkingSlot(int floor, int slotNumber, String typeOfPlace) {
         boolean slotCreated = false;
-        SlotDAO slotDao = new SlotDAO();
         int occupation = 0;
         int reservation = 0;
         try {
-            slotDao.insertNewSlotInDb(floor, slotNumber, occupation, reservation, typeOfPlace);
+            this.slotDAO.insertNewSlotInDb(floor, slotNumber, occupation, reservation, typeOfPlace);
             slotCreated = true;
         } catch (SQLException e) {
             e.printStackTrace();
