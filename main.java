@@ -91,7 +91,6 @@ public class main {
                                 );
                         i++;
                     }
-                    uam.signUp()
                 case 3:
                     InitializationManager im = new InitializationManager();
 
