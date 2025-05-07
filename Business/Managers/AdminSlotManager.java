@@ -1,12 +1,10 @@
 package Business.Managers;
 
 import Business.Entities.Account;
+import Business.Entities.Reservation;
 import Business.Entities.Slot;
 import Business.Entities.Vehicle;
-import Persistence.AccountDao;
-import Persistence.SqlDao;
-import Persistence.VehicleDao;
-import Persistence.SlotDAO;
+import Persistence.*;
 
 
 import java.io.FileNotFoundException;
@@ -18,11 +16,12 @@ public class AdminSlotManager   {
 
     SlotDAO slotDAO;
     VehicleDao vehicleDao;
+    ReservationDao reservationDao;
 
     public AdminSlotManager() {
         this.slotDAO = new SlotDAO();
         this.vehicleDao = new VehicleDao();
-
+        this.reservationDao = new ReservationDao();
     }
 
     public boolean deleteParkingSlot(int slotNumber) {
@@ -62,4 +61,26 @@ public class AdminSlotManager   {
 
         return exists;
     }
+
+    public List<Reservation> getAllReservationThatHaveBeenDone (){
+        List<Reservation> allReservationWithOutTheCanceled;
+        try{
+            allReservationWithOutTheCanceled = this.reservationDao.readAllReservationContentInDb();
+            if(!allReservationWithOutTheCanceled.isEmpty()){
+                for(Reservation reservation : allReservationWithOutTheCanceled){
+                    if(reservation.isCancelled()){
+                        allReservationWithOutTheCanceled.remove(reservation);
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return allReservationWithOutTheCanceled;
+    }
+    
 }
