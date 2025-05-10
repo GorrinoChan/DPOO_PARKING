@@ -42,8 +42,6 @@ public class CheckPlateController {
 
         if (plate.isEmpty()) {
             checkPlateView.setErrorMessage("Introduzca una matrícula valida.");
-        } else if (!userSlotManager.licensePlateExist(plate)) {
-                checkPlateView.setErrorMessage("La matrícula no existe.");
         } else {
             if (!userReservations.isEmpty()) {
                 if (userSlotManager.markVehicleAsOccupyingSlot(plate)) {
@@ -53,7 +51,7 @@ public class CheckPlateController {
                 try {
                     slots = userSlotManager.readAllSlot();
                     if (!slots.isEmpty()) {
-                        assignedSlot = slots.get(0);
+                        assignedSlot = slots.getFirst();
                         if (userSlotManager.checkIfVehicleIsCorrectForSlot(plate, assignedSlot.getNumber())) {
                             if (userSlotManager.assignVehicleToFirstAvailableSLot(userName, plate, assignedSlot.getTypeOfPlace())) {
                                 JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente. Su plaza es la número: " + assignedSlot.getNumber());
