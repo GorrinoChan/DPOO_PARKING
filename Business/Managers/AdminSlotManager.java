@@ -82,5 +82,5 @@ public class AdminSlotManager   {
 
         return allReservationWithOutTheCanceled;
     }
-    
+
 }
