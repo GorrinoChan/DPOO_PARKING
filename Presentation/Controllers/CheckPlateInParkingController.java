@@ -35,7 +35,7 @@ public class CheckPlateInParkingController {
         if (plate.isEmpty()) {
             checkPlateInParkingView.setErrorMessage("Introduzca una matrícula valida.");
         } else if (userSlotManager.licensePlateExist(plate) && userSlotManager.checkIfLicensePlateIsFromTheUser(userName, plate)) {
-                
+                userSlotManager.markVehicleAsNotOccupyingSlot(plate);
                 JOptionPane.showMessageDialog(null, "Ha salido de PARKING LS correctamente.");
                 checkPlateInParkingView.dispose();
                 UserMenuView userMenuView = new UserMenuView();

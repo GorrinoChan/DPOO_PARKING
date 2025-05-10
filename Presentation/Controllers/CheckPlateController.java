@@ -36,7 +36,7 @@ public class CheckPlateController {
         String plate = checkPlateView.getPlate();
         UserSlotManager userSlotManager = new UserSlotManager();
         List<Reservation> userReservations = userSlotManager.readUserReservationByUserName(plate);
-        List<Slot> freeSlots = null;
+        List<Slot> slots = null;
         Slot assignedSlot = null;
         String userName = LogInController.userName;
 
@@ -51,9 +51,9 @@ public class CheckPlateController {
                 }
             } else {
                 try {
-                    freeSlots = userSlotManager.readAllFreeSlot();
-                    if (!freeSlots.isEmpty()) {
-                        assignedSlot = freeSlots.get(0);
+                    slots = userSlotManager.readAllSlot();
+                    if (!slots.isEmpty()) {
+                        assignedSlot = slots.get(0);
                         if (userSlotManager.checkIfVehicleIsCorrectForSlot(plate, assignedSlot.getNumber())) {
                             if (userSlotManager.assignVehicleToFirstAvailableSLot(userName, plate, assignedSlot.getTypeOfPlace())) {
                                 JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente. Su plaza es la número: " + assignedSlot.getNumber());
