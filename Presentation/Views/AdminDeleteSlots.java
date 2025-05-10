@@ -5,7 +5,10 @@ import java.awt.*;
 
 public class AdminDeleteSlots extends JFrame {
     private JButton returnButton,DeleteButton,userProfileButton;
-    private JLabel titleLabel;
+    private JLabel titleLabel,numbereditLabel,errorLabel;
+    private JTextField numbersearchTextField;
+
+    public String getnumber() { return numbersearchTextField.getText(); }
 
     public JButton getReturnButton() {
         return returnButton;
@@ -19,6 +22,9 @@ public class AdminDeleteSlots extends JFrame {
         return userProfileButton;
     }
 
+    public void setErrorMessage(String message) {
+        errorLabel.setText(message);
+    }
 
     public AdminDeleteSlots() {
         setTitle("Parking LS - AdminDeleteSlots");
@@ -55,6 +61,23 @@ public class AdminDeleteSlots extends JFrame {
         gbc.gridy = 0;
         gbc.gridwidth = 3;
         panel.add(titleLabel, gbc);
+
+        numbereditLabel = new JLabel("Numero de Plaza a Editar");
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        panel.add(numbereditLabel, gbc);
+
+        numbersearchTextField = new JTextField(20);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        panel.add(numbersearchTextField, gbc);
+
+        errorLabel = new JLabel(" ", SwingConstants.CENTER);
+        errorLabel.setForeground(Color.RED);
+        gbc.gridx = 1;
+        gbc.gridy = 9;
+        panel.add(errorLabel, gbc);
 
         DeleteButton = new JButton("Eliminar");
         gbc.gridx = 1;
