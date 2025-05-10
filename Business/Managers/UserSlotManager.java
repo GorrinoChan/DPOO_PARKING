@@ -221,7 +221,7 @@ public class UserSlotManager {
         return correct;
     }
 
-    public boolean checkIfLicensePlateIssFromTheUser (String userName, String licensePlate){
+    public boolean checkIfLicensePlateIsFromTheUser (String userName, String licensePlate){
 
         boolean correct = false;
         try{

@@ -31,11 +31,11 @@ public class CheckPlateInParkingController {
     private void confirmReservation() {
         String plate = checkPlateInParkingView.getPlate();
         UserSlotManager userSlotManager = new UserSlotManager();
-
+        String userName = LogInController.userName;
         if (plate.isEmpty()) {
             checkPlateInParkingView.setErrorMessage("Introduzca una matrícula valida.");
-        } else if (userSlotManager.licensePlateExist(plate) && ) {
-                // liberar el espacio que ocupe la plaza
+        } else if (userSlotManager.licensePlateExist(plate) && userSlotManager.checkIfLicensePlateIsFromTheUser(userName, plate)) {
+                
                 JOptionPane.showMessageDialog(null, "Ha salido de PARKING LS correctamente.");
                 checkPlateInParkingView.dispose();
                 UserMenuView userMenuView = new UserMenuView();
