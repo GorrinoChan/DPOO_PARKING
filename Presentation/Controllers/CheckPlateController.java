@@ -1,14 +1,11 @@
 package Presentation.Controllers;
 
-import Presentation.Views.CheckPlateInParkingView;
-import Presentation.Views.EnterParkingView;
-import Presentation.Views.UserMenuView;
-import Presentation.Views.UserProfileView;
+import Presentation.Views.*;
 
 public class CheckPlateController {
-    private CheckPlateInParkingView checkPlateView;
+    private CheckPlateView checkPlateView;
 
-    public CheckPlateController(CheckPlateInParkingView checkPlateView) {
+    public CheckPlateController(CheckPlateView checkPlateView) {
         this.checkPlateView = checkPlateView;
         checkPlateView.getReturnButton().addActionListener(e -> returnToMenu());
         checkPlateView.getUserProfileButton().addActionListener(e -> openUserProfileView());

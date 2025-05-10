@@ -27,15 +27,15 @@ public class EnterParkingController {
 
     private void openCheckPlateView() {
         enterParkingView.dispose();
-        CheckPlateInParkingView checkPlateView = new CheckPlateInParkingView();
-        new CheckPlateInParkingController(checkPlateView);
+        CheckPlateView checkPlateView = new CheckPlateView();
+        new CheckPlateController(checkPlateView);
         checkPlateView.setVisible(true);
     }
 
     private void openCheckPlateInParkingView() {
         enterParkingView.dispose();
-        CheckPlateInParkingView checkPlateView = new CheckPlateInParkingView();
-        new CheckPlateInParkingController(checkPlateView);
-        checkPlateView.setVisible(true);
+        CheckPlateInParkingView checkPlateInParkingView = new CheckPlateInParkingView();
+        new CheckPlateInParkingController(checkPlateInParkingView);
+        checkPlateInParkingView.setVisible(true);
     }
 }

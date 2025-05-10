@@ -121,7 +121,7 @@ public class main {
 
 
 
-        System.out.println("Hola");
+       /* System.out.println("Hola");
         SqlConfigurationDao sqlconf = null;
         AccountDao accountDao = new AccountDao();
         try {
@@ -153,7 +153,7 @@ public class main {
         } catch (FileNotFoundException e) {
             System.out.println("Hay un problema");
 
-        }
+        }*/
 
     }
 }
