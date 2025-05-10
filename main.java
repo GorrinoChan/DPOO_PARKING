@@ -5,10 +5,7 @@ import Business.Managers.AdminSlotManager;
 import Business.Managers.InitializationManager;
 import Business.Managers.UserAccountManager;
 import Business.Managers.UserSlotManager;
-import Persistence.AccountDao;
-import Persistence.SlotDAO;
-import Persistence.SqlConfigurationDao;
-import Persistence.SqlDao;
+import Persistence.*;
 import Presentation.Controllers.*;
 import Presentation.Views.*;
 
@@ -150,6 +147,12 @@ public class main {
             SlotDAO slotDao = new SlotDAO();
             AdminSlotManager adminSlotManager = new AdminSlotManager();
             UserAccountManager userAccountManager = new UserAccountManager("Daniel");
+            UserSlotManager userSlotManager = new UserSlotManager();
+            ReservationDao reservedParkingSlotsDao = new ReservationDao();
+            VehicleDao vehicleDao = new VehicleDao();
+            AccountDao accountDao = new AccountDao();
+            ReservationDao reservationDao = new ReservationDao();
+            slotDao.deleteSpecificSlot(2);
 
 
 

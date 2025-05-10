@@ -51,12 +51,28 @@ public class UserSlotManager {
         return correct;
     }
 
-    public boolean assignVehicleToFirstAvailableSLot(String userName, String licensePlate, String vehicleType){
-        boolean correct = false;
-        try {
-            List<Slot> allAvailableSlotsWithSameVehicleType = this.slotDao.readSpecificSlotOfDb("typeOfPlace", vehicleType);
-            if(!allAvailableSlotsWithSameVehicleType.isEmpty()){
+        public boolean assignVehicleToFirstAvailableSLot(String userName, String licensePlate, String vehicleType) {
+            boolean correct = false;
+
+            System.out.println(userName);
+            System.out.println("\n");
+            System.out.println(licensePlate);
+            System.out.println("\n");
+            System.out.println(vehicleType);
+
+            List<Slot> allAvailableSlotsWithSameVehicleType = null;
+            try {
+                allAvailableSlotsWithSameVehicleType = this.slotDao.readSpecificSlotOfDb("typeOfPlace", vehicleType);
+
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+
+            if (!allAvailableSlotsWithSameVehicleType.isEmpty()) {
                 Slot possibleOption = allAvailableSlotsWithSameVehicleType.get(0);
+
                 int floorNumber = possibleOption.getFloor();
                 int slotNumber = possibleOption.getNumber();
                 int occupationStatus = 1;
@@ -68,14 +84,24 @@ public class UserSlotManager {
                     occupationStatus = 0;
                 }
                 LocalDateTime date = LocalDateTime.now();
-                this.slotDao.deleteSpecificSlot(slotNumber);
-                this.reservedParkingSlotsDao.insertNewReservationInDb(licensePlate, String.valueOf(date), userName, slotNumber, floorNumber, 0, reservedStatus, occupationStatus, vehicleType);
+                System.out.println(possibleOption.getNumber());
+                System.out.println("Number");
+                try{
+                    this.slotDao.deleteSpecificSlot(slotNumber);
+                }catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    this.reservedParkingSlotsDao.insertNewReservationInDb(licensePlate, String.valueOf(date), userName, slotNumber, floorNumber, 0, reservedStatus, occupationStatus, vehicleType);
+                }catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                try{
+                    this.slotDao.deleteSpecificSlot(slotNumber);
+                }catch (FileNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
             }
-        }catch (SQLException e){
-            correct = false;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
         return correct;
     }
 
@@ -92,7 +118,7 @@ public class UserSlotManager {
         return allFreeSlotsInDB;
     }
 
-    public List<Reservation> readUserReservationByUserName(String userName){
+    public List<Reservation> readUserReservationByUserName (String userName){
         List<Reservation> userReservations;
         try{
             userReservations = this.reservedParkingSlotsDao.readSpecificReservationOfDb("userName", userName);
