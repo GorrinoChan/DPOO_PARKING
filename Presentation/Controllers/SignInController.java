@@ -5,6 +5,7 @@ import Presentation.Views.SignInView;
 import Business.Managers.UserAccountManager;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class SignInController {
     private SignInView signInView;
@@ -21,18 +22,18 @@ public class SignInController {
         String password = signInView.getPassword();
         String confirmPassword = signInView.getPasswordConfirmation();
         UserAccountManager userAccountManager = new UserAccountManager(username);
-        boolean checkUserName = userAccountManager.accountUsernameExistByUsername(username);
-        boolean checkUserMail = userAccountManager.accountUsernameExistByMail(email);
-        boolean checkPassword = userAccountManager.passwordIsCorrect(password, confirmPassword);
+        ArrayList<Boolean> validateSignIn = userAccountManager.signUp(username, email, password, confirmPassword);
 
         if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             signInView.setErrorMessage("Todos los campos son obligatorios.");
-        } else if (!checkUserName) {
+        } else if (!validateSignIn.get(0)) {
             signInView.setErrorMessage("El nombre de usuario ya está en uso.");
-        } else if (!checkUserMail) {
-            signInView.setErrorMessage("El mail del usuario ya está en uso.");
-        } else if (!checkPassword) {
+        } else if (!validateSignIn.get(6)) {
             signInView.setErrorMessage("Las contraseñas no coinciden.");
+        } else if (!validateSignIn.get(7)) {
+            signInView.setErrorMessage("El correo electrónico no es válido.");
+        } else if (!validateSignIn.get(1) || !validateSignIn.get(2) || !validateSignIn.get(3) || !validateSignIn.get(4) || !validateSignIn.get(5)) {
+            signInView.setErrorMessage("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.");
         } else {
             signInView.setErrorMessage("");
             userAccountManager.createNewAccount(username, email, password);
