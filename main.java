@@ -25,7 +25,7 @@ import java.util.Scanner;
 * *****************/
 
 public class main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
         /**********
         Scanner sc = new Scanner(System.in);
@@ -122,6 +122,7 @@ public class main {
 
          ******/
 
+        /**********
         System.out.println("Hola");
         SqlConfigurationDao sqlconf = null;
         AccountDao accountDao = new AccountDao();
@@ -131,8 +132,10 @@ public class main {
             System.out.println("Hay un problema");
         }
         try{
-            Configuration configuration = sqlconf.readJson();
 
+            Configuration configuration = sqlconf.readJson();
+         ******/
+        /**********
             System.out.println(configuration.getDatebaseName() + "\n");
             System.out.println(configuration.getDatabasePassword() + "\n");
             System.out.println(configuration.getDatabaseHost() + "\n");
@@ -142,19 +145,22 @@ public class main {
 
             SqlDao sqlDAo = new SqlDao(sqlconf);
             sqlDAo.connect();
+            ******/
+        InitializationManager initializationManager = new InitializationManager();
+        initializationManager.prepareReadJson();
+        initializationManager.readJsonForConfigDb();
+        initializationManager.tryToConnectToDb();
+
             SlotDAO slotDao = new SlotDAO();
             AdminSlotManager adminSlotManager = new AdminSlotManager();
-            if(adminSlotManager.parkingSlotAlreadyExists(7)){
-                System.out.println("Funciona");
-            }else{
-                System.out.println("NO Funciona");
-            }
+            UserAccountManager userAccountManager = new UserAccountManager("Daniel");
+            userAccountManager.createNewAccount("Hola", "Hola", "Hola");
 
-
+        /*****
         } catch (FileNotFoundException e) {
             System.out.println("Hay un problema");
 
-        }
+        }*****/
 
     }
 }
