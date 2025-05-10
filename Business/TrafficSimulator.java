@@ -33,14 +33,12 @@ public class TrafficSimulator implements Runnable{
             try{
                 Configuration configuration = sqlConfigurationDao.readJson();
                 double timeOfWaitUntilNextActionInSimulation = configuration.getTimeVehicle();
-
                 //ESPERAMOS LA CANTIDAD DE TIEMPO INDICADA
                 try{
                     Thread.sleep((long) (timeOfWaitUntilNextActionInSimulation * 1000));
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-
                 //NUMERO DE PLAZAS DISPONIBLES
                 List<Slot> allSlotsFree = slotDAO.readAllSlotsContentInDb();
                 int amountOfSlots = allSlotsFree.size();
