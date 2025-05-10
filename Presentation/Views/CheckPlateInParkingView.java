@@ -3,7 +3,7 @@ package Presentation.Views;
 import javax.swing.*;
 import java.awt.*;
 
-public class CheckPlateView extends JFrame {
+public class CheckPlateInParkingView extends JFrame {
     private JButton returnButton, userProfileButton, confirmButton;
     private JLabel titleLabel, plateLabel, errorLabel, subTitleLabel;
     private JTextField plateTextField;
@@ -28,8 +28,8 @@ public class CheckPlateView extends JFrame {
         return plateTextField.getText();
     }
 
-    public CheckPlateView() {
-        setTitle("Parking LS - CheckPlateView");
+    public CheckPlateInParkingView() {
+        setTitle("Parking LS - CheckPlateInParkingView");
         setSize(500, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -64,7 +64,7 @@ public class CheckPlateView extends JFrame {
         gbc.insets = new Insets(4, 0, 4, 0);
         panel.add(titleLabel, gbc);
 
-        subTitleLabel = new JLabel("Entrar al Parking", SwingConstants.CENTER);
+        subTitleLabel = new JLabel("Salir del Parking", SwingConstants.CENTER);
         subTitleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         gbc.gridx = 1;
         gbc.gridy = 1;

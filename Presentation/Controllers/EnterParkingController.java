@@ -8,7 +8,7 @@ public class EnterParkingController {
         enterParkingView.getReturnButton().addActionListener(e -> returnToMenu());
         enterParkingView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         enterParkingView.getEnterParkingSlotButtonButton().addActionListener(e -> openCheckPlateView());
-        enterParkingView.getRemoveFromParkingButton().addActionListener(e-> openCheckPlateView());
+        enterParkingView.getRemoveFromParkingButton().addActionListener(e-> openCheckPlateInParkingView());
     }
 
     private void openUserProfileView() {
@@ -27,8 +27,15 @@ public class EnterParkingController {
 
     private void openCheckPlateView() {
         enterParkingView.dispose();
-        CheckPlateView checkPlateView = new CheckPlateView();
-        new CheckPlateController(checkPlateView);
+        CheckPlateInParkingView checkPlateView = new CheckPlateInParkingView();
+        new CheckPlateInParkingController(checkPlateView);
+        checkPlateView.setVisible(true);
+    }
+
+    private void openCheckPlateInParkingView() {
+        enterParkingView.dispose();
+        CheckPlateInParkingView checkPlateView = new CheckPlateInParkingView();
+        new CheckPlateInParkingController(checkPlateView);
         checkPlateView.setVisible(true);
     }
 }

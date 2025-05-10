@@ -9,6 +9,8 @@ public class LoadController {
     private LoadView loadView;
 
     public LoadController(LoadView loadView) throws FileNotFoundException {
+        this.loadView = loadView;
+
         InitializationManager initializationManager = new InitializationManager();
         new Thread(() -> {
             try {

@@ -32,7 +32,7 @@ public class UserMenuView extends JFrame {
     }
 
     public UserMenuView() {
-        setTitle("Parking LS - Presentation.Views.UserMenuView");
+        setTitle("Parking LS - UserMenuView");
         setSize(500, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -74,7 +74,7 @@ public class UserMenuView extends JFrame {
         gbc.gridwidth = 3;
         panel.add(subTitleLabel, gbc);
 
-        enterButton = new JButton("Entrar al Parking");
+        enterButton = new JButton("Gestión del Parking");
         gbc.gridx = 1;
         gbc.gridy = 2;
         panel.add(enterButton, gbc);
