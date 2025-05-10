@@ -28,7 +28,7 @@ public class AdminDeleteSlots extends JFrame {
 
     public AdminDeleteSlots() {
         setTitle("Parking LS - AdminDeleteSlots");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

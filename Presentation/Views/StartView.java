@@ -13,7 +13,7 @@ public class StartView extends JFrame {
 
     public StartView() {
         setTitle("Parking LS - Start");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

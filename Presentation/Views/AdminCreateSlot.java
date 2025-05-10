@@ -33,7 +33,7 @@ public class AdminCreateSlot extends JFrame {
 
     public AdminCreateSlot() {
         setTitle("Parking LS - AdminCreateSlot");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

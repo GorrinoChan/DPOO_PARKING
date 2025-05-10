@@ -35,7 +35,7 @@ public class LogInView extends JFrame {
 
     public LogInView() {
         setTitle("Parking LS - LogIn");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

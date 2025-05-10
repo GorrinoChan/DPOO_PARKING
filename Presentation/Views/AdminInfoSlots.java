@@ -22,7 +22,7 @@ public class AdminInfoSlots extends JFrame {
 
     public AdminInfoSlots() {
         setTitle("Parking LS - AdminInfoSlots");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

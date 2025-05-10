@@ -39,7 +39,7 @@ public class SignInView extends JFrame {
 
     public SignInView() {
         setTitle("Parking LS - SignIn");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

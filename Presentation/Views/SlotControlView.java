@@ -25,7 +25,7 @@ public class SlotControlView extends JFrame {
 
     public SlotControlView() {
         setTitle("Parking LS - Presentation.Views.SlotControlView");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
