@@ -28,11 +28,11 @@ public class SignInController {
             signInView.setErrorMessage("Todos los campos son obligatorios.");
         } else if (!validateSignIn.get(0)) {
             signInView.setErrorMessage("El nombre de usuario ya está en uso.");
-        } else if (!validateSignIn.get(6)) {
+        } else if (!validateSignIn.get(5)) {
             signInView.setErrorMessage("Las contraseñas no coinciden.");
-        } else if (!validateSignIn.get(7)) {
+        } else if (!validateSignIn.get(6)) {
             signInView.setErrorMessage("El correo electrónico no es válido.");
-        } else if (!validateSignIn.get(1) || !validateSignIn.get(2) || !validateSignIn.get(3) || !validateSignIn.get(4) || !validateSignIn.get(5)) {
+        } else if (!validateSignIn.get(1) || !validateSignIn.get(2) || !validateSignIn.get(3) || !validateSignIn.get(4)) {
             signInView.setErrorMessage("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.");
         } else {
             signInView.setErrorMessage("");
