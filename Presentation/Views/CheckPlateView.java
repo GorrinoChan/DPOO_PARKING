@@ -3,38 +3,33 @@ package Presentation.Views;
 import javax.swing.*;
 import java.awt.*;
 
-public class LogInView extends JFrame {
-    private JButton returnButton, forgotPassword, loginButton, signInButton;
-    private JLabel titleLabel, subTitleLabel, userLabel, passwordLabel, errorLabel;
-    private JTextField userTextField;
-    private JPasswordField passwordTextField;
+public class CheckPlateView extends JFrame {
+    private JButton returnButton, userProfileButton, confirmButton;
+    private JLabel titleLabel, plateLabel, errorLabel, subTitleLabel;
+    private JTextField plateTextField;
 
-    public JButton getLoginButton() {
-        return loginButton;
+    public JButton getUserProfileButton() {
+        return userProfileButton;
     }
 
-    public JButton getSignInButton() {
-        return signInButton;
+    public JButton getConfirmButton() {
+        return confirmButton;
     }
 
     public JButton getReturnButton() {
         return returnButton;
     }
 
-    public String getUsername() {
-        return userTextField.getText();
-    }
-
-    public String getPassword() {
-        return new String(passwordTextField.getPassword());
-    }
-
     public void setErrorMessage(String message) {
         errorLabel.setText(message);
     }
 
-    public LogInView() {
-        setTitle("Parking LS - LogIn");
+    public String getPlate() {
+        return plateTextField.getText();
+    }
+
+    public CheckPlateView() {
+        setTitle("Parking LS - CheckPlateView");
         setSize(500, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -45,7 +40,7 @@ public class LogInView extends JFrame {
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(4, 0, 4, 0);
+        gbc.insets = new Insets(4, 0, 4, 20);
 
         returnButton = new JButton("<");
         returnButton.setBorderPainted(false);
@@ -54,47 +49,52 @@ public class LogInView extends JFrame {
         gbc.gridy = 0;
         panel.add(returnButton, gbc);
 
+        userProfileButton = new JButton("User");
+        gbc.gridx = 4;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(4, 20, 4, 0);
+        panel.add(userProfileButton, gbc);
+
         titleLabel = new JLabel("PARKING LS", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
+        gbc.insets = new Insets(4, 0, 4, 0);
         panel.add(titleLabel, gbc);
 
-        subTitleLabel = new JLabel("Inicia Sesión", SwingConstants.CENTER);
+        subTitleLabel = new JLabel("Entrar al Parking", SwingConstants.CENTER);
         subTitleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
         panel.add(subTitleLabel, gbc);
 
-        userLabel = new JLabel("Usuario");
+        plateLabel = new JLabel("Matrícula");
         gbc.gridx = 1;
         gbc.gridy = 2;
-        gbc.gridwidth = 1;
-        panel.add(userLabel, gbc);
+        panel.add(plateLabel, gbc);
 
-        userTextField = new JTextField(20);
+        plateTextField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 3;
-        panel.add(userTextField, gbc);
+        panel.add(plateTextField, gbc);
 
-        passwordLabel = new JLabel("Contraseña");
+        titleLabel = new JLabel(" ", SwingConstants.CENTER);
         gbc.gridx = 1;
         gbc.gridy = 4;
-        panel.add(passwordLabel, gbc);
+        panel.add(titleLabel, gbc);
 
-        passwordTextField = new JPasswordField(20);
+        titleLabel = new JLabel(" ", SwingConstants.CENTER);
         gbc.gridx = 1;
         gbc.gridy = 5;
-        panel.add(passwordTextField, gbc);
+        panel.add(titleLabel, gbc);
 
-        /*forgotPassword = new JButton("¿Ha olvidado la contraseña?");
-        forgotPassword.setBorderPainted(false);
-        forgotPassword.setContentAreaFilled(false);
+        titleLabel = new JLabel(" ", SwingConstants.CENTER);
         gbc.gridx = 1;
         gbc.gridy = 6;
-        panel.add(forgotPassword, gbc);*/
+        panel.add(titleLabel, gbc);
 
         errorLabel = new JLabel("", SwingConstants.CENTER);
         errorLabel.setForeground(Color.RED);
@@ -102,15 +102,10 @@ public class LogInView extends JFrame {
         gbc.gridy = 7;
         panel.add(errorLabel, gbc);
 
-        loginButton = new JButton("Inicia Sesión");
+        confirmButton = new JButton("Confirmar");
         gbc.gridx = 1;
         gbc.gridy = 8;
-        panel.add(loginButton, gbc);
-
-        signInButton = new JButton("Registrarse");
-        gbc.gridx = 1;
-        gbc.gridy = 9;
-        panel.add(signInButton, gbc);
+        panel.add(confirmButton, gbc);
 
         c.add(panel, BorderLayout.CENTER);
     }

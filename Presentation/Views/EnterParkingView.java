@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class EnterParkingView extends JFrame {
-    private JButton returnButton, userProfileButton;
-    private JLabel titleLabel;
+    private JButton returnButton, userProfileButton, enterParkingSlotButton, removeFromParkingButton;
+    private JLabel titleLabel, subTitleLabel;
 
     public JButton getReturnButton() {
         return returnButton;
@@ -13,6 +13,14 @@ public class EnterParkingView extends JFrame {
 
     public JButton getUserProfileButton() {
         return userProfileButton;
+    }
+
+    public JButton getEnterParkingSlotButtonButton() {
+        return enterParkingSlotButton;
+    }
+
+    public JButton getRemoveFromParkingButton() {
+        return removeFromParkingButton;
     }
 
     public EnterParkingView() {
@@ -34,6 +42,7 @@ public class EnterParkingView extends JFrame {
         returnButton.setContentAreaFilled(false);
         gbc.gridx = 0;
         gbc.gridy = 0;
+        gbc.gridwidth = 1;
         panel.add(returnButton, gbc);
 
         userProfileButton = new JButton("User");
@@ -51,6 +60,36 @@ public class EnterParkingView extends JFrame {
         gbc.gridwidth = 3;
         panel.add(titleLabel, gbc);
 
+        subTitleLabel = new JLabel("Control del parking", SwingConstants.CENTER);
+        subTitleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridwidth = 3;
+        panel.add(subTitleLabel, gbc);
+
+        subTitleLabel = new JLabel(" ");
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.gridwidth = 3;
+        panel.add(subTitleLabel, gbc);
+
+        subTitleLabel = new JLabel(" ");
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.gridwidth = 3;
+        panel.add(subTitleLabel, gbc);
+
+        enterParkingSlotButton = new JButton("Entrar");
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.gridwidth = 3;
+        panel.add(enterParkingSlotButton, gbc);
+
+        removeFromParkingButton = new JButton("Salir");
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        gbc.gridwidth = 3;
+        panel.add(removeFromParkingButton, gbc);
 
         c.add(panel, BorderLayout.CENTER);
     }

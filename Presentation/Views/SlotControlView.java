@@ -15,11 +15,11 @@ public class SlotControlView extends JFrame {
         return userProfileButton;
     }
 
-    public JButton getreserveSlotButton() {
+    public JButton getReserveSlotButton() {
         return reserveSlotButton;
     }
 
-    public JButton getremoveReservationButton() {
+    public JButton getRemoveReservationButton() {
         return removeReservationButton;
     }
 
