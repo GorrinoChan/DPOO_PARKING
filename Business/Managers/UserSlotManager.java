@@ -221,4 +221,25 @@ public class UserSlotManager {
         return correct;
     }
 
+    public boolean checkIfLicensePlateIssFromTheUser (String userName, String licensePlate){
+
+        boolean correct = false;
+        try{
+            List<Vehicle> vehiclesOfUser = this.vehicleDao.readSpecificVehicleOfDb("nameOfUserAccount", userName);
+            if(!vehiclesOfUser.isEmpty()){
+                for(Vehicle vehicle : vehiclesOfUser){
+                    if (vehicle.getVehicleType().equals(licensePlate)) {
+                        correct = true;
+                        break;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return correct;
+    }
+
 }
