@@ -145,15 +145,14 @@ public class main {
             SqlDao sqlDAo = new SqlDao(sqlconf);
             sqlDAo.connect();
             ******/
-        InitializationManager initializationManager = new InitializationManager();
-        initializationManager.prepareReadJson();
-        initializationManager.readJsonForConfigDb();
-        initializationManager.tryToConnectToDb();
+
 
             SlotDAO slotDao = new SlotDAO();
             AdminSlotManager adminSlotManager = new AdminSlotManager();
             UserAccountManager userAccountManager = new UserAccountManager("Daniel");
-            userAccountManager.createNewAccount("Hola", "Hola", "Hola");
+
+
+
 
         /*****
         } catch (FileNotFoundException e) {

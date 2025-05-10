@@ -22,6 +22,7 @@ public class UserAccountManager {
 
     }
     //Esta por arreglar
+    /***
     public boolean accountUsernameExistByUsername(String userName) {
         boolean exist = true;
         List<Account> specificSqlAccount = null;
@@ -38,6 +39,7 @@ public class UserAccountManager {
         }
             return exist;
     }
+
 
     //Esta por arreglar
     public boolean accountUsernameExistByMail(String mailOfUser) {
@@ -61,8 +63,12 @@ public class UserAccountManager {
         boolean correct;
         try{
             List<Account> specificSqlAccount = accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
-            if (specificSqlAccount.get(0).getPassword().equals(password)){
-                correct = true;
+            if(specificSqlAccount.isEmpty()) {
+                if (specificSqlAccount.get(0).getPassword().equals(password)) {
+                    correct = true;
+                } else {
+                    correct = false;
+                }
             }else{
                 correct = false;
             }
@@ -71,6 +77,7 @@ public class UserAccountManager {
         }
         return correct;
     }
+     ****/
 
     public void createNewAccount(String userName, String emailOfTheAccount, String password) {
         accountDao.insertNewAccountInDb(userName,emailOfTheAccount,password);
