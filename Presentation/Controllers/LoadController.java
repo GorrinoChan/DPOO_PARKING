@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 public class LoadController {
     private LoadView loadView;
 
-    public LoadController(LoadView loadView) throws FileNotFoundException {
+    public LoadController(LoadView loadView) {
         this.loadView = loadView;
 
         InitializationManager initializationManager = new InitializationManager();
