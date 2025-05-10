@@ -30,7 +30,7 @@ public class CheckPlateInParkingView extends JFrame {
 
     public CheckPlateInParkingView() {
         setTitle("Parking LS - CheckPlateInParkingView");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

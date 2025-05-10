@@ -17,7 +17,7 @@ public class AdminSimulation extends JFrame {
 
     public AdminSimulation() {
         setTitle("Parking LS - AdminSimulation");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

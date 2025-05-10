@@ -32,8 +32,8 @@ public class RemoveReservationView extends JFrame {
     }
 
     public RemoveReservationView() {
-        setTitle("Parking LS - Presentation.Views.RemoveReservationView");
-        setSize(500, 400);
+        setTitle("Parking LS - RemoveReservationView");
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

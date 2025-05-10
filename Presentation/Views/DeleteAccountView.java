@@ -17,7 +17,7 @@ public class DeleteAccountView extends JFrame {
 
     public DeleteAccountView() {
         setTitle("Parking LS - DeleteAccount");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

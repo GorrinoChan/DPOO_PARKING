@@ -23,7 +23,7 @@ public class AdminSlotAvaliableView extends JFrame {
 
     public AdminSlotAvaliableView() {
         setTitle("Parking LS - AdminSlotAvaliableView");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

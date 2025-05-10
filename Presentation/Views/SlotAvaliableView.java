@@ -20,7 +20,7 @@ public class SlotAvaliableView extends JFrame {
 
     public SlotAvaliableView() {
         setTitle("Parking LS - SlotAvaliable");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

@@ -37,7 +37,7 @@ public class ReserveSlotView extends JFrame {
 
     public ReserveSlotView() {
         setTitle("Parking LS - ReserveSlot");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

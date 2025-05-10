@@ -39,7 +39,7 @@ public class AdminEditSlots extends JFrame {
 
     public AdminEditSlots() {
         setTitle("Parking LS - AdminEditSlots");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 

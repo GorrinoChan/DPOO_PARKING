@@ -17,7 +17,7 @@ public class AdminProfileView extends JFrame {
 
     public AdminProfileView() {
         setTitle("Parking LS - AdminProfile");
-        setSize(500, 400);
+        setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
