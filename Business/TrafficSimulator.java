@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 
-public class TrafficSimulator {
+public class TrafficSimulator implements Runnable{
 
     private final SlotDAO slotDAO = new SlotDAO();
     private final SqlConfigurationDao sqlConfigurationDao = new SqlConfigurationDao();
@@ -25,7 +25,7 @@ public class TrafficSimulator {
     public TrafficSimulator() throws FileNotFoundException {
     }
 
-    public void runSimulationOfCars (){
+    public void run (){
         //BUCLE INFINITO
         while(i == 1){
 
