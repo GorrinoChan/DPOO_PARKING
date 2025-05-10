@@ -203,4 +203,22 @@ public class UserSlotManager {
         return false;
     }
 
+    public boolean  licensePlateExist(String licensePlate){
+        boolean correct = false;
+
+        try{
+
+            List<Vehicle> vehicle = this.vehicleDao.readSpecificVehicleOfDb("licencePlate", licensePlate);
+            if(!vehicle.isEmpty()){
+                correct = true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return correct;
+    }
+
 }
