@@ -79,7 +79,7 @@ public class UserSlotManager {
     }
 
 
-    public List<Slot> readAllFreeSlot () throws SQLException {
+    public List<Slot> readAllSlot () throws SQLException {
         List<Slot> allFreeSlotsInDB;
         try{
             allFreeSlotsInDB = this.slotDao.readAllSlotsContentInDb();
