@@ -36,9 +36,6 @@ public class CheckPlateController {
         String plate = checkPlateView.getPlate();
         UserSlotManager userSlotManager = new UserSlotManager();
         List<Reservation> userReservations = userSlotManager.readUserReservationByUserName(plate);
-        List<Slot> slots = null;
-        Slot assignedSlot = null;
-        String userName = LogInController.userName;
 
         if (plate.isEmpty()) {
             checkPlateView.setErrorMessage("Introduzca una matrícula valida.");
@@ -48,23 +45,10 @@ public class CheckPlateController {
                     JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente.");
                 }
             } else {
-                try {
-                    slots = userSlotManager.readAllSlot();
-                    if (!slots.isEmpty()) {
-                        assignedSlot = slots.getFirst();
-                        if (userSlotManager.checkIfVehicleIsCorrectForSlot(plate, assignedSlot.getNumber())) {
-                            if (userSlotManager.assignVehicleToFirstAvailableSLot(userName, plate, assignedSlot.getTypeOfPlace())) {
-                                JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente. Su plaza es la número: " + assignedSlot.getNumber());
-                            } else {
-                                checkPlateView.setErrorMessage("No se ha podido asignar una plaza correctamente.");
-                            }
-                        }
-                    } else {
-                        checkPlateView.setErrorMessage("No hay plazas disponibles.");
-                    }
-                } catch (SQLException e) {
-                    checkPlateView.setErrorMessage("Error en la base de datos: " + e.getMessage());
-                }
+               checkPlateView.dispose();
+               CheckTypeVehicleView checkTypeVehicleView = new CheckTypeVehicleView();
+               new CheckTypeVehicleController(checkTypeVehicleView, plate);
+                checkTypeVehicleView.setVisible(true);
             }
         }
     }

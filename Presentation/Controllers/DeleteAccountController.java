@@ -17,9 +17,9 @@ public class DeleteAccountController {
     }
 
     private void deleteAccount() {
-        UserAccountManager userAccountManager = new UserAccountManager("error");// Problema porque yo aqui no tengo el username
-        Boolean checkCorrectDelete = userAccountManager.deleteExistingAccount("error");
-        if (checkCorrectDelete) {
+        String userName = LogInController.userName;
+        UserAccountManager userAccountManager = new UserAccountManager(userName);
+        if (userAccountManager.deleteExistingAccount(userName)) {
             JOptionPane.showMessageDialog(deleteAccountView, "Cuenta eliminada correctamente.");
             deleteAccountView.dispose();
             StartView startView = new StartView();
