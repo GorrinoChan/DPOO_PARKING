@@ -89,12 +89,12 @@ public class LogInView extends JFrame {
         gbc.gridy = 5;
         panel.add(passwordTextField, gbc);
 
-        forgotPassword = new JButton("¿Ha olvidado la contraseña?");
+        /*forgotPassword = new JButton("¿Ha olvidado la contraseña?");
         forgotPassword.setBorderPainted(false);
         forgotPassword.setContentAreaFilled(false);
         gbc.gridx = 1;
         gbc.gridy = 6;
-        panel.add(forgotPassword, gbc);
+        panel.add(forgotPassword, gbc);*/
 
         errorLabel = new JLabel("", SwingConstants.CENTER);
         errorLabel.setForeground(Color.RED);

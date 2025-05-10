@@ -1,8 +1,5 @@
 package Presentation.Controllers;
-
-import Presentation.Views.EnterParkingView;
-import Presentation.Views.UserMenuView;
-import Presentation.Views.UserProfileView;
+import Presentation.Views.*;
 public class EnterParkingController {
     private EnterParkingView enterParkingView;
 
@@ -10,6 +7,8 @@ public class EnterParkingController {
         this.enterParkingView = enterParkingView;
         enterParkingView.getReturnButton().addActionListener(e -> returnToMenu());
         enterParkingView.getUserProfileButton().addActionListener(e -> openUserProfileView());
+        enterParkingView.getEnterParkingSlotButtonButton().addActionListener(e -> openCheckPlateView());
+        enterParkingView.getRemoveFromParkingButton().addActionListener(e-> openCheckPlateView());
     }
 
     private void openUserProfileView() {
@@ -24,5 +23,12 @@ public class EnterParkingController {
         UserMenuView userMenuView = new UserMenuView();
         new UserMenuController(userMenuView);
         userMenuView.setVisible(true);
+    }
+
+    private void openCheckPlateView() {
+        enterParkingView.dispose();
+        CheckPlateView checkPlateView = new CheckPlateView();
+        new CheckPlateController(checkPlateView);
+        checkPlateView.setVisible(true);
     }
 }

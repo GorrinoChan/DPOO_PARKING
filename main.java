@@ -113,14 +113,13 @@ public class main {
         }
         ******/
 
-        /**********
         SwingUtilities.invokeLater(() -> {
             StartView startView = new StartView();
             new StartController(startView);
             startView.setVisible(true);
         });
 
-         ******/
+
 
         System.out.println("Hola");
         SqlConfigurationDao sqlconf = null;

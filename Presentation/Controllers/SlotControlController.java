@@ -7,8 +7,8 @@ public class SlotControlController {
         this.slotControlView = slotControlView;
         slotControlView.getReturnButton().addActionListener(e -> returnToMenu());
         slotControlView.getUserProfileButton().addActionListener(e -> openUserProfileView());
-        slotControlView.getreserveSlotButton().addActionListener(e -> openReserveSlotView());
-        slotControlView.getremoveReservationButton().addActionListener(e-> openRemoveReservationView());
+        slotControlView.getReserveSlotButton().addActionListener(e -> openReserveSlotView());
+        slotControlView.getRemoveReservationButton().addActionListener(e-> openRemoveReservationView());
     }
 
     private void openUserProfileView() {

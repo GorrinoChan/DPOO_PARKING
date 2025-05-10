@@ -6,6 +6,11 @@ import java.awt.*;
 public class LoadView extends JFrame {
     private JLabel titleLabel, loadLabel;
 
+    public void setErrorMessage(String message) {
+        loadLabel.setText(message);
+        loadLabel.setForeground(Color.RED);
+    }
+
     public LoadView() {
         setTitle("Parking LS - Start");
         setSize(500, 400);
