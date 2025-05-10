@@ -228,7 +228,7 @@ public class UserSlotManager {
             List<Vehicle> vehiclesOfUser = this.vehicleDao.readSpecificVehicleOfDb("nameOfUserAccount", userName);
             if(!vehiclesOfUser.isEmpty()){
                 for(Vehicle vehicle : vehiclesOfUser){
-                    if (vehicle.getVehicleType().equals(licensePlate)) {
+                    if (vehicle.getVehicleLicense().equals(licensePlate)) {
                         correct = true;
                         break;
                     }
