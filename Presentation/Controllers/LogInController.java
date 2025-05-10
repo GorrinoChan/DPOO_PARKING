@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class LogInController {
     private LogInView logInView;
+    public static String userName;
 
     public LogInController(LogInView logInView) {
         this.logInView = logInView;
@@ -17,11 +18,11 @@ public class LogInController {
     private void validateLogin() {
         InitializationManager initializationManager = new InitializationManager();
 
-        String username = logInView.getUsername();
+        userName = logInView.getUsername();
         String password = logInView.getPassword();
-        ArrayList<Boolean> checkLogIn = initializationManager.logIn(username, password);
+        ArrayList<Boolean> checkLogIn = initializationManager.logIn(userName, password);
 
-        if (username.isEmpty() || password.isEmpty()) {
+        if (userName.isEmpty() || password.isEmpty()) {
             logInView.setErrorMessage("Todos los campos son obligatorios.");
         } else if (!checkLogIn.get(0) || !checkLogIn.get(1)){
             logInView.setErrorMessage("Usuario o contraseña incorrectos.");

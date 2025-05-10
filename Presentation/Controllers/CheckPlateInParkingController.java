@@ -1,6 +1,9 @@
 package Presentation.Controllers;
 
 import Presentation.Views.*;
+import Business.Managers.UserSlotManager;
+
+import javax.swing.*;
 
 public class CheckPlateInParkingController {
     private CheckPlateInParkingView checkPlateInParkingView;
@@ -27,16 +30,21 @@ public class CheckPlateInParkingController {
     }
     private void confirmReservation() {
         String plate = checkPlateInParkingView.getPlate();
-
+        UserSlotManager userSlotManager = new UserSlotManager();
+        String userName = LogInController.userName;
         if (plate.isEmpty()) {
-            checkPlateInParkingView.setErrorMessage("");
-            checkPlateInParkingView.dispose();
-            UserMenuView userMenuView = new UserMenuView();
-            new UserMenuController(userMenuView);
-            userMenuView.setVisible(true);
-        } else {
-
+            checkPlateInParkingView.setErrorMessage("Introduzca una matrícula valida.");
+        } else if (userSlotManager.licensePlateExist(plate) && userSlotManager.checkIfLicensePlateIsFromTheUser(userName, plate)) {
+                userSlotManager.markVehicleAsNotOccupyingSlot(plate);
+                JOptionPane.showMessageDialog(null, "Ha salido de PARKING LS correctamente.");
+                checkPlateInParkingView.dispose();
+                UserMenuView userMenuView = new UserMenuView();
+                new UserMenuController(userMenuView);
+                userMenuView.setVisible(true);
+            } else {
+                checkPlateInParkingView.setErrorMessage("La matrícula no existe.");
+            }
         }
 
     }
-}
+
