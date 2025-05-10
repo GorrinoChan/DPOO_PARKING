@@ -9,16 +9,10 @@ public class StartController {
 
     public StartController(StartView startView) {
         this.startView = startView;
-        startView.getStartButton().addActionListener(e -> {
-            try {
-                openLogInView();
-            } catch (FileNotFoundException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+        startView.getStartButton().addActionListener(e -> openLoadView());
     }
 
-    private void openLogInView() throws FileNotFoundException {
+    private void openLoadView() {
         startView.dispose();
         LoadView loadView = new LoadView();
         new LoadController(loadView);

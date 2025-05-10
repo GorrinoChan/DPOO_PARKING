@@ -55,21 +55,22 @@ public class UserSlotManager {
         boolean correct = false;
         try {
             List<Slot> allAvailableSlotsWithSameVehicleType = this.slotDao.readSpecificSlotOfDb("typeOfPlace", vehicleType);
-            Slot possibleOption = allAvailableSlotsWithSameVehicleType.get(0);
-            int floorNumber = possibleOption.getFloor();
-            int slotNumber = possibleOption.getNumber();
-            int occupationStatus = 1;
-            if(!possibleOption.isOccupation()){
-                occupationStatus = 0;
+            if(!allAvailableSlotsWithSameVehicleType.isEmpty()){
+                Slot possibleOption = allAvailableSlotsWithSameVehicleType.get(0);
+                int floorNumber = possibleOption.getFloor();
+                int slotNumber = possibleOption.getNumber();
+                int occupationStatus = 1;
+                if (!possibleOption.isOccupation()) {
+                    occupationStatus = 0;
+                }
+                int reservedStatus = 1;
+                if (!possibleOption.isReservation()) {
+                    occupationStatus = 0;
+                }
+                LocalDateTime date = LocalDateTime.now();
+                this.slotDao.deleteSpecificSlot(slotNumber);
+                this.reservedParkingSlotsDao.insertNewReservationInDb(licensePlate, String.valueOf(date), userName, slotNumber, floorNumber, 0, reservedStatus, occupationStatus, vehicleType);
             }
-            int reservedStatus = 1;
-            if(!possibleOption.isReservation()){
-                occupationStatus = 0;
-            }
-            LocalDateTime date = LocalDateTime.now();
-            this.slotDao.deleteSpecificSlot(slotNumber);
-            this.reservedParkingSlotsDao.insertNewReservationInDb(licensePlate, String.valueOf(date), userName, slotNumber,  floorNumber, 0, reservedStatus, occupationStatus, vehicleType);
-
         }catch (SQLException e){
             correct = false;
         } catch (FileNotFoundException e) {
@@ -218,6 +219,27 @@ public class UserSlotManager {
             throw new RuntimeException(e);
         }
 
+        return correct;
+    }
+
+    public boolean checkIfLicensePlateIsFromTheUser (String userName, String licensePlate){
+
+        boolean correct = false;
+        try{
+            List<Vehicle> vehiclesOfUser = this.vehicleDao.readSpecificVehicleOfDb("nameOfUserAccount", userName);
+            if(!vehiclesOfUser.isEmpty()){
+                for(Vehicle vehicle : vehiclesOfUser){
+                    if (vehicle.getVehicleLicense().equals(licensePlate)) {
+                        correct = true;
+                        break;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         return correct;
     }
 
