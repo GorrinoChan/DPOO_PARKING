@@ -38,16 +38,15 @@ public class CheckTypeVehicleController {
         UserSlotManager userSlotManager = new UserSlotManager();
         String userName = LogInController.userName;
         String slot = userSlotManager.assignVehicleToFirstAvailableSLot(userName, plate, type);
-        try {
-            if (!slot.equals("00")) {
-                JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente. Su plaza está en la planta " + slot.get(0) + " y es la número: " + slot.get(1));
-            } else {
-                checkTypeVehicleView.setErrorMessage("No hay plazas disponibles.");
-            }
+        String[] informationSlot = null;
 
-        } catch (SQLException e) {
-            checkTypeVehicleView.setErrorMessage("Error en la base de datos: " + e.getMessage());
+        if (!slot.equals("00")) {
+            informationSlot = slot.split("/");
+            JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente. Su plaza está en la planta " + informationSlot[0] + " y es la número: " + informationSlot[1]);
+        } else {
+            checkTypeVehicleView.setErrorMessage("No hay plazas disponibles.");
         }
+
         checkTypeVehicleView.dispose();
         EnterParkingView enterParkingView = new EnterParkingView();
         new EnterParkingController(enterParkingView);
