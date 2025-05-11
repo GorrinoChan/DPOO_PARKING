@@ -5,7 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class SlotAvaliableView extends JFrame {
-    private JButton returnButton, userProfileButton;
+    private JButton returnButton, userProfileButton, carButton, largeCarButton, motorcycleButton;
     private JLabel titleLabel, subTitleLabel;
     private JTable slotsAvaliableTable;
     private DefaultTableModel tableModel;
@@ -17,6 +17,12 @@ public class SlotAvaliableView extends JFrame {
     public JButton getReturnButton() {
         return returnButton;
     }
+
+    public JButton getCarButton() { return carButton; }
+
+    public JButton getLargeCarButton() { return largeCarButton; }
+
+    public JButton getMotorcycleButton() { return motorcycleButton; }
 
     public SlotAvaliableView() {
         setTitle("Parking LS - SlotAvaliable");
@@ -61,9 +67,23 @@ public class SlotAvaliableView extends JFrame {
         gbc.gridwidth = 2;
         panel.add(subTitleLabel, gbc);
 
-        slotsAvaliableTable = new JTable(tableModel);
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        carButton = new JButton("Coches");
+        largeCarButton = new JButton("Vehículos Grandes");
+        motorcycleButton = new JButton("Motos");
+
+        buttonPanel.add(carButton);
+        buttonPanel.add(largeCarButton);
+        buttonPanel.add(motorcycleButton);
+
         gbc.gridx = 1;
         gbc.gridy = 2;
+        gbc.gridwidth = 3;
+        panel.add(buttonPanel, gbc);
+
+        slotsAvaliableTable = new JTable(tableModel);
+        gbc.gridx = 1;
+        gbc.gridy = 3;
         gbc.gridwidth = 2;
         panel.add(slotsAvaliableTable, gbc);
         slotsAvaliableTable.setFillsViewportHeight(true);
@@ -73,4 +93,7 @@ public class SlotAvaliableView extends JFrame {
         c.add(panel, BorderLayout.CENTER);
     }
 
+    public void updateSlotsAvaliableTable(DefaultTableModel model) {
+        slotsAvaliableTable.setModel(model);
+    }
 }

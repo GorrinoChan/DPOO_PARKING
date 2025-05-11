@@ -76,7 +76,7 @@ public class TrafficSimulator implements Runnable{
                             //RESERVAMOS LA PLAZA Y ELIMINAMOS LAS PLAZA LIBRE
                             LocalDateTime dateOfReservation = LocalDateTime.now();
                             reservationDao.insertNewReservationInDb(plateOfTheSimulatedCar, String.valueOf(dateOfReservation), "SIMULATOR", slotThatIsGoingToBeSimulated.getNumber(), slotThatIsGoingToBeSimulated.getFloor(),0,0,1,slotThatIsGoingToBeSimulated.getTypeOfPlace());
-                            slotDAO.deleteSpecificSlot(slotThatIsGoingToBeSimulated.getNumber());
+                            slotDAO.deleteSpecificSlot(String.valueOf(slotThatIsGoingToBeSimulated.getNumber()));
                     }   }
                 }
 
