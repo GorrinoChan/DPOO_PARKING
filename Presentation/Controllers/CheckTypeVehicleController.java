@@ -36,22 +36,20 @@ public class CheckTypeVehicleController {
     private void confirmEntrance(String plate) {
         String type = checkTypeVehicleView.getTypeVehicle();
         UserSlotManager userSlotManager = new UserSlotManager();
-        List<Slot> slots = null;
         String userName = LogInController.userName;
+        String slot = userSlotManager.assignVehicleToFirstAvailableSLot(userName, plate, type);
+        String[] informationSlot = null;
 
-        try {
-            slots = userSlotManager.readAllSlot();
-            for (Slot slot : slots) {
-                if (slot != null && userSlotManager.checkIfVehicleIsCorrectForSlot(plate, slot.getNumber())) {
-                    if (userSlotManager.assignVehicleToFirstAvailableSLot(userName, plate, type)) {
-                        JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente. Su plaza es la número: " + slot.getNumber());
-                    } else {
-                        checkTypeVehicleView.setErrorMessage("No hay plazas disponibles.");
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            checkTypeVehicleView.setErrorMessage("Error en la base de datos: " + e.getMessage());
+        if (!slot.equals("00")) {
+            informationSlot = slot.split("/");
+            JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente. Su plaza está en la planta " + informationSlot[0] + " y es la número: " + informationSlot[1]);
+        } else {
+            checkTypeVehicleView.setErrorMessage("No hay plazas disponibles.");
         }
+
+        checkTypeVehicleView.dispose();
+        EnterParkingView enterParkingView = new EnterParkingView();
+        new EnterParkingController(enterParkingView);
+        enterParkingView.setVisible(true);
     }
 }

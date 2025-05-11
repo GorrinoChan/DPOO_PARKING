@@ -57,8 +57,8 @@ public class AdminDeleteSlotsController {
                 else{
                     adminDeleteSlots.setErrorMessage("Error al Eliminar la plaza.");
                 }
-            } else {
-                boolean reassigned = userSlotManager.assignVehicleToFirstAvailableSLot(
+            } else {/*
+                String reassigned = userSlotManager.assignVehicleToFirstAvailableSLot(
                         targetReservation.getUserName(),
                         targetReservation.getLicencePlate(),
                         targetReservation.getTypeOfPlace()
@@ -95,7 +95,7 @@ public class AdminDeleteSlotsController {
                     } else {
                         adminDeleteSlots.setErrorMessage("Error al Eliminar la plaza.");
                     }
-                }
+                }*/
             }
 
         } catch (NumberFormatException e) {
