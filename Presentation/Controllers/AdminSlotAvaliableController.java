@@ -22,7 +22,7 @@ public class AdminSlotAvaliableController {
         adminslotAvaliableView.getInfoButton().addActionListener(e -> opengetInfoButton());
         adminslotAvaliableView.getUserProfileButton().addActionListener(e -> openUserProfileView());
 
-        mostrarTablaParking(); // <<<<<<<<<<<<<<<<<<<< AÑADIDO
+        mostrarTablaParking();
     }
 
     private void mostrarTablaParking() {
@@ -31,29 +31,46 @@ public class AdminSlotAvaliableController {
 
         try {
             AdminSlotManager adminSlotManager = new AdminSlotManager();
-            UserSlotManager userSlotManager = new UserSlotManager();
 
-            List<Slot> slots = userSlotManager.readAllSlot();
-            List<Reservation> reservas = adminSlotManager.getAllReservationThatHaveBeenDone();
+            // Obtenemos la información combinada como Strings
+            List<String> infoPlazas = adminSlotManager.allSlotsAndReservationInformationForTable();
 
-            for (Slot slot : slots) {
-                String ocupacion = slot.isOccupation() ? "Ocupado" : "Libre";
-                String reserva = slot.isReservation() ? "Reservado" : "Disponible";
-                String matricula = "";
+            for (String linea : infoPlazas) {
+                // Dividimos la información separada por "/"
+                String[] partes = linea.split("/");
 
-                if (slot.isOccupation() || slot.isReservation()) {
-                    for (Reservation res : reservas) {
-                        if (res.getNumber() == slot.getNumber() && res.getFloor() == slot.getFloor()) {
-                            matricula = res.getLicencePlate(); // Asignar la matrícula de la reserva correspondiente
-                            break;
-                        }
+                // Extraemos los datos
+                String codigo = partes[0];               // Número de plaza
+                String planta = partes[1];               // Número de planta
+                String matricula = partes[2];            // "FREE" o matrícula
+                String tipoVehiculo = partes[3];         // Tipo de plaza
+                String ocupacionStr = partes[4];         // "true", "false" o "FREE"
+                // partes[5] = userName, no lo usamos aquí
+
+                // Determinar ocupación y reserva
+                String ocupacion;
+                String reserva;
+
+                if (matricula.equals("FREE")) {
+                    ocupacion = "Libre";
+                    reserva = "Disponible";
+                    matricula = ""; // no mostrar "FREE"
+                } else {
+                    // Hay una matrícula, por lo tanto está ocupado o reservado
+                    if (ocupacionStr.equals("true")) {
+                        ocupacion = "Ocupado";
+                        reserva = "Reservado";
+                    } else {
+                        ocupacion = "Libre";
+                        reserva = "Reservado";
                     }
                 }
 
+                // Añadir la fila a la tabla
                 Object[] fila = {
-                        slot.getNumber(),
-                        slot.getFloor(),
-                        slot.getTypeOfPlace(),
+                        codigo,
+                        planta,
+                        tipoVehiculo,
                         ocupacion,
                         reserva,
                         matricula
@@ -61,6 +78,7 @@ public class AdminSlotAvaliableController {
                 model.addRow(fila);
             }
 
+            // Mostrar tabla
             JTable tabla = new JTable(model);
             JScrollPane scrollPane = new JScrollPane(tabla);
             adminslotAvaliableView.getContentPane().add(scrollPane);
@@ -69,6 +87,7 @@ public class AdminSlotAvaliableController {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(adminslotAvaliableView, "Error al cargar la tabla: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
