@@ -144,7 +144,7 @@ public class main {
             ******/
 
 
-            SlotDAO slotDao = new SlotDAO();
+            /*SlotDAO slotDao = new SlotDAO();
             AdminSlotManager adminSlotManager = new AdminSlotManager();
             UserAccountManager userAccountManager = new UserAccountManager("Daniel");
             UserSlotManager userSlotManager = new UserSlotManager();
@@ -157,7 +157,7 @@ public class main {
             userSlotManager.assignVehicleToFirstAvailableSLot("Dani","1111 BBB", "Car");
 
 
-
+*/
         /*****
         } catch (FileNotFoundException e) {
             System.out.println("Hay un problema");
