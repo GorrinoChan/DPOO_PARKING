@@ -51,8 +51,8 @@ public class UserSlotManager {
         return correct;
     }
 
-        public boolean assignVehicleToFirstAvailableSLot(String userName, String licensePlate, String vehicleType) {
-            boolean correct = false;
+        public String assignVehicleToFirstAvailableSLot(String userName, String licensePlate, String vehicleType) {
+            String info = "00";
 
             System.out.println(userName);
             System.out.println("\n");
@@ -85,23 +85,14 @@ public class UserSlotManager {
                 }
                 LocalDateTime date = LocalDateTime.now();
                 System.out.println(possibleOption.getNumber());
-                System.out.println("Number");
                 try {
                     this.reservedParkingSlotsDao.insertNewReservationInDb(licensePlate, String.valueOf(date), userName, slotNumber, floorNumber, 0, reservedStatus, occupationStatus, vehicleType);
-                    correct = true;
+                    info = String.valueOf(floorNumber).concat("/").concat(String.valueOf(slotNumber));
                 }catch (SQLException e) {
-                    correct = false;
-                    throw new RuntimeException(e);
-                }
-                try{
-                    this.slotDao.deleteSpecificSlot(slotNumber);
-                    correct = true;
-                }catch (FileNotFoundException e) {
-                    correct = false;
                     throw new RuntimeException(e);
                 }
             }
-        return correct;
+        return info;
     }
 
 
@@ -265,6 +256,17 @@ public class UserSlotManager {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        return correct;
+    }
+
+    public boolean deleteSlot (int slotNumber){
+        boolean correct = false;
+        try{
+           this.slotDao.deleteSpecificSlot(slotNumber);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         return correct;
     }
 
