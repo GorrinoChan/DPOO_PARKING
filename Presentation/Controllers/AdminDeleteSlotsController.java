@@ -115,8 +115,8 @@ public class AdminDeleteSlotsController {
 
     private void returnToMenu() {
         adminDeleteSlots.dispose();
-        AdminMenuView adminMenuView = new AdminMenuView();
-        new AdminMenuController(adminMenuView);
-        adminMenuView.setVisible(true);
+        AdminManagement adminManagement = new AdminManagement();
+        new AdminManagementController(adminManagement);
+        adminManagement.setVisible(true);
     }
 }

@@ -67,8 +67,8 @@ public class AdminEditSlotsController {
 
     private void returnToMenu() {
         adminEditSlots.dispose();
-        AdminMenuView adminMenuView = new AdminMenuView();
-        new AdminMenuController(adminMenuView);
-        adminMenuView.setVisible(true);
+        AdminManagement adminManagement = new AdminManagement();
+        new AdminManagementController(adminManagement);
+        adminManagement.setVisible(true);
     }
 }

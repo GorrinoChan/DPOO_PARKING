@@ -143,6 +143,7 @@ public class main {
             sqlDAo.connect();
             ******/
 
+        /**********
 
             SlotDAO slotDao = new SlotDAO();
             AdminSlotManager adminSlotManager = new AdminSlotManager();
@@ -155,6 +156,7 @@ public class main {
             slotDao.deleteSpecificSlot(2);
             List<String> stringInDB = adminSlotManager.allSlotsAndReservationInformationForTable();
             userSlotManager.assignVehicleToFirstAvailableSLot("Dani","1111 BBB", "Car");
+            ******/
 
 
 
