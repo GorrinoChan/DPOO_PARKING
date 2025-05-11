@@ -28,7 +28,7 @@ public class AdminSlotManager   {
         boolean wasDeleted = false;
 
         try {
-            this.slotDAO.deleteSpecificSlot(slotNumber);
+            this.slotDAO.deleteSpecificSlot(String.valueOf(slotNumber));
             wasDeleted = true;
         } catch (Exception e) {
             e.printStackTrace();

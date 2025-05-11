@@ -15,8 +15,8 @@ public class SlotDAO {
     public SlotDAO() {
     }
 
-    public void deleteSpecificSlot(int slotNumber)throws FileNotFoundException {
-        SqlDao.getInstance().deleteObject("slot", "slotNumber", String.valueOf(slotNumber));
+    public void deleteSpecificSlot(String slotNumber)throws FileNotFoundException {
+        SqlDao.getInstance().deleteObject("slot", "slotNumber", slotNumber);
     }
 
     private List<Slot> transformSqlTableSlotToObjectSlot(ResultSet sqlInfoOfDB) throws FileNotFoundException, SQLException {

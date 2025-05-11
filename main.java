@@ -152,12 +152,10 @@ public class main {
             VehicleDao vehicleDao = new VehicleDao();
             AccountDao accountDao = new AccountDao();
             ReservationDao reservationDao = new ReservationDao();
-            slotDao.deleteSpecificSlot(2);
-            List<String> stringInDB = adminSlotManager.allSlotsAndReservationInformationForTable();
-            userSlotManager.assignVehicleToFirstAvailableSLot("Dani","1111 BBB", "Car");
+            slotDao.deleteSpecificSlot("3");*/
 
 
-*/
+
         /*****
         } catch (FileNotFoundException e) {
             System.out.println("Hay un problema");

@@ -88,6 +88,12 @@ public class UserSlotManager {
                 try {
                     this.reservedParkingSlotsDao.insertNewReservationInDb(licensePlate, String.valueOf(date), userName, slotNumber, floorNumber, 0, reservedStatus, occupationStatus, vehicleType);
                     info = String.valueOf(floorNumber).concat("/").concat(String.valueOf(slotNumber));
+                    System.out.println("Creada la reserva");
+                    try{
+                        this.slotDao.deleteSpecificSlot(String.valueOf(slotNumber));
+                    } catch (FileNotFoundException e) {
+                        throw new RuntimeException(e);
+                    }
                 }catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -259,15 +265,9 @@ public class UserSlotManager {
         return correct;
     }
 
-    public boolean deleteSlot (int slotNumber){
-        boolean correct = false;
-        try{
-           this.slotDao.deleteSpecificSlot(slotNumber);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-
-        return correct;
+    public void deleteSlot (String slotNumber){
+           SqlDao.getInstance().deleteObject("slot", "slotNumber", slotNumber);
+           System.out.println("DElete");
     }
 
 }
