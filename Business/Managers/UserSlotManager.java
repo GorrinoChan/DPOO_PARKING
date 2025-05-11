@@ -86,19 +86,18 @@ public class UserSlotManager {
                 LocalDateTime date = LocalDateTime.now();
                 System.out.println(possibleOption.getNumber());
                 System.out.println("Number");
-                try{
-                    this.slotDao.deleteSpecificSlot(slotNumber);
-                }catch (FileNotFoundException e) {
-                    throw new RuntimeException(e);
-                }
                 try {
                     this.reservedParkingSlotsDao.insertNewReservationInDb(licensePlate, String.valueOf(date), userName, slotNumber, floorNumber, 0, reservedStatus, occupationStatus, vehicleType);
+                    correct = true;
                 }catch (SQLException e) {
+                    correct = false;
                     throw new RuntimeException(e);
                 }
                 try{
                     this.slotDao.deleteSpecificSlot(slotNumber);
+                    correct = true;
                 }catch (FileNotFoundException e) {
+                    correct = false;
                     throw new RuntimeException(e);
                 }
             }
