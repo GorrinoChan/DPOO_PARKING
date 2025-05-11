@@ -153,7 +153,12 @@ public class main {
             AccountDao accountDao = new AccountDao();
             ReservationDao reservationDao = new ReservationDao();
             slotDao.deleteSpecificSlot(2);
-
+            List<String> stringInDB = adminSlotManager.allSlotsAndReservationInformationForTable();
+            if(!stringInDB.isEmpty()) {
+            for (String string : stringInDB) {
+                System.out.println(string);
+            }
+            }
 
 
 

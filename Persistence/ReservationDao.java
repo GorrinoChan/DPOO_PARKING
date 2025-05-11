@@ -36,12 +36,12 @@ public class ReservationDao {
 
         try {
             while (sqlInfoOfDB.next()){
-                floor = sqlInfoOfDB.getInt("floorNumber");
-                number = sqlInfoOfDB.getInt("slotNumber");
-                reservationInDb = sqlInfoOfDB.getInt("reservationStatus");
-                date = sqlInfoOfDB.getString("date");
                 licensePlate = sqlInfoOfDB.getString("licencePlate");
+                date = sqlInfoOfDB.getString("date");
                 userName = sqlInfoOfDB.getString("userName");
+                number = sqlInfoOfDB.getInt("slotNumber");
+                floor = sqlInfoOfDB.getInt("floorNumber");
+                reservationInDb = sqlInfoOfDB.getInt("reservationStatus");
                 if(reservationInDb == 0){
                     reservation = false;
                 }else{
@@ -81,7 +81,7 @@ public class ReservationDao {
     public List<Reservation> readAllReservationContentInDb() throws SQLException, FileNotFoundException {
         List<Reservation> allSqlReservationsInDb;
         ResultSet sqlInfoOfDB;
-        sqlInfoOfDB = SqlDao.getInstance().readAllTable("account");
+        sqlInfoOfDB = SqlDao.getInstance().readAllTable("reservation");
         allSqlReservationsInDb = transformSqlTableReservationToObjectReservation(sqlInfoOfDB);
         return allSqlReservationsInDb;
     }

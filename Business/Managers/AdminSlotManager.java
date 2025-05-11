@@ -92,4 +92,52 @@ public class AdminSlotManager   {
         }
         return slotUpdated;
     }
+
+        public List<String> allSlotsAndReservationInformationForTable (){
+            //Te devuelve la info como Lista de String donde cada String es SlotNumber/FloorNumber/Vehicle/Ocupado/UserName
+            //Si la reserva esta cancelada (isCanceled = 1) no lo mostrara
+            List<String> allInfoOfReservationAndSlot = new ArrayList<>();
+            String info;
+            try{
+                //Leemos la base de datos para las plazas libres
+                List<Slot> slotInDb = this.slotDAO.readAllSlotsContentInDb();
+                //Bucle para llenar toda la info de las slot (las libres)
+                if(!slotInDb.isEmpty()){
+                    for(Slot slot :slotInDb){
+                        System.out.println("UN LOOP");
+                        info = String.valueOf(slot.getNumber()).concat("/").concat(String.valueOf(slot.getFloor())).concat("/").concat("FREE").concat("/").concat("FREE").concat("/").concat("FREE");
+                        allInfoOfReservationAndSlot.add(info);
+                    }
+                }
+
+            } catch (SQLException e) {
+                System.out.println("No funciona Slot");
+                throw new RuntimeException(e);
+            } catch (FileNotFoundException e) {
+                System.out.println("No funciona Slot");
+                throw new RuntimeException(e);
+            }
+            try{
+                //Leemos la Base de datoss para las plazas reservada
+                List<Reservation> reservationsInDb = this.reservationDao.readAllReservationContentInDb();
+                //Bucle para llenar toda la info de las reservas (slots reservada)
+                if(!reservationsInDb.isEmpty()){
+                    for(Reservation reservation : reservationsInDb) {
+                        if (!reservation.isCancelled()) {
+                            info = String.valueOf(reservation.getNumber()).concat("/").concat(String.valueOf(reservation.getFloor())).concat("/").concat(reservation.getLicencePlate()).concat("/").concat(String.valueOf(reservation.getOccupation())).concat("/").concat(reservation.getUserName());
+                            allInfoOfReservationAndSlot.add(info);
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                System.out.println("No funciona Reservation");
+                throw new RuntimeException(e);
+            } catch (FileNotFoundException e) {
+                System.out.println("No funciona Reservation");
+                throw new RuntimeException(e);
+            }
+            return allInfoOfReservationAndSlot;
+        }
+
+
 }
