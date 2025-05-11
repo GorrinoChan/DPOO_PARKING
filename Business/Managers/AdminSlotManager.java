@@ -94,7 +94,7 @@ public class AdminSlotManager   {
     }
 
         public List<String> allSlotsAndReservationInformationForTable (){
-            //Te devuelve la info como Lista de String donde cada String es SlotNumber/FloorNumber/Vehicle/Ocupado/UserName
+            //Te devuelve la info como Lista de String donde cada String es SlotNumber/FloorNumber/Vehicle/tipoDeVehiculo/Ocupado/UserName
             //Si la reserva esta cancelada (isCanceled = 1) no lo mostrara
             List<String> allInfoOfReservationAndSlot = new ArrayList<>();
             String info;
@@ -105,7 +105,7 @@ public class AdminSlotManager   {
                 if(!slotInDb.isEmpty()){
                     for(Slot slot :slotInDb){
                         System.out.println("UN LOOP");
-                        info = String.valueOf(slot.getNumber()).concat("/").concat(String.valueOf(slot.getFloor())).concat("/").concat("FREE").concat("/").concat("FREE").concat("/").concat("FREE");
+                        info = String.valueOf(slot.getNumber()).concat("/").concat(String.valueOf(slot.getFloor())).concat("/").concat("FREE").concat("/").concat(slot.getTypeOfPlace()).concat("/").concat("FREE").concat("/").concat("FREE");
                         allInfoOfReservationAndSlot.add(info);
                     }
                 }
@@ -124,7 +124,7 @@ public class AdminSlotManager   {
                 if(!reservationsInDb.isEmpty()){
                     for(Reservation reservation : reservationsInDb) {
                         if (!reservation.isCancelled()) {
-                            info = String.valueOf(reservation.getNumber()).concat("/").concat(String.valueOf(reservation.getFloor())).concat("/").concat(reservation.getLicencePlate()).concat("/").concat(String.valueOf(reservation.getOccupation())).concat("/").concat(reservation.getUserName());
+                            info = String.valueOf(reservation.getNumber()).concat("/").concat(String.valueOf(reservation.getFloor())).concat("/").concat(reservation.getLicencePlate()).concat("/").concat(reservation.getTypeOfPlace()).concat("/").concat(String.valueOf(reservation.getOccupation())).concat("/").concat(reservation.getUserName());
                             allInfoOfReservationAndSlot.add(info);
                         }
                     }
