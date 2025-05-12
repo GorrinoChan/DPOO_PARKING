@@ -48,7 +48,7 @@ public class main {
                 case 2:
                     /*
                     * Funciones comprobadas: Crear cuenta, eliminar cuenta añadir vehiculo a cuenta, obtener todas las cuentas
-                    * aumentar num de reservaciones de la cuenta(esta no crea una reservacion, solo edita un parametro de la tabla)
+                    * aumentar num de reservaciones de la cuenta(esta no     crea una reservacion, solo edita un parametro de la tabla)
                     * aumentar num de cancelaciones de la cuenta(esta no crea una reservacion, solo edita un parametro de la tabla)
                     * obtener todos los vehiculos de una cuenta, comprobar contraseña,
                     *

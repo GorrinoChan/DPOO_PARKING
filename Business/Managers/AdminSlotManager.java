@@ -140,4 +140,16 @@ public class AdminSlotManager   {
         }
 
 
+        public boolean deleteReservedSlot(int slotNumber){
+            boolean correct = false;
+            try{
+                this.reservationDao.deleteSpecificReservation(String.valueOf(slotNumber));
+                correct = true;
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+
+
 }
