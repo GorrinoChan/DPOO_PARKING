@@ -148,7 +148,7 @@ public class AdminSlotManager   {
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
-
+        return correct;
         }
 
 
