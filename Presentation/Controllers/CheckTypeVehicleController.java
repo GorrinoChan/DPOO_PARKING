@@ -44,7 +44,7 @@ public class CheckTypeVehicleController {
 
         if (!slot.equals("00")) {
             informationSlot = slot.split("/");
-            JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente. Su plaza está en la planta " + informationSlot[0] + " y es la número: " + informationSlot[1]);
+            JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente. Su plaza está en la planta " + informationSlot[1] + " y es la número: " + informationSlot[0]);
             userSlotManager.deleteSlot(informationSlot[0]);
             userAccountManager.augmentInOneTheNumberOfReservationsOfUserAccount(userName);
 

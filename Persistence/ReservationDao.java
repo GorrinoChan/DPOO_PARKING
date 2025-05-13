@@ -93,8 +93,8 @@ public class ReservationDao {
         orderToDb.setString(1, licencePlate);
         orderToDb.setString(2, date);
         orderToDb.setString(3, userName);
-        orderToDb.setInt(4, slotNumber);
-        orderToDb.setInt(5, floorNumber);
+        orderToDb.setInt(4, floorNumber);
+        orderToDb.setInt(5, slotNumber);
         orderToDb.setInt(6, canceledStatus);
         orderToDb.setInt(7, reservationStatus);
         orderToDb.setInt(8, occupationStatus);
