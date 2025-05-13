@@ -40,13 +40,13 @@ public class AdminInfoSlotsController {
             String tipoVehiculo = partes[3];
             String ocupacionStr = partes[4];
             String nombrebuscado = partes[5];
-            String email = "";
-            String password = "";
+            String email = "-";
+            String password = "-";
             int numeroReservas = 0;
             int cantidadVehiculos=0;
             UserAccountManager accountManager = new UserAccountManager(nombrebuscado);
             if(nombrebuscado.equals("FREE")){
-                nombrebuscado = "";
+                nombrebuscado = "-";
             } else{
                 List<Account> cuentas = accountManager.getAllAccountsInDb();
                 for (Account cuenta : cuentas) {
@@ -115,8 +115,8 @@ public class AdminInfoSlotsController {
 
     private void returnToMenu() {
         adminInfoSlots.dispose();
-        AdminMenuView adminMenuView = new AdminMenuView();
-        new AdminMenuController(adminMenuView);
-        adminMenuView.setVisible(true);
+        AdminSlotAvaliableView adminSlotAvaliableView = new AdminSlotAvaliableView();
+        new AdminSlotAvaliableController(adminSlotAvaliableView);
+        adminSlotAvaliableView.setVisible(true);
     }
 }

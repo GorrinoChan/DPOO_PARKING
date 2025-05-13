@@ -62,7 +62,7 @@ public class AdminDeleteSlots extends JFrame {
         gbc.gridwidth = 3;
         panel.add(titleLabel, gbc);
 
-        numbereditLabel = new JLabel("Numero de Plaza a Editar");
+        numbereditLabel = new JLabel("Numero de Plaza a Eliminar");
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
@@ -81,7 +81,7 @@ public class AdminDeleteSlots extends JFrame {
 
         DeleteButton = new JButton("Eliminar");
         gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         panel.add(DeleteButton, gbc);
 
         c.add(panel, BorderLayout.CENTER);
