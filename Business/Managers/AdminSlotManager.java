@@ -151,5 +151,21 @@ public class AdminSlotManager   {
         return correct;
         }
 
+        public boolean parkingReservedSlotAlreadyExist(String slotNumber){
+            List<Reservation> reservations;
+            boolean correct = false;
+            try{
+                reservations = reservationDao.readSpecificReservationOfDb("slotNumber", slotNumber);
+                if(!reservations.isEmpty()){
+                    correct = true;
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            return correct;
+        }
+
 
 }
