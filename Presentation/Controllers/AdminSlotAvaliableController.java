@@ -1,14 +1,10 @@
 package Presentation.Controllers;
 
-import Business.Entities.Reservation;
-import Business.Entities.Slot;
 import Business.Managers.AdminSlotManager;
-import Business.Managers.UserSlotManager;
 import Presentation.Views.AdminInfoSlots;
 import Presentation.Views.AdminMenuView;
 import Presentation.Views.AdminProfileView;
 import Presentation.Views.AdminSlotAvaliableView;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
@@ -19,56 +15,77 @@ public class AdminSlotAvaliableController {
     public AdminSlotAvaliableController(AdminSlotAvaliableView adminslotAvaliableView) {
         this.adminslotAvaliableView = adminslotAvaliableView;
         adminslotAvaliableView.getReturnButton().addActionListener(e -> returnToMenu());
-        adminslotAvaliableView.getInfoButton().addActionListener(e -> opengetInfoButton());
         adminslotAvaliableView.getUserProfileButton().addActionListener(e -> openUserProfileView());
-
-        mostrarTablaParking(); // <<<<<<<<<<<<<<<<<<<< AÑADIDO
+        mostrarTablaParking();
     }
 
     private void mostrarTablaParking() {
-        String[] columnas = {"Código", "Planta", "Tipo Vehículo", "Ocupación", "Reserva", "Matrícula"};
+        String[] columnas = {"Numero", "Planta", "Tipo Vehículo", "Ocupación", "Reserva", "Matrícula"};
         DefaultTableModel model = new DefaultTableModel(columnas, 0);
 
         try {
             AdminSlotManager adminSlotManager = new AdminSlotManager();
-            UserSlotManager userSlotManager = new UserSlotManager();
+            List<String> infoPlazas = adminSlotManager.allSlotsAndReservationInformationForTable();
 
-            List<Slot> slots = userSlotManager.readAllSlot();
-            List<Reservation> reservas = adminSlotManager.getAllReservationThatHaveBeenDone();
+            for (String linea : infoPlazas) {
+                String[] partes = linea.split("/");
 
-            for (Slot slot : slots) {
-                String ocupacion = slot.isOccupation() ? "Ocupado" : "Libre";
-                String reserva = slot.isReservation() ? "Reservado" : "Disponible";
-                String matricula = "";
+                String numero = partes[1];
+                String planta = partes[0];
+                String matricula = partes[2];
+                String tipoVehiculo = partes[3];
+                String ocupacionStr = partes[4];
+                String ocupacion;
+                String reserva;
 
-                if (slot.isOccupation() || slot.isReservation()) {
-                    for (Reservation res : reservas) {
-                        if (res.getNumber() == slot.getNumber() && res.getFloor() == slot.getFloor()) {
-                            matricula = res.getLicencePlate(); // Asignar la matrícula de la reserva correspondiente
-                            break;
-                        }
+                if (matricula.equals("FREE")) {
+                    ocupacion = "Libre";
+                    reserva = "Disponible";
+                    matricula = "";
+                } else {
+                    if (ocupacionStr.equals("true")) {
+                        ocupacion = "Ocupado";
+                        reserva = "Reservado";
+                    } else {
+                        ocupacion = "Libre";
+                        reserva = "Reservado";
                     }
                 }
 
                 Object[] fila = {
-                        slot.getNumber(),
-                        slot.getFloor(),
-                        slot.getTypeOfPlace(),
+                        numero,
+                        planta,
+                        tipoVehiculo,
                         ocupacion,
                         reserva,
                         matricula
                 };
                 model.addRow(fila);
             }
-
             JTable tabla = new JTable(model);
+            this.adminslotAvaliableView.setSlotTable(tabla);
             JScrollPane scrollPane = new JScrollPane(tabla);
+            scrollPane.setBorder(BorderFactory.createEmptyBorder(200, 0, 0, 0));
             adminslotAvaliableView.getContentPane().add(scrollPane);
             adminslotAvaliableView.revalidate();
             adminslotAvaliableView.repaint();
 
+
+            tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    if (evt.getClickCount() == 1) {
+                        int selectedRow = tabla.getSelectedRow();  // Obtenemos la fila seleccionada
+                        adminslotAvaliableView.dispose();  // Cerramos la vista actual
+                        AdminInfoSlots infoView = new AdminInfoSlots(selectedRow);  // Pasamos la posición
+                        new AdminInfoSlotsController(infoView);  // Iniciamos el controlador de InfoSlots
+                        infoView.setVisible(true);  // Hacemos visible la nueva vista
+                    }
+                }
+            });
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(adminslotAvaliableView, "Error al cargar la tabla: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -79,12 +96,6 @@ public class AdminSlotAvaliableController {
         adminProfileView.setVisible(true);
     }
 
-    private void opengetInfoButton() {
-        adminslotAvaliableView.dispose();
-        AdminInfoSlots adminInfoSlots = new AdminInfoSlots();
-        new AdminInfoSlotsController(adminInfoSlots);
-        adminInfoSlots.setVisible(true);
-    }
 
     private void returnToMenu() {
         adminslotAvaliableView.dispose();

@@ -57,13 +57,13 @@ public class AdminDeleteSlotsController {
                 else{
                     adminDeleteSlots.setErrorMessage("Error al Eliminar la plaza.");
                 }
-            } else {/*
+            } else {
                 String reassigned = userSlotManager.assignVehicleToFirstAvailableSLot(
                         targetReservation.getUserName(),
                         targetReservation.getLicencePlate(),
                         targetReservation.getTypeOfPlace()
                 );
-                if (reassigned) {
+                if (!reassigned.equals("00")) {
                     boolean deleted = adminSlotManager.deleteParkingSlot(slotNumbersearch);
                     if (deleted) {
                         JOptionPane.showMessageDialog(adminDeleteSlots, "Plaza eliminada correctamente.");
@@ -78,6 +78,15 @@ public class AdminDeleteSlotsController {
                 } else {
                     boolean reservationDeleted = userSlotManager.deleteAReservation(slotNumbersearch);
                     boolean slotDeleted = adminSlotManager.deleteParkingSlot(slotNumbersearch);
+                    List<String> infoPlazas = adminSlotManager.allSlotsAndReservationInformationForTable();
+                    String detallesPlaza = infoPlazas.get(slotNumbersearch);
+                    String[] partes = detallesPlaza.split("/");
+                    String nombrebuscado = partes[5];
+                    UserAccountManager accountManager = new UserAccountManager(nombrebuscado);
+                    accountManager.reduceInOneTheNumberOfReservationsOfUserAccount(nombrebuscado);
+                    accountManager.augmentInOneTheNumberOfCancellationsOfUserAccount(nombrebuscado);
+
+
                     if (reservationDeleted && slotDeleted) {
                         JOptionPane.showMessageDialog(adminDeleteSlots, "Plaza eliminada correctamente.");
                         adminDeleteSlots.dispose();
@@ -95,7 +104,7 @@ public class AdminDeleteSlotsController {
                     } else {
                         adminDeleteSlots.setErrorMessage("Error al Eliminar la plaza.");
                     }
-                }*/
+                }
             }
 
         } catch (NumberFormatException e) {
@@ -115,8 +124,8 @@ public class AdminDeleteSlotsController {
 
     private void returnToMenu() {
         adminDeleteSlots.dispose();
-        AdminMenuView adminMenuView = new AdminMenuView();
-        new AdminMenuController(adminMenuView);
-        adminMenuView.setVisible(true);
+        AdminManagement adminManagement = new AdminManagement();
+        new AdminManagementController(adminManagement);
+        adminManagement.setVisible(true);
     }
 }
