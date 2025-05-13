@@ -205,7 +205,7 @@ public class UserSlotManager {
             if(reservationFound.isReservation()){
                 reserved = 1;
             }
-            this.slotDao.insertNewSlotInDb(reservationFound.getNumber(), reservationFound.getFloor(), occupation, reserved, reservationFound.getTypeOfPlace());
+            this.slotDao.insertNewSlotInDb(reservationFound.getFloor(), reservationFound.getNumber(), occupation, reserved, reservationFound.getTypeOfPlace());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

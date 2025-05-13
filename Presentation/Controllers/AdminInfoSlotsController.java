@@ -97,19 +97,14 @@ public class AdminInfoSlotsController {
     private void openCancelButton() {
         UserSlotManager userSlotManager = new UserSlotManager();
         int slot = adminInfoSlots.getSelectedRow();
-        cargarDetallesPlaza(slot);
         AdminSlotManager adminSlotManager = new AdminSlotManager();
         List<String> infoPlazas = adminSlotManager.allSlotsAndReservationInformationForTable();
         String detallesPlaza = infoPlazas.get(slot);
         String[] partes = detallesPlaza.split("/");
-        String Number = partes[1];
-        int slotNumber = Integer.parseInt(Number);
-        String floor = partes[0];
-        int floorNumber = Integer.parseInt(floor);
-        String typeOfPlace = partes[3];
         String nombrebuscado = partes[5];
-        adminSlotManager.createNewParkingSlot(floorNumber, slotNumber, typeOfPlace);
-        userSlotManager.deleteAReservation(slot);
+        String number = partes[1];
+        int numero = Integer.parseInt(number);
+        userSlotManager.deleteAReservation(numero);
         UserAccountManager accountManager = new UserAccountManager(nombrebuscado);
         accountManager.reduceInOneTheNumberOfReservationsOfUserAccount(nombrebuscado);
         accountManager.augmentInOneTheNumberOfCancellationsOfUserAccount(nombrebuscado);
