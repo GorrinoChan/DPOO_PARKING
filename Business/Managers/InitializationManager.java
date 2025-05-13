@@ -91,28 +91,19 @@ public class InitializationManager {
         return arrayWithAllInfoInLogInAnalysis;
     }
 
-    public List<Reservation> getAllReservationOfUserThatHaveBeenCanceledByAdmin(String userName){
-        List<Reservation> allCanceledReservationsUser;
+    public int getNumberOfReservationOfUserThatHaveBeenCanceledByAdmin(String userName){
+        List<Account> account;
+        int numberOfCancellations = 0;
         try{
-            allCanceledReservationsUser = this.reservationDao.readSpecificReservationOfDb("userName", userName);
-
-            for(Reservation reservation : allCanceledReservationsUser){
-                if(!reservation.isCancelled()){
-                    allCanceledReservationsUser.remove(reservation);
-                }
-            }
-            if(!allCanceledReservationsUser.isEmpty()) {
-                for (Reservation reservation : allCanceledReservationsUser) {
-                    this.reservationDao.deleteSpecificReservation(String.valueOf(reservation.getNumber()));
-                }
-            }
-
+            account = accountDao.readSpecificAccountOfDb("nameOfUserAccount",userName);
+            numberOfCancellations = account.get(0).getSlotCancelations();
+            SqlDao.getInstance().updateIntAndBolean("account", "slotCancelations", "0","nameOfUserAccount",userName);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return allCanceledReservationsUser;
+        return numberOfCancellations;
     }
 
 
