@@ -124,7 +124,7 @@ public class AdminSlotManager   {
                 if(!reservationsInDb.isEmpty()){
                     for(Reservation reservation : reservationsInDb) {
                         if (!reservation.isCancelled()) {
-                            info = String.valueOf(reservation.getNumber()).concat("/").concat(String.valueOf(reservation.getFloor())).concat("/").concat(reservation.getLicencePlate()).concat("/").concat(reservation.getTypeOfPlace()).concat("/").concat(String.valueOf(reservation.getOccupation())).concat("/").concat(reservation.getUserName());
+                            info = String.valueOf(reservation.getFloor()).concat("/").concat(String.valueOf(reservation.getNumber())).concat("/").concat(reservation.getLicencePlate()).concat("/").concat(reservation.getTypeOfPlace()).concat("/").concat(String.valueOf(reservation.getOccupation())).concat("/").concat(reservation.getUserName());
                             allInfoOfReservationAndSlot.add(info);
                         }
                     }
@@ -163,8 +163,7 @@ public class AdminSlotManager   {
                 throw new RuntimeException(e);
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
-            }
-            return correct;
+            }            return correct;
         }
 
 
