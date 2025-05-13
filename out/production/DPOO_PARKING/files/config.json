@@ -2,7 +2,7 @@
   "databaseHost": "localhost",
   "databaseName": "parkingdpoodb",
   "databaseUsername": "root",
-  "databasePassword": "1234",
+  "databasePassword": "",
   "databasePort": 3306,
   "timeVehicle": 2.2
 }

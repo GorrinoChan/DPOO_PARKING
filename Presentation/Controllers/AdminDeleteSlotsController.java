@@ -33,7 +33,8 @@ public class AdminDeleteSlotsController {
         }
         try {
             int slotNumbersearch = Integer.parseInt(slotNumbersearchText.trim());
-            if (!adminSlotManager.parkingSlotAlreadyExists(slotNumbersearch)) {
+            String SlotNumbersearch = String.valueOf(slotNumbersearch);
+            if (!adminSlotManager.parkingSlotAlreadyExists(slotNumbersearch) && !adminSlotManager.parkingReservedSlotAlreadyExist(SlotNumbersearch)) {
                 JOptionPane.showMessageDialog(adminDeleteSlots, "La plaza no existe.");
                 return;
             }
