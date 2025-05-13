@@ -33,7 +33,8 @@ public class AdminDeleteSlotsController {
         }
         try {
             int slotNumbersearch = Integer.parseInt(slotNumbersearchText.trim());
-            if (!adminSlotManager.parkingSlotAlreadyExists(slotNumbersearch)) {
+            String SlotNumbersearch = String.valueOf(slotNumbersearch);
+            if (!adminSlotManager.parkingSlotAlreadyExists(slotNumbersearch) && !adminSlotManager.parkingReservedSlotAlreadyExist(SlotNumbersearch)) {
                 JOptionPane.showMessageDialog(adminDeleteSlots, "La plaza no existe.");
                 return;
             }
@@ -64,7 +65,7 @@ public class AdminDeleteSlotsController {
                         targetReservation.getTypeOfPlace()
                 );
                 if (!reassigned.equals("00")) {
-                    boolean deleted = adminSlotManager.deleteParkingSlot(slotNumbersearch);
+                    boolean deleted = userSlotManager.deleteAReservation(slotNumbersearch);
                     if (deleted) {
                         JOptionPane.showMessageDialog(adminDeleteSlots, "Plaza eliminada correctamente.");
                         adminDeleteSlots.dispose();
@@ -77,7 +78,6 @@ public class AdminDeleteSlotsController {
                     }
                 } else {
                     boolean reservationDeleted = userSlotManager.deleteAReservation(slotNumbersearch);
-                    boolean slotDeleted = adminSlotManager.deleteParkingSlot(slotNumbersearch);
                     List<String> infoPlazas = adminSlotManager.allSlotsAndReservationInformationForTable();
                     String detallesPlaza = infoPlazas.get(slotNumbersearch);
                     String[] partes = detallesPlaza.split("/");
@@ -87,7 +87,7 @@ public class AdminDeleteSlotsController {
                     accountManager.augmentInOneTheNumberOfCancellationsOfUserAccount(nombrebuscado);
 
 
-                    if (reservationDeleted && slotDeleted) {
+                    if (reservationDeleted) {
                         JOptionPane.showMessageDialog(adminDeleteSlots, "Plaza eliminada correctamente.");
                         adminDeleteSlots.dispose();
                         AdminManagement adminManagement = new AdminManagement();
@@ -95,12 +95,6 @@ public class AdminDeleteSlotsController {
                         adminManagement.setVisible(true);
                     } else if (reservationDeleted) {
                         adminDeleteSlots.setErrorMessage("Error al Eliminar la plaza.");
-                    } else if (slotDeleted) {
-                        JOptionPane.showMessageDialog(adminDeleteSlots, "Plaza eliminada correctamente pero error en reservar.");
-                        adminDeleteSlots.dispose();
-                        AdminManagement adminManagement = new AdminManagement();
-                        new AdminManagementController(adminManagement);
-                        adminManagement.setVisible(true);
                     } else {
                         adminDeleteSlots.setErrorMessage("Error al Eliminar la plaza.");
                     }
