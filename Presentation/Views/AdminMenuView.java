@@ -5,15 +5,14 @@ import java.awt.*;
 
 public class AdminMenuView extends JFrame {
 
-    private JButton Slots, Simulate, slotAvaliableButton, graphButton,userProfileButton;
+    private JButton Slots, playPauseButton, slotAvaliableButton, graphButton,userProfileButton;
     private JLabel titleLabel, subTitleLabel;
 
     public JButton getSlots() {
         return Slots;
     }
-
-    public JButton getSimulate() {
-        return Simulate;
+    public JButton getPlayPauseButton() {
+        return playPauseButton;
     }
     public JButton getslotAvaliableButton() {
         return slotAvaliableButton;
@@ -37,6 +36,13 @@ public class AdminMenuView extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(4, 0, 4, 0);
+
+        playPauseButton = new JButton("Play");
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(4, 0, 4, 20);
+        panel.add(playPauseButton, gbc);
 
         userProfileButton = new JButton("User");
         gbc.gridx = 4;
@@ -64,11 +70,6 @@ public class AdminMenuView extends JFrame {
         gbc.gridx = 1;
         gbc.gridy = 2;
         panel.add(Slots, gbc);
-
-        Simulate = new JButton("Simular transito");
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        panel.add(Simulate, gbc);
 
         slotAvaliableButton = new JButton("Ver plazas disponibles");
         gbc.gridx = 1;

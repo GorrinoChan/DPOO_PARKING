@@ -103,15 +103,18 @@ public class AdminInfoSlotsController {
         String[] partes = detallesPlaza.split("/");
         String nombrebuscado = partes[5];
         String number = partes[1];
+        String matricula = partes[2];
         int numero = Integer.parseInt(number);
-        userSlotManager.deleteAReservation(numero);
-        UserAccountManager accountManager = new UserAccountManager(nombrebuscado);
-        accountManager.reduceInOneTheNumberOfReservationsOfUserAccount(nombrebuscado);
-        accountManager.augmentInOneTheNumberOfCancellationsOfUserAccount(nombrebuscado);
-        adminInfoSlots.dispose();
-        AdminSlotAvaliableView adminSlotAvaliableView = new AdminSlotAvaliableView();
-        new AdminSlotAvaliableController(adminSlotAvaliableView);
-        adminSlotAvaliableView.setVisible(true);
+        if (!matricula.equals("FREE")) {
+            userSlotManager.deleteAReservation(numero);
+            UserAccountManager accountManager = new UserAccountManager(nombrebuscado);
+            accountManager.reduceInOneTheNumberOfReservationsOfUserAccount(nombrebuscado);
+            accountManager.augmentInOneTheNumberOfCancellationsOfUserAccount(nombrebuscado);
+            adminInfoSlots.dispose();
+            AdminSlotAvaliableView adminSlotAvaliableView = new AdminSlotAvaliableView();
+            new AdminSlotAvaliableController(adminSlotAvaliableView);
+            adminSlotAvaliableView.setVisible(true);
+        }
     }
 
     private void returnToMenu() {
