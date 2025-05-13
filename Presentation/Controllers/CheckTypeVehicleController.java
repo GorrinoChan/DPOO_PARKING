@@ -2,6 +2,7 @@ package Presentation.Controllers;
 
 import Business.Entities.Reservation;
 import Business.Entities.Slot;
+import Business.Managers.UserAccountManager;
 import Business.Managers.UserSlotManager;
 import Presentation.Views.*;
 
@@ -37,6 +38,7 @@ public class CheckTypeVehicleController {
         String type = checkTypeVehicleView.getTypeVehicle();
         UserSlotManager userSlotManager = new UserSlotManager();
         String userName = LogInController.userName;
+        UserAccountManager userAccountManager = new UserAccountManager(userName);
         String slot = userSlotManager.assignVehicleToFirstAvailableSLot(userName, plate, type);
         String[] informationSlot = null;
 
@@ -44,6 +46,8 @@ public class CheckTypeVehicleController {
             informationSlot = slot.split("/");
             JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente. Su plaza está en la planta " + informationSlot[0] + " y es la número: " + informationSlot[1]);
             userSlotManager.deleteSlot(informationSlot[0]);
+            userAccountManager.augmentInOneTheNumberOfReservationsOfUserAccount(userName);
+
 
         } else {
             checkTypeVehicleView.setErrorMessage("No hay plazas disponibles.");
