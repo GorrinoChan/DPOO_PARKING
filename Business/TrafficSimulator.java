@@ -108,4 +108,12 @@ public class TrafficSimulator implements Runnable{
         }
 
     }
+
+    public void stopInteger (){
+        this.i = 0;
+    }
+
+    public void resumInteger(){
+        this.i = 1;
+    }
 }
