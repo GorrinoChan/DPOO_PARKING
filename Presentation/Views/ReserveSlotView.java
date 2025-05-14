@@ -121,4 +121,8 @@ public class ReserveSlotView extends JFrame {
         c.add(panel, BorderLayout.CENTER);
     }
 
+    public void updateSlotsAvaliableTable(DefaultTableModel model) {
+        slotsAvaliableTable.setModel(model);
+    }
+
 }
