@@ -25,9 +25,9 @@ public class AddVehicleController {
 
     private void returnToMenu() {
         addVehicleView.dispose();
-        SlotControlView slotControlView = new SlotControlView();
-        new SlotControlController(slotControlView);
-        slotControlView.setVisible(true);
+        UserMenuView userMenuView = new UserMenuView();
+        new UserMenuController(userMenuView);
+        userMenuView.setVisible(true);
     }
     private void confirmVehicle() {
         String plate = addVehicleView.getPlateTextField();
