@@ -288,4 +288,21 @@ public class UserSlotManager {
         return correct;
     }
 
+    public boolean checkIfCarIsInReservedSlot(String licencePlate){
+        boolean correct = false;
+        List<Reservation> reservations;
+        try{
+            reservations = this.reservedParkingSlotsDao.readSpecificReservationOfDb("licencePlate", licencePlate);
+            if(!reservations.isEmpty()){
+                correct = true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return correct;
+    }
+
 }
