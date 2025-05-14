@@ -270,4 +270,20 @@ public class UserSlotManager {
            System.out.println("DElete");
     }
 
+
+    public boolean checkTypeOfVehicle (String licensePlate, String vehicleType){
+        boolean correct = false;
+        try{
+            List<Vehicle> vehicles = this.vehicleDao.readSpecificVehicleOfDb("licencePlate", licensePlate);
+            if (vehicles.get(0).getVehicleType().equals(vehicleType)){
+                correct = true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return correct;
+    }
 }

@@ -61,7 +61,7 @@ public class TrafficSimulator implements Runnable{
                         //MIRAMOS LA PRIMERA PLAZA LIBRE Y GENERAMOS UN VEHICULO QUE CUMPLA LAS CONDICIONES
                         Slot slotThatIsGoingToBeSimulated = allSlotsFree.get(0);
                         //CREAMOS UNA MATRICULA ALEATORIA
-                        String plateOfTheSimulatedCar =  ("A" + randomNumbers.nextInt(26)).concat(("A" + randomNumbers.nextInt(26))).concat(("A" + randomNumbers.nextInt(26))).concat(String.valueOf(randomNumbers.nextInt(1000)));
+                        String plateOfTheSimulatedCar =  "A".concat("A").concat("A").concat(String.valueOf(randomNumbers.nextInt(1000)));
                         //MIRAMOS QUE LA MATRICULA NO EXISTA YA (EN CASO DE HACERLO PUES NO CREAMOS EL VEHICULO)
                         Boolean problemInLicensePlate = false;
                         for(Vehicle vehicle : vehiclesSimulated){
