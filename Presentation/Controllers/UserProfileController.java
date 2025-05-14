@@ -14,7 +14,7 @@ public class UserProfileController {
         userProfileView.getLogOutButton().addActionListener(e -> openLogOutView());
         userProfileView.getDeleteAccountButton().addActionListener(e -> openDeleteAccountView());
         userProfileView.getReturnButton().addActionListener(e -> returnToPreviousView());
-        userProfileView.getAddVehicleButton().addActionListener(e -> openAddVehicleView);
+        userProfileView.getAddVehicleButton().addActionListener(e -> openAddVehicleView());
     }
 
     private void openLogOutView() {
