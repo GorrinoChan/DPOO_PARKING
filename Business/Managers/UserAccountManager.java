@@ -15,8 +15,9 @@ public class UserAccountManager {
 
     AccountDao accountDao;
     VehicleDao vehicleDao;
+    String userName;
 
-    public UserAccountManager(String userName) {
+    public UserAccountManager() {
         this.accountDao = new AccountDao();
         this.vehicleDao = new VehicleDao();
 
@@ -290,6 +291,12 @@ public class UserAccountManager {
         }
 
         return correctAction;
+    }
+    public void deleteUserName(String userName){
+        this.userName = "";
+    }
+    public String getUserName(){
+        return this.userName;
     }
 
 

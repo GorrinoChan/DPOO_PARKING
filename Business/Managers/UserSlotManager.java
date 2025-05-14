@@ -20,6 +20,7 @@ public class UserSlotManager {
     ReservationDao reservedParkingSlotsDao;
     VehicleDao  vehicleDao;
     SlotDAO slotDao;
+    String userName;
 
 
     public UserSlotManager() {
@@ -286,4 +287,5 @@ public class UserSlotManager {
 
         return correct;
     }
+
 }
