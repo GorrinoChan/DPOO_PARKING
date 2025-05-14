@@ -282,7 +282,6 @@ public class UserAccountManager {
             if(vehicleExist.isEmpty()){
                this.vehicleDao.insertNewVehicleInDb(licensePlate, typeOfVehicle, userName);
                correctAction = true;
-               System.out.println("hola");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
