@@ -15,11 +15,13 @@ public class LoadController {
         new Thread(() -> {
             try {
                 Thread.sleep(2000);
-                verificarInicializacion(new InitializationManager());
-                loadView.dispose();
-                LogInView logInView = new LogInView();
-                new LogInController(logInView);
-                logInView.setVisible(true);
+                if (verificarInicializacion(new InitializationManager())){
+                    loadView.dispose();
+                    LogInView logInView = new LogInView();
+                    new LogInController(logInView);
+                    logInView.setVisible(true);
+                }
+
             } catch (Exception e) {
                 loadView.setErrorMessage("Error: " + e.getMessage());
             }
@@ -27,17 +29,21 @@ public class LoadController {
 
     }
 
-    private void verificarInicializacion(InitializationManager initializationManager) {
+    private boolean verificarInicializacion(InitializationManager initializationManager) {
+        boolean verificacion = true;
         try {
             initializationManager.prepareReadJson();
         } catch (RuntimeException e) {
             loadView.setErrorMessage("Archivo JSON no encontrado: " + e.getMessage());
+            verificacion = false;
+
         }
 
         try {
             initializationManager.readJsonForConfigDb();
         } catch (FileNotFoundException e) {
             loadView.setErrorMessage("Error al leer configuración de la base de datos: " + e.getMessage());
+            verificacion = false;
 
         }
 
@@ -45,8 +51,10 @@ public class LoadController {
             initializationManager.tryToConnectToDb();
         } catch (FileNotFoundException e) {
             loadView.setErrorMessage("No se pudo conectar a la base de datos: " + e.getMessage());
+            verificacion = false;
 
         }
+        return verificacion;
     }
 
 }
