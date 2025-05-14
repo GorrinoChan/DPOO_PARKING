@@ -5,7 +5,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class ReserveSlotView extends JFrame {
-    private JButton returnButton, userProfileButton, confirmButton;
+    private JButton returnButton, userProfileButton, confirmButton, refreshButton;
     private JLabel titleLabel, subTitleLabel, plateLabel, errorLabel, typeVehicleLabel;
     private JTextField plateTextField, typeVehicleTextField;
     private JTable slotsAvaliableTable;
@@ -21,6 +21,10 @@ public class ReserveSlotView extends JFrame {
 
     public JButton getReturnButton() {
         return returnButton;
+    }
+
+    public JButton getRefreshButton() {
+        return refreshButton;
     }
 
     public String getPlateTextField() {
@@ -62,6 +66,13 @@ public class ReserveSlotView extends JFrame {
         gbc.gridwidth = 1;
         gbc.insets = new Insets(4, 20, 4, 0);
         panel.add(userProfileButton, gbc);
+
+        refreshButton = new JButton("Recarga Tabla");
+        gbc.gridx = 4;
+        gbc.gridy = 6;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(4, 20, 4, 0);
+        panel.add(refreshButton, gbc);
 
         titleLabel = new JLabel("PARKING LS", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));

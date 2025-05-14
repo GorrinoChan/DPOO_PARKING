@@ -19,7 +19,8 @@ public class ReserveSlotController {
         this.reserveSlotView = reserveSlotView;
         reserveSlotView.getReturnButton().addActionListener(e -> returnToMenu());
         reserveSlotView.getUserProfileButton().addActionListener(e -> openUserProfileView());
-        reserveSlotView.getConfirmButton().addActionListener(e-> confirmReservation());
+        reserveSlotView.getConfirmButton().addActionListener(e -> confirmReservation());
+        reserveSlotView.getRefreshButton().addActionListener(e -> updateTable(reserveSlotView.getTypeVehicleTextField()));
     }
 
     private void openUserProfileView() {
@@ -53,7 +54,7 @@ public class ReserveSlotController {
                 model.addRow(new Object[]{slot.getTypeOfPlace(), slot.getNumber(), slot.getFloor()});
             }
         }
-        slotAvaliableView.updateSlotsAvaliableTable(model);
+        reserveSlotView.updateSlotsAvaliableTable(model);
     }
 
     private void confirmReservation() {

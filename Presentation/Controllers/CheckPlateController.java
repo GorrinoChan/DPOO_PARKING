@@ -35,15 +35,18 @@ public class CheckPlateController {
     private void confirmEntrance() {
         String plate = checkPlateView.getPlate();
         UserSlotManager userSlotManager = new UserSlotManager();
-        List<Reservation> userReservations = userSlotManager.readUserReservationByUserName(plate);
 
         if (plate.isEmpty()) {
             checkPlateView.setErrorMessage("Introduzca una matrícula valida.");
         } else {
-            if (!userReservations.isEmpty()) {
-                if (userSlotManager.markVehicleAsOccupyingSlot(plate)) {
+            if (userSlotManager.checkIfCarIsInReservedSlot(plate)) {
+                    userSlotManager.markVehicleAsOccupyingSlot(plate);
                     JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente.");
-                }
+                    checkPlateView.dispose();
+                    UserMenuView userMenuView = new UserMenuView();
+                    new UserMenuController(userMenuView);
+                    userMenuView.setVisible(true);
+                    
             } else {
                checkPlateView.dispose();
                CheckTypeVehicleView checkTypeVehicleView = new CheckTypeVehicleView();

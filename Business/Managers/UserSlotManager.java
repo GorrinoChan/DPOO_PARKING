@@ -268,7 +268,7 @@ public class UserSlotManager {
 
     public void deleteSlot (String slotNumber){
            SqlDao.getInstance().deleteObject("slot", "slotNumber", slotNumber);
-           System.out.println("DElete");
+           System.out.println("Delete");
     }
 
 
