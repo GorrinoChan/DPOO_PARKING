@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class UserProfileView extends JFrame {
-    private JButton logOutButton, deleteAccountButton, returnButton;
+    private JButton logOutButton, deleteAccountButton, returnButton, addVehicleButton;
     private JLabel titleLabel;
 
     public JButton getLogOutButton() {
@@ -17,6 +17,10 @@ public class UserProfileView extends JFrame {
 
     public JButton getReturnButton() {
         return returnButton;
+    }
+
+    public JButton getAddVehicleButton() {
+        return addVehicleButton;
     }
 
     public UserProfileView() {
@@ -47,23 +51,25 @@ public class UserProfileView extends JFrame {
         gbc.gridwidth = 6;
         panel.add(titleLabel, gbc);
 
+
+        gbc.insets = new Insets(8, 0, 50, 0);
+        addVehicleButton = new JButton("Añadir Vehículo");
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        panel.add(addVehicleButton, gbc);
+
         gbc.insets = new Insets(8, 0, 8, 0);
         logOutButton = new JButton("Cerrar Sesión");
         gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         panel.add(logOutButton, gbc);
 
         deleteAccountButton = new JButton("Eliminar Cuenta");
         gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         panel.add(deleteAccountButton, gbc);
 
         gbc.insets = new Insets(10, 0, 10, 0);
-        titleLabel = new JLabel(" ", SwingConstants.CENTER);
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        panel.add(titleLabel, gbc);
-
         titleLabel = new JLabel(" ", SwingConstants.CENTER);
         gbc.gridx = 1;
         gbc.gridy = 4;
@@ -72,6 +78,11 @@ public class UserProfileView extends JFrame {
         titleLabel = new JLabel(" ", SwingConstants.CENTER);
         gbc.gridx = 1;
         gbc.gridy = 5;
+        panel.add(titleLabel, gbc);
+
+        titleLabel = new JLabel(" ", SwingConstants.CENTER);
+        gbc.gridx = 1;
+        gbc.gridy = 6;
         panel.add(titleLabel, gbc);
 
         c.add(panel, BorderLayout.CENTER);

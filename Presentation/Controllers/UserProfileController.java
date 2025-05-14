@@ -14,6 +14,7 @@ public class UserProfileController {
         userProfileView.getLogOutButton().addActionListener(e -> openLogOutView());
         userProfileView.getDeleteAccountButton().addActionListener(e -> openDeleteAccountView());
         userProfileView.getReturnButton().addActionListener(e -> returnToPreviousView());
+        userProfileView.getAddVehicleButton().addActionListener(e -> openAddVehicleView);
     }
 
     private void openLogOutView() {
@@ -31,6 +32,13 @@ public class UserProfileController {
     }
 
     private void returnToPreviousView() {
+        userProfileView.dispose();
+        UserMenuView userMenuView = new UserMenuView();
+        new UserMenuController(userMenuView);
+        userMenuView.setVisible(true);
+    }
+
+    private void openAddVehicleView() {
         userProfileView.dispose();
         UserMenuView userMenuView = new UserMenuView();
         new UserMenuController(userMenuView);
