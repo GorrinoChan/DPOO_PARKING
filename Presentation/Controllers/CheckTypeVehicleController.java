@@ -37,8 +37,8 @@ public class CheckTypeVehicleController {
     private void confirmEntrance(String plate) {
         String type = checkTypeVehicleView.getTypeVehicle();
         UserSlotManager userSlotManager = new UserSlotManager();
-        String userName = LogInController.userName;
-        UserAccountManager userAccountManager = new UserAccountManager(userName);
+        UserAccountManager userAccountManager = new UserAccountManager();
+        String userName = userAccountManager.getUserName();
         boolean checkType = userSlotManager.checkTypeOfVehicle(plate, type);
         String slot = userSlotManager.assignVehicleToFirstAvailableSLot(userName, plate, type);
         String[] informationSlot = null;

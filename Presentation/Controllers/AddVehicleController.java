@@ -30,10 +30,11 @@ public class AddVehicleController {
         slotControlView.setVisible(true);
     }
     private void confirmVehicle() {
-        String userName = LogInController.userName;
         String plate = addVehicleView.getPlateTextField();
         String type = addVehicleView.getTypeVehicleTextField();
-        UserAccountManager userAccountManager = new UserAccountManager(userName);
+        UserAccountManager userAccountManager = new UserAccountManager();
+        String userName = userAccountManager.getUserName();
+
         addVehicleView.setErrorMessage("");
         if (userAccountManager.addAVehicleToUserAccount(plate, userName, type)){
             JOptionPane.showMessageDialog(null, "Vehículo Registrado Correctamente.");

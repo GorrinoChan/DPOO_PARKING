@@ -1,5 +1,6 @@
 package Presentation.Controllers;
 
+import Business.Managers.UserAccountManager;
 import Presentation.Views.*;
 import Business.Managers.UserSlotManager;
 
@@ -31,7 +32,9 @@ public class CheckPlateInParkingController {
     private void confirmReservation() {
         String plate = checkPlateInParkingView.getPlate();
         UserSlotManager userSlotManager = new UserSlotManager();
-        String userName = LogInController.userName;
+        UserAccountManager userAccountManager = new UserAccountManager();
+        String userName = userAccountManager.getUserName();
+
         if (plate.isEmpty()) {
             checkPlateInParkingView.setErrorMessage("Introduzca una matrícula valida.");
         } else if (userSlotManager.licensePlateExist(plate) && userSlotManager.checkIfLicensePlateIsFromTheUser(userName, plate)) {

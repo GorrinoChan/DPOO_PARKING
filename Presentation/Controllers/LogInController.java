@@ -1,12 +1,12 @@
 package Presentation.Controllers;
 import Business.Managers.InitializationManager;
+import Business.Managers.UserAccountManager;
 import Presentation.Views.*;
 
 import java.util.ArrayList;
 
 public class LogInController {
     private LogInView logInView;
-    public static String userName;
 
     public LogInController(LogInView logInView) {
         this.logInView = logInView;
@@ -17,8 +17,8 @@ public class LogInController {
 
     private void validateLogin() {
         InitializationManager initializationManager = new InitializationManager();
-
-
+        UserAccountManager userAccountManager = new UserAccountManager();
+        String userName = logInView.getUsername();
         String password = logInView.getPassword();
         ArrayList<Boolean> checkLogIn = initializationManager.logIn(userName, password);
 
@@ -37,7 +37,7 @@ public class LogInController {
             new AdminMenuController(adminMenuView);
             adminMenuView.setVisible(true);
         }
-        userName = logInView.getUsername();
+            userAccountManager.setUserName(userName);
     }
 
     private void openSignInView() {

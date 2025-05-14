@@ -91,7 +91,7 @@ public class AdminDeleteSlotsController {
                         int search = Integer.parseInt(numero);
                         if(search == slotNumbersearch){
                             String nombrebuscado = partes[5];
-                            UserAccountManager accountManager = new UserAccountManager(nombrebuscado);
+                            UserAccountManager accountManager = new UserAccountManager();
                             accountManager.reduceInOneTheNumberOfReservationsOfUserAccount(nombrebuscado);
                             accountManager.augmentInOneTheNumberOfCancellationsOfUserAccount(nombrebuscado);
                             break;

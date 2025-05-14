@@ -17,14 +17,15 @@ public class SignInController {
     }
 
     private void registerUser() {
-        String username = signInView.getUsername();
+        String userName = signInView.getUsername();
         String email = signInView.getEmail();
         String password = signInView.getPassword();
         String confirmPassword = signInView.getPasswordConfirmation();
-        UserAccountManager userAccountManager = new UserAccountManager(username);
-        ArrayList<Boolean> validateSignIn = userAccountManager.signUp(username, email, password, confirmPassword);
+        UserAccountManager userAccountManager = new UserAccountManager();
 
-        if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+        ArrayList<Boolean> validateSignIn = userAccountManager.signUp(userName, email, password, confirmPassword);
+
+        if (userName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             signInView.setErrorMessage("Todos los campos son obligatorios.");
         } else if (!validateSignIn.get(0)) {
             signInView.setErrorMessage("El nombre de usuario ya está en uso.");
@@ -36,7 +37,7 @@ public class SignInController {
             signInView.setErrorMessage("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.");
         } else {
             signInView.setErrorMessage("");
-            userAccountManager.createNewAccount(username, email, password);
+            userAccountManager.createNewAccount(userName, email, password);
             JOptionPane.showMessageDialog(null, "Usuario registrado correctamente.");
             signInView.dispose();
             LogInView loginView = new LogInView();

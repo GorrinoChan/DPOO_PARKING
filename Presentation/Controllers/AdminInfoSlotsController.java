@@ -44,7 +44,7 @@ public class AdminInfoSlotsController {
             String password = "-";
             int numeroReservas = 0;
             int cantidadVehiculos=0;
-            UserAccountManager accountManager = new UserAccountManager(nombrebuscado);
+            UserAccountManager accountManager = new UserAccountManager();
             if(nombrebuscado.equals("FREE")){
                 nombrebuscado = "-";
             } else{
@@ -107,7 +107,7 @@ public class AdminInfoSlotsController {
         int numero = Integer.parseInt(number);
         if (!matricula.equals("FREE")) {
             userSlotManager.deleteAReservation(numero);
-            UserAccountManager accountManager = new UserAccountManager(nombrebuscado);
+            UserAccountManager accountManager = new UserAccountManager();
             accountManager.reduceInOneTheNumberOfReservationsOfUserAccount(nombrebuscado);
             accountManager.augmentInOneTheNumberOfCancellationsOfUserAccount(nombrebuscado);
             adminInfoSlots.dispose();

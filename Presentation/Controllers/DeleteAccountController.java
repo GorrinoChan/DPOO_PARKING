@@ -17,8 +17,9 @@ public class DeleteAccountController {
     }
 
     private void deleteAccount() {
-        String userName = LogInController.userName;
-        UserAccountManager userAccountManager = new UserAccountManager(userName);
+        UserAccountManager userAccountManager = new UserAccountManager();
+        String userName = userAccountManager.getUserName();
+
         if (userAccountManager.deleteExistingAccount(userName)) {
             JOptionPane.showMessageDialog(deleteAccountView, "Cuenta eliminada correctamente.");
             deleteAccountView.dispose();

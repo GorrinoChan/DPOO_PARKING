@@ -292,7 +292,10 @@ public class UserAccountManager {
 
         return correctAction;
     }
-    public void deleteUserName(String userName){
+    public void setUserName(String userName){
+        this.userName = userName;
+    }
+    public void deleteUserName(){
         this.userName = "";
     }
     public String getUserName(){
