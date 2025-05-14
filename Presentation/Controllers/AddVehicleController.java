@@ -13,7 +13,7 @@ public class AddVehicleController {
         this.addVehicleView = addVehicleView;
         addVehicleView.getReturnButton().addActionListener(e -> returnToMenu());
         addVehicleView.getUserProfileButton().addActionListener(e -> openUserProfileView());
-        addVehicleView.getConfirmButton().addActionListener(e-> confirmReservation());
+        addVehicleView.getConfirmButton().addActionListener(e-> confirmVehicle());
     }
 
     private void openUserProfileView() {
@@ -29,7 +29,7 @@ public class AddVehicleController {
         new SlotControlController(slotControlView);
         slotControlView.setVisible(true);
     }
-    private void confirmReservation() {
+    private void confirmVehicle() {
         String userName = LogInController.userName;
         String plate = addVehicleView.getPlateTextField();
         String type = addVehicleView.getTypeVehicleTextField();

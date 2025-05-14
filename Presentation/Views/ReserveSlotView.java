@@ -28,7 +28,7 @@ public class ReserveSlotView extends JFrame {
     }
 
     public String getTypeVehicleTextField() {
-        return typeVehicleLabel.getText();
+        return typeVehicleTextField.getText();
     }
 
     public void setErrorMessage(String message) {

@@ -26,10 +26,13 @@ public class EnterParkingController {
     }
 
     private void openCheckPlateView() {
+
         enterParkingView.dispose();
         CheckPlateView checkPlateView = new CheckPlateView();
         new CheckPlateController(checkPlateView);
         checkPlateView.setVisible(true);
+
+
     }
 
     private void openCheckPlateInParkingView() {

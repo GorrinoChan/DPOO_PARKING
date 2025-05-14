@@ -18,7 +18,7 @@ public class LogInController {
     private void validateLogin() {
         InitializationManager initializationManager = new InitializationManager();
 
-        userName = logInView.getUsername();
+
         String password = logInView.getPassword();
         ArrayList<Boolean> checkLogIn = initializationManager.logIn(userName, password);
 
@@ -37,7 +37,7 @@ public class LogInController {
             new AdminMenuController(adminMenuView);
             adminMenuView.setVisible(true);
         }
-
+        userName = logInView.getUsername();
     }
 
     private void openSignInView() {

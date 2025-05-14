@@ -1,9 +1,6 @@
 package Presentation.Controllers;
 
-import Presentation.Views.DeleteAccountView;
-import Presentation.Views.LogOutView;
-import Presentation.Views.UserMenuView;
-import Presentation.Views.UserProfileView;
+import Presentation.Views.*;
 
 public class UserProfileController {
     private UserProfileView userProfileView;
@@ -40,8 +37,8 @@ public class UserProfileController {
 
     private void openAddVehicleView() {
         userProfileView.dispose();
-        UserMenuView userMenuView = new UserMenuView();
-        new UserMenuController(userMenuView);
-        userMenuView.setVisible(true);
+        AddVehicleView addVehicleView = new AddVehicleView();
+        new AddVehicleController(addVehicleView);
+        addVehicleView.setVisible(true);
     }
 }

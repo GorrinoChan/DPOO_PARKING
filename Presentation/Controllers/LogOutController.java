@@ -1,5 +1,6 @@
 package Presentation.Controllers;
 
+import Business.Managers.UserAccountManager;
 import Presentation.Views.LogOutView;
 import Presentation.Views.StartView;
 import Presentation.Views.UserProfileView;
@@ -18,7 +19,6 @@ public class LogOutController {
 
     private void logOut() {
         JOptionPane.showMessageDialog(logOutView, "Sesión cerrada correctamente.");
-
         logOutView.dispose();
         StartView startView = new StartView();
         new StartController(startView);
