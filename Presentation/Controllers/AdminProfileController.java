@@ -1,9 +1,6 @@
 package Presentation.Controllers;
 
-import Presentation.Views.AdminMenuView;
-import Presentation.Views.AdminProfileView;
-import Presentation.Views.LogOutView;
-import Presentation.Views.UserMenuView;
+import Presentation.Views.*;
 
 public class AdminProfileController {
     private AdminProfileView adminProfileView;
@@ -13,15 +10,15 @@ public class AdminProfileController {
         this.adminProfileView = adminProfileView;
         this.adminMenuView = adminMenuView;
 
-        adminProfileView.getLogOutButton().addActionListener(e -> openLogOutView());
+        adminProfileView.getLogOutButton().addActionListener(e -> openAdminLogOutView());
         adminProfileView.getReturnButton().addActionListener(e -> returnToPreviousView());
     }
 
-    private void openLogOutView() {
+    private void openAdminLogOutView() {
         adminProfileView.dispose();
-        LogOutView logOutView = new LogOutView();
-        new LogOutController(logOutView);
-        logOutView.setVisible(true);
+        AdminLogOutView adminLogOutView = new AdminLogOutView();
+        new AdminLogOutController(adminLogOutView, adminMenuView);
+        adminLogOutView.setVisible(true);
     }
 
     private void returnToPreviousView() {
