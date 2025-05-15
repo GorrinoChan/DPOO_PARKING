@@ -78,12 +78,15 @@ public class ReserveSlotController {
             reserveSlotView.setErrorMessage("La matrícula no es correcta.");
         } else if (!userSlotManager.checkTypeOfVehicle(plate, type)) {
             reserveSlotView.setErrorMessage("El tipo de vehículo no coincide con el asignado a la matrícula.");
-        }else {
+        } else if (userSlotManager.checkIfCarIsInReservedSlot(plate)) {
+            reserveSlotView.setErrorMessage("Este vehículo ya tiene una reserva.");
+        } else {
+            if (model.getRowCount() == 0) {
+                reserveSlotView.setErrorMessage("No hay plazas disponibles en estos instantes.");
+            }
             selectedRow = table.getSelectedRow();
             if (selectedRow == -1) {
                 reserveSlotView.setErrorMessage("Seleccione una plaza de la tabla.");
-            } else if (model.getRowCount() == 0) {
-                reserveSlotView.setErrorMessage("No hay plazas disponibles en estos instantes.");
             } else {
                 selectedSlot = Integer.parseInt(model.getValueAt(selectedRow, 2).toString());
                 floor = model.getValueAt(selectedRow, 1).toString();

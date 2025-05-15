@@ -16,7 +16,7 @@ public class GraphView extends JFrame {
     }
 
     public GraphView() {
-        setTitle("Parking LS - Presentation.Views.GraphView");
+        setTitle("Parking LS - Graph");
         setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

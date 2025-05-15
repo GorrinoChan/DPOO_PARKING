@@ -29,7 +29,7 @@ public class CheckTypeVehicleView extends JFrame {
     }
 
     public CheckTypeVehicleView() {
-        setTitle("Parking LS - CheckTypeVehicleView");
+        setTitle("Parking LS - CheckTypeVehicle");
         setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
