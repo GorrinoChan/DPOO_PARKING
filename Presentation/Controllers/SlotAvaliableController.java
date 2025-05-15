@@ -40,14 +40,13 @@ public class SlotAvaliableController {
     private void updateTable(String vehicleType) {
         UserSlotManager userSlotManager = new UserSlotManager();
         List<Slot> availableSlots = null;
-        DefaultTableModel model = null;
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);;
 
         try {
             availableSlots = userSlotManager.readAllSlot();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        model = new DefaultTableModel(new String[]{"Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);
 
         for (Slot slot : availableSlots) {
             if (!slot.isOccupation() && !slot.isReservation() && slot.getTypeOfPlace().equals(vehicleType)) {

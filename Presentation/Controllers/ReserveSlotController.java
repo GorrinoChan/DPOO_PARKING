@@ -44,7 +44,7 @@ public class ReserveSlotController {
     private void updateTable(String vehicleType) {
         UserSlotManager userSlotManager = new UserSlotManager();
         List<Slot> availableSlots = null;
-        DefaultTableModel model = null;
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);;
         if (vehicleType.isEmpty()) {
             reserveSlotView.setErrorMessage("Escribe el tipo de vehiculo.");
         } else {
@@ -54,7 +54,6 @@ public class ReserveSlotController {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-            model = new DefaultTableModel(new String[]{"Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);
 
             for (Slot slot : availableSlots) {
                 if (!slot.isOccupation() && !slot.isReservation() && slot.getTypeOfPlace().equals(vehicleType)) {
@@ -70,7 +69,7 @@ public class ReserveSlotController {
         String plate = reserveSlotView.getPlateTextField();
         String type = reserveSlotView.getTypeVehicleTextField();
         JTable table = reserveSlotView.getSlotsAvaliableTable();
-        DefaultTableModel model = null;
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);;
         int selectedRow = 0;
         int selectedSlot = 0;
         String floor = null;
@@ -78,7 +77,6 @@ public class ReserveSlotController {
         UserAccountManager userAccountManager = new UserAccountManager();
         String userName = userAccountManager.getUserName();
 
-        model = new DefaultTableModel(new String[]{"Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);
         reserveSlotView.setErrorMessage("");
         if (plate.isEmpty() || type.isEmpty()) {
             reserveSlotView.setErrorMessage("Todos los campos son obligatorios.");

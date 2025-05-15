@@ -47,12 +47,8 @@ public class SlotReservationsController {
         UserSlotManager userSlotManager = new UserSlotManager();
         UserAccountManager userAccountManager = new UserAccountManager();
         String userName = userAccountManager.getUserName();
-        List<Reservation> reservations = null;
-        DefaultTableModel model = null;
-
-        reservations = userSlotManager.readUserReservationByUserName(userName);
-
-        model = new DefaultTableModel(new String[]{"Fecha", "Matrícula", "Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);
+        List<Reservation> reservations = userSlotManager.readUserReservationByUserName(userName);
+        DefaultTableModel model = new DefaultTableModel(new String[]{"Fecha", "Matrícula", "Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);
 
         for (Reservation reservation : reservations) {
             if (reservation.getTypeOfPlace().equals(vehicleType) && !reservation.isCancelled()) {

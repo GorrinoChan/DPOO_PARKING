@@ -72,31 +72,31 @@ public class SlotControlView extends JFrame {
         subTitleLabel = new JLabel(" ");
         gbc.gridx = 1;
         gbc.gridy = 2;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 3;
         panel.add(subTitleLabel, gbc);
 
         subTitleLabel = new JLabel(" ");
         gbc.gridx = 1;
         gbc.gridy = 3;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 3;
         panel.add(subTitleLabel, gbc);
 
         reserveSlotButton = new JButton("Reservar Plaza");
         gbc.gridx = 1;
         gbc.gridy = 4;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 3;
         panel.add(reserveSlotButton, gbc);
 
         reservationsButton = new JButton("Ver reservas");
         gbc.gridx = 1;
         gbc.gridy = 5;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 3;
         panel.add(reservationsButton, gbc);
 
         removeReservationButton = new JButton("Retirar Reserva");
         gbc.gridx = 1;
         gbc.gridy = 6;
-        gbc.gridwidth = 1;
+        gbc.gridwidth = 3;
         panel.add(removeReservationButton, gbc);
 
         c.add(panel, BorderLayout.CENTER);
