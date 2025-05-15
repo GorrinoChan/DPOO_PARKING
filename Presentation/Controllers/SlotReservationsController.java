@@ -4,6 +4,7 @@ import Business.Entities.Reservation;
 import Business.Entities.Slot;
 import Business.Managers.UserAccountManager;
 import Business.Managers.UserSlotManager;
+import Presentation.Views.SlotControlView;
 import Presentation.Views.SlotReservationsView;
 import Presentation.Views.UserMenuView;
 import Presentation.Views.UserProfileView;
@@ -37,7 +38,9 @@ public class SlotReservationsController {
 
     private void returnToPrevious() {
         slotReservationsView.dispose();
-        userMenuView.setVisible(true);
+        SlotControlView slotControlView = new SlotControlView();
+        new SlotControlController(slotControlView, userMenuView);
+        slotControlView.setVisible(true);
     }
 
     private void updateTable(String vehicleType) {
@@ -52,7 +55,7 @@ public class SlotReservationsController {
         model = new DefaultTableModel(new String[]{"Fecha", "Matrícula", "Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);
 
         for (Reservation reservation : reservations) {
-            if (!reservation.isCancelled()) {
+            if (reservation.getTypeOfPlace().equals(vehicleType) && !reservation.isCancelled()) {
                 model.addRow(new Object[]{reservation.getDate(), reservation.getLicencePlate(), reservation.getTypeOfPlace(), reservation.getNumber(), reservation.getFloor()});
 
             }

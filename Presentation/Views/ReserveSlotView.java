@@ -113,7 +113,6 @@ public class ReserveSlotView extends JFrame {
         gbc.gridy = 5;
         panel.add(typeVehicleTextField, gbc);
 
-        tableModel= new DefaultTableModel(new String[]{"Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);
         slotsAvaliableTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(slotsAvaliableTable);
         scrollPane.setPreferredSize(new Dimension(400, 150));
