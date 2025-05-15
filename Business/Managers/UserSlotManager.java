@@ -268,7 +268,7 @@ public class UserSlotManager {
 
     public void deleteSlot (String slotNumber){
            SqlDao.getInstance().deleteObject("slot", "slotNumber", slotNumber);
-           System.out.println("DElete");
+           System.out.println("Delete");
     }
 
 
@@ -277,6 +277,23 @@ public class UserSlotManager {
         try{
             List<Vehicle> vehicles = this.vehicleDao.readSpecificVehicleOfDb("licencePlate", licensePlate);
             if (vehicles.get(0).getVehicleType().equals(vehicleType)){
+                correct = true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return correct;
+    }
+
+    public boolean checkIfCarIsInReservedSlot(String licencePlate){
+        boolean correct = false;
+        List<Reservation> reservations;
+        try{
+            reservations = this.reservedParkingSlotsDao.readSpecificReservationOfDb("licencePlate", licencePlate);
+            if(!reservations.isEmpty()){
                 correct = true;
             }
         } catch (SQLException e) {
