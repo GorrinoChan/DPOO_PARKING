@@ -35,7 +35,6 @@ public class LoadController {
         try {
             initializationManager.prepareReadJson();
         } catch (RuntimeException e) {
-            System.out.println("Error 1");
             loadView.setErrorMessage("Archivo JSON no encontrado: " + e.getMessage());
             verificacion = false;
 
@@ -44,7 +43,6 @@ public class LoadController {
         try {
             initializationManager.readJsonForConfigDb();
         } catch (FileNotFoundException e) {
-            System.out.println("Error 2");
             loadView.setErrorMessage("Error al leer configuración de la base de datos: " + e.getMessage());
             verificacion = false;
 
@@ -53,12 +51,10 @@ public class LoadController {
         try {
             initializationManager.tryToConnectToDb();
         } catch (FileNotFoundException e) {
-            System.out.println("Error 3");
             loadView.setErrorMessage("No se pudo conectar a la base de datos: " + e.getMessage());
             verificacion = false;
 
         } catch (SQLException e) {
-            System.out.println("Error 3");
             loadView.setErrorMessage("No se pudo conectar a la base de datos: " + e.getMessage());
             verificacion = false;
         }

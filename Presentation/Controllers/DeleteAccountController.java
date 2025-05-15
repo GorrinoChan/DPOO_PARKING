@@ -9,9 +9,12 @@ import javax.swing.*;
 
 public class DeleteAccountController {
     private DeleteAccountView deleteAccountView;
+    private UserMenuView userMenuView;
 
-    public DeleteAccountController(DeleteAccountView deleteAccountView) {
+    public DeleteAccountController(DeleteAccountView deleteAccountView, UserMenuView userMenuView) {
         this.deleteAccountView = deleteAccountView;
+        this.userMenuView = userMenuView;
+
         deleteAccountView.getConfirmButton().addActionListener(e -> deleteAccount());
         deleteAccountView.getReturnButton().addActionListener(e -> returnUserProfileView());
     }
@@ -28,10 +31,7 @@ public class DeleteAccountController {
             startView.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(deleteAccountView, "Cuenta no existe");
-            deleteAccountView.dispose();
-            UserProfileView userProfileView = new UserProfileView();
-            new UserProfileController(userProfileView);
-            userProfileView.setVisible(true);
+            returnUserProfileView();
         }
 
     }
@@ -39,7 +39,7 @@ public class DeleteAccountController {
     private void returnUserProfileView() {
         deleteAccountView.dispose();
         UserProfileView userProfileView = new UserProfileView();
-        new UserProfileController(userProfileView);
+        new UserProfileController(userProfileView, userMenuView);
         userProfileView.setVisible(true);
     }
 }

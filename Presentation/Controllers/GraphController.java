@@ -5,9 +5,12 @@ import Presentation.Views.UserMenuView;
 import Presentation.Views.UserProfileView;
 public class GraphController {
     private GraphView graphView;
+    private UserMenuView userMenuView;
 
-    public GraphController(GraphView graphView) {
+    public GraphController(GraphView graphView, UserMenuView userMenuView) {
         this.graphView = graphView;
+        this.userMenuView = userMenuView;
+
         graphView.getReturnButton().addActionListener(e -> returnToMenu());
         graphView.getUserProfileButton().addActionListener(e -> openUserProfileView());
     }
@@ -15,14 +18,12 @@ public class GraphController {
     private void openUserProfileView() {
         graphView.dispose();
         UserProfileView userProfileView = new UserProfileView();
-        new UserProfileController(userProfileView);
+        new UserProfileController(userProfileView, userMenuView);
         userProfileView.setVisible(true);
     }
 
     private void returnToMenu() {
         graphView.dispose();
-        UserMenuView userMenuView = new UserMenuView();
-        new UserMenuController(userMenuView);
         userMenuView.setVisible(true);
     }
 }

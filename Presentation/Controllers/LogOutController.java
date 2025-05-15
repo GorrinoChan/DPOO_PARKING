@@ -3,15 +3,18 @@ package Presentation.Controllers;
 import Business.Managers.UserAccountManager;
 import Presentation.Views.LogOutView;
 import Presentation.Views.StartView;
+import Presentation.Views.UserMenuView;
 import Presentation.Views.UserProfileView;
 
 import javax.swing.*;
 
 public class LogOutController {
     private LogOutView logOutView;
+    private UserMenuView userMenuView;
 
-    public LogOutController(LogOutView logOutView) {
+    public LogOutController(LogOutView logOutView, UserMenuView userMenuView) {
         this.logOutView = logOutView;
+        this.userMenuView = userMenuView;
 
         logOutView.getConfirmButton().addActionListener(e -> logOut());
         logOutView.getReturnButton().addActionListener(e -> goBack());
@@ -30,7 +33,7 @@ public class LogOutController {
     private void goBack() {
         logOutView.dispose();
         UserProfileView userProfileView = new UserProfileView();
-        new UserProfileController(userProfileView);
+        new UserProfileController(userProfileView, userMenuView);
         userProfileView.setVisible(true);
     }
 }

@@ -11,10 +11,13 @@ import java.util.List;
 
 public class CheckPlateController {
     private CheckPlateView checkPlateView;
+    private UserMenuView userMenuView;
 
-    public CheckPlateController(CheckPlateView checkPlateView) {
+    public CheckPlateController(CheckPlateView checkPlateView, UserMenuView userMenuView) {
         this.checkPlateView = checkPlateView;
-        checkPlateView.getReturnButton().addActionListener(e -> returnToMenu());
+        this.userMenuView = userMenuView;
+
+        checkPlateView.getReturnButton().addActionListener(e -> returnToEnterParkingView());
         checkPlateView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         checkPlateView.getConfirmButton().addActionListener(e-> confirmEntrance());
     }
@@ -22,14 +25,14 @@ public class CheckPlateController {
     private void openUserProfileView() {
         checkPlateView.dispose();
         UserProfileView userProfileView = new UserProfileView();
-        new UserProfileController(userProfileView);
+        new UserProfileController(userProfileView, userMenuView);
         userProfileView.setVisible(true);
     }
 
-    private void returnToMenu() {
+    private void returnToEnterParkingView() {
         checkPlateView.dispose();
         EnterParkingView enterParkingView = new EnterParkingView();
-        new EnterParkingController(enterParkingView);
+        new EnterParkingController(enterParkingView, userMenuView);
         enterParkingView.setVisible(true);
     }
     private void confirmEntrance() {
@@ -43,14 +46,12 @@ public class CheckPlateController {
                     userSlotManager.markVehicleAsOccupyingSlot(plate);
                     JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente.");
                     checkPlateView.dispose();
-                    UserMenuView userMenuView = new UserMenuView();
-                    new UserMenuController(userMenuView);
                     userMenuView.setVisible(true);
                     
             } else {
                checkPlateView.dispose();
                CheckTypeVehicleView checkTypeVehicleView = new CheckTypeVehicleView();
-               new CheckTypeVehicleController(checkTypeVehicleView, plate);
+               new CheckTypeVehicleController(checkTypeVehicleView, plate, userMenuView);
                 checkTypeVehicleView.setVisible(true);
             }
         }

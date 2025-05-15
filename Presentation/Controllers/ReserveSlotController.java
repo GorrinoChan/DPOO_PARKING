@@ -15,9 +15,12 @@ import java.util.List;
 
 public class ReserveSlotController {
     private ReserveSlotView reserveSlotView;
+    private UserMenuView userMenuView;
 
-    public ReserveSlotController(ReserveSlotView reserveSlotView) {
+    public ReserveSlotController(ReserveSlotView reserveSlotView, UserMenuView userMenuView) {
         this.reserveSlotView = reserveSlotView;
+        this.userMenuView = userMenuView;
+
         reserveSlotView.getReturnButton().addActionListener(e -> returnToMenu());
         reserveSlotView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         reserveSlotView.getConfirmButton().addActionListener(e -> confirmReservation());
@@ -28,14 +31,14 @@ public class ReserveSlotController {
     private void openUserProfileView() {
         reserveSlotView.dispose();
         UserProfileView userProfileView = new UserProfileView();
-        new UserProfileController(userProfileView);
+        new UserProfileController(userProfileView, userMenuView);
         userProfileView.setVisible(true);
     }
 
     private void returnToMenu() {
         reserveSlotView.dispose();
         SlotControlView slotControlView = new SlotControlView();
-        new SlotControlController(slotControlView);
+        new SlotControlController(slotControlView, userMenuView);
         slotControlView.setVisible(true);
     }
 
@@ -96,8 +99,6 @@ public class ReserveSlotController {
                 } else {
                     JOptionPane.showMessageDialog(null, "Plaza " + selectedSlot + " de la planta " + floor + " reservada correctamente.");
                     reserveSlotView.dispose();
-                    UserMenuView userMenuView = new UserMenuView();
-                    new UserMenuController(userMenuView);
                     userMenuView.setVisible(true);
                 }
             }

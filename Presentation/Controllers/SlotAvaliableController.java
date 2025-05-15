@@ -2,6 +2,7 @@ package Presentation.Controllers;
 
 import Business.Entities.Slot;
 import Business.Managers.UserSlotManager;
+import Presentation.Views.AdminMenuView;
 import Presentation.Views.SlotAvaliableView;
 import Presentation.Views.UserMenuView;
 import Presentation.Views.UserProfileView;
@@ -12,9 +13,12 @@ import java.util.List;
 
 public class SlotAvaliableController {
     private SlotAvaliableView slotAvaliableView;
+    private UserMenuView userMenuView;
 
-    public SlotAvaliableController(SlotAvaliableView slotAvaliableView) {
+    public SlotAvaliableController(SlotAvaliableView slotAvaliableView, UserMenuView userMenuView) {
         this.slotAvaliableView = slotAvaliableView;
+        this.userMenuView = userMenuView;
+
         slotAvaliableView.getReturnButton().addActionListener(e -> returnToMenu());
         slotAvaliableView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         slotAvaliableView.getCarButton().addActionListener(e -> updateTable("Car"));
@@ -26,13 +30,11 @@ public class SlotAvaliableController {
     private void openUserProfileView() {
         slotAvaliableView.dispose();
         UserProfileView userProfileView = new UserProfileView();
-        new UserProfileController(userProfileView);
+        new UserProfileController(userProfileView, userMenuView);
         userProfileView.setVisible(true);
     }
     private void returnToMenu() {
         slotAvaliableView.dispose();
-        UserMenuView userMenuView = new UserMenuView();
-        new UserMenuController(userMenuView);
         userMenuView.setVisible(true);
     }
     private void updateTable(String vehicleType) {

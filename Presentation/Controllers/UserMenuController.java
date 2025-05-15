@@ -1,8 +1,14 @@
 package Presentation.Controllers;
+import Business.TrafficSimulator;
 import Presentation.Views.*;
+
+import java.io.FileNotFoundException;
+
 public class UserMenuController {
     private UserMenuView userMenuView;
+    private TrafficSimulator simulator;
     private boolean running = false;
+    private Thread simulatorThread;
 
     public UserMenuController(UserMenuView userMenuView) {
         this.userMenuView = userMenuView;
@@ -18,45 +24,64 @@ public class UserMenuController {
 
     private void playPauseTraficSim() {
         running = !running;
+
         if (running) {
+            if (simulator == null || simulatorThread == null || !simulatorThread.isAlive()) {
+                try {
+                    simulator = new TrafficSimulator();
+                    simulator.resumInteger();
+                    simulatorThread = new Thread(simulator, "TrafficSimulator");
+                    simulatorThread.start();
+                } catch (FileNotFoundException ex) {
+                    System.out.println("Error al iniciar simulación");
+                }
+            } else {
+                simulator.resumInteger();
+            }
+
             userMenuView.getPlayPauseButton().setText("Stop");
+
         } else {
+            if (simulator != null) {
+                simulator.stopInteger();
+            }
+
             userMenuView.getPlayPauseButton().setText("Play");
         }
     }
 
     private void openUserProfileView() {
-        userMenuView.dispose();
+        userMenuView.setVisible(false);
         UserProfileView userProfileView = new UserProfileView();
-        new UserProfileController(userProfileView);
+        new UserProfileController(userProfileView, userMenuView);
         userProfileView.setVisible(true);
     }
 
     private void openEnterParkingView() {
-        userMenuView.dispose();
+        userMenuView.setVisible(false);
         EnterParkingView enterParkingView = new EnterParkingView();
-        new EnterParkingController(enterParkingView);
+        new EnterParkingController(enterParkingView, userMenuView);
         enterParkingView.setVisible(true);
     }
 
     private void openSlotControlView() {
-        userMenuView.dispose();
+        userMenuView.setVisible(false);
         SlotControlView slotControlView = new SlotControlView();
-        new SlotControlController(slotControlView);
+        new SlotControlController(slotControlView, userMenuView);
         slotControlView.setVisible(true);
     }
 
     private void openSlotAvaliableView() {
-        userMenuView.dispose();
+        userMenuView.setVisible(false);
         SlotAvaliableView slotAvaliableView = new SlotAvaliableView();
-        new SlotAvaliableController(slotAvaliableView);
+        new SlotAvaliableController(slotAvaliableView, userMenuView);
         slotAvaliableView.setVisible(true);
     }
 
     private void openGraphView() {
-        userMenuView.dispose();
+        userMenuView.setVisible(false);
         GraphView graphView = new GraphView();
-        new GraphController(graphView);
+        new GraphController(graphView, userMenuView);
         graphView.setVisible(true);
     }
 }

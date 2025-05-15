@@ -8,9 +8,12 @@ import java.awt.event.ActionListener;
 
 public class AddVehicleController {
     private AddVehicleView addVehicleView;
+    private UserMenuView userMenuView;
 
-    public AddVehicleController(AddVehicleView addVehicleView) {
+    public AddVehicleController(AddVehicleView addVehicleView, UserMenuView userMenuView) {
         this.addVehicleView = addVehicleView;
+        this.userMenuView = userMenuView;
+
         addVehicleView.getReturnButton().addActionListener(e -> returnToMenu());
         addVehicleView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         addVehicleView.getConfirmButton().addActionListener(e-> confirmVehicle());
@@ -19,14 +22,12 @@ public class AddVehicleController {
     private void openUserProfileView() {
         addVehicleView.dispose();
         UserProfileView userProfileView = new UserProfileView();
-        new UserProfileController(userProfileView);
+        new UserProfileController(userProfileView, userMenuView);
         userProfileView.setVisible(true);
     }
 
     private void returnToMenu() {
         addVehicleView.dispose();
-        UserMenuView userMenuView = new UserMenuView();
-        new UserMenuController(userMenuView);
         userMenuView.setVisible(true);
     }
     private void confirmVehicle() {
@@ -38,10 +39,7 @@ public class AddVehicleController {
         addVehicleView.setErrorMessage("");
         if (userAccountManager.addAVehicleToUserAccount(plate, userName, type)){
             JOptionPane.showMessageDialog(null, "Vehículo Registrado Correctamente.");
-            addVehicleView.dispose();
-            UserMenuView userMenuView = new UserMenuView();
-            new UserMenuController(userMenuView);
-            userMenuView.setVisible(true);
+            returnToMenu();
         } else {
             addVehicleView.setErrorMessage("No se ha podido registrar el vehículo.");
         }

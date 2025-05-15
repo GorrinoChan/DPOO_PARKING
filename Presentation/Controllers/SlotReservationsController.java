@@ -14,9 +14,12 @@ import java.util.List;
 
 public class SlotReservationsController {
     private SlotReservationsView slotReservationsView;
+    private UserMenuView userMenuView;
 
-    public SlotReservationsController(SlotReservationsView slotReservationsView) {
+    public SlotReservationsController(SlotReservationsView slotReservationsView, UserMenuView userMenuView) {
         this.slotReservationsView = slotReservationsView;
+        this.userMenuView = userMenuView;
+
         slotReservationsView.getReturnButton().addActionListener(e -> returnToPrevious());
         slotReservationsView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         slotReservationsView.getCarButton().addActionListener(e -> updateTable("Car"));
@@ -28,14 +31,12 @@ public class SlotReservationsController {
     private void openUserProfileView() {
         slotReservationsView.dispose();
         UserProfileView userProfileView = new UserProfileView();
-        new UserProfileController(userProfileView);
+        new UserProfileController(userProfileView, userMenuView);
         userProfileView.setVisible(true);
     }
 
     private void returnToPrevious() {
         slotReservationsView.dispose();
-        UserMenuView userMenuView = new UserMenuView();
-        new UserMenuController(userMenuView);
         userMenuView.setVisible(true);
     }
 

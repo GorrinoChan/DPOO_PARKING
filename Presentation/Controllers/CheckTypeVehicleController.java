@@ -12,10 +12,13 @@ import java.util.List;
 
 public class CheckTypeVehicleController {
     private CheckTypeVehicleView checkTypeVehicleView;
+    private UserMenuView userMenuView;
 
-    public CheckTypeVehicleController(CheckTypeVehicleView checkTypeVehicleView, String plate) {
+    public CheckTypeVehicleController(CheckTypeVehicleView checkTypeVehicleView, String plate, UserMenuView userMenuView) {
         this.checkTypeVehicleView = checkTypeVehicleView;
-        checkTypeVehicleView.getReturnButton().addActionListener(e -> returnToMenu());
+        this.userMenuView = userMenuView;
+
+        checkTypeVehicleView.getReturnButton().addActionListener(e -> returnToEnterParking());
         checkTypeVehicleView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         checkTypeVehicleView.getConfirmButton().addActionListener(e -> confirmEntrance(plate));
     }
@@ -23,14 +26,14 @@ public class CheckTypeVehicleController {
     private void openUserProfileView() {
         checkTypeVehicleView.dispose();
         UserProfileView userProfileView = new UserProfileView();
-        new UserProfileController(userProfileView);
+        new UserProfileController(userProfileView, userMenuView);
         userProfileView.setVisible(true);
     }
 
-    private void returnToMenu() {
+    private void returnToEnterParking() {
         checkTypeVehicleView.dispose();
         EnterParkingView enterParkingView = new EnterParkingView();
-        new EnterParkingController(enterParkingView);
+        new EnterParkingController(enterParkingView, userMenuView);
         enterParkingView.setVisible(true);
     }
 
@@ -50,10 +53,7 @@ public class CheckTypeVehicleController {
                 JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente. Su plaza está en la planta " + informationSlot[1] + " y es la número: " + informationSlot[0]);
                 userSlotManager.deleteSlot(informationSlot[0]);
                 userAccountManager.augmentInOneTheNumberOfReservationsOfUserAccount(userName);
-                checkTypeVehicleView.dispose();
-                EnterParkingView enterParkingView = new EnterParkingView();
-                new EnterParkingController(enterParkingView);
-                enterParkingView.setVisible(true);
+                returnToEnterParking();
             } else {
                 checkTypeVehicleView.setErrorMessage("No hay plazas disponibles.");
             }

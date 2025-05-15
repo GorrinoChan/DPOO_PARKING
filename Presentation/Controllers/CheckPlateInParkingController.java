@@ -8,10 +8,13 @@ import javax.swing.*;
 
 public class CheckPlateInParkingController {
     private CheckPlateInParkingView checkPlateInParkingView;
+    private UserMenuView userMenuView;
 
-    public CheckPlateInParkingController(CheckPlateInParkingView checkPlateInParkingView) {
+    public CheckPlateInParkingController(CheckPlateInParkingView checkPlateInParkingView, UserMenuView userMenuView) {
         this.checkPlateInParkingView = checkPlateInParkingView;
-        checkPlateInParkingView.getReturnButton().addActionListener(e -> returnToMenu());
+        this.userMenuView = userMenuView;
+
+        checkPlateInParkingView.getReturnButton().addActionListener(e -> returnToEnterParkingView());
         checkPlateInParkingView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         checkPlateInParkingView.getConfirmButton().addActionListener(e-> confirmReservation());
     }
@@ -19,14 +22,14 @@ public class CheckPlateInParkingController {
     private void openUserProfileView() {
         checkPlateInParkingView.dispose();
         UserProfileView userProfileView = new UserProfileView();
-        new UserProfileController(userProfileView);
+        new UserProfileController(userProfileView, userMenuView);
         userProfileView.setVisible(true);
     }
 
-    private void returnToMenu() {
+    private void returnToEnterParkingView() {
         checkPlateInParkingView.dispose();
         EnterParkingView enterParkingView = new EnterParkingView();
-        new EnterParkingController(enterParkingView);
+        new EnterParkingController(enterParkingView, userMenuView);
         enterParkingView.setVisible(true);
     }
     private void confirmReservation() {
@@ -41,8 +44,6 @@ public class CheckPlateInParkingController {
                 userSlotManager.markVehicleAsNotOccupyingSlot(plate);
                 JOptionPane.showMessageDialog(null, "Ha salido de PARKING LS correctamente.");
                 checkPlateInParkingView.dispose();
-                UserMenuView userMenuView = new UserMenuView();
-                new UserMenuController(userMenuView);
                 userMenuView.setVisible(true);
             } else {
                 checkPlateInParkingView.setErrorMessage("La matrícula no existe.");
