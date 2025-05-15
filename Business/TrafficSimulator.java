@@ -4,6 +4,7 @@ import Business.Entities.Configuration;
 import Business.Entities.Reservation;
 import Business.Entities.Slot;
 import Business.Entities.Vehicle;
+import Business.Entities.Account;
 import Persistence.*;
 
 import java.io.FileNotFoundException;
@@ -17,6 +18,7 @@ public class TrafficSimulator implements Runnable{
     private final SlotDAO slotDAO = new SlotDAO();
     private final SqlConfigurationDao sqlConfigurationDao = new SqlConfigurationDao();
     private final SqlDao sqlDao = new SqlDao(sqlConfigurationDao);
+    private final AccountDao accountDao = new AccountDao();
     private final VehicleDao vehicleDao = new VehicleDao();
     private final ReservationDao reservationDao = new ReservationDao();
 
@@ -53,6 +55,7 @@ public class TrafficSimulator implements Runnable{
                 //GENERAMOS UN NUMERO RANDOM
                 Random randomNumbers = new Random();
                 int resultOfTheRandomNumber = randomNumbers.nextInt(2);
+                System.out.println(probability + "/" + resultOfTheRandomNumber);
 
                 //HEMOS SUPERADO LA PROBABILIDAD METEMOS UN COCHE
                 if (probability < resultOfTheRandomNumber){
@@ -76,26 +79,36 @@ public class TrafficSimulator implements Runnable{
                             //RESERVAMOS LA PLAZA Y ELIMINAMOS LAS PLAZA LIBRE
                             LocalDateTime dateOfReservation = LocalDateTime.now();
                             reservationDao.insertNewReservationInDb(plateOfTheSimulatedCar, String.valueOf(dateOfReservation), "SIMULATOR", slotThatIsGoingToBeSimulated.getNumber(), slotThatIsGoingToBeSimulated.getFloor(),0,0,1,slotThatIsGoingToBeSimulated.getTypeOfPlace());
-                            slotDAO.deleteSpecificSlot(String.valueOf(slotThatIsGoingToBeSimulated.getNumber()));
-                    }   }
-                }
-
-                //NO HEMOS SUPERADO LA PROBABILIDAD SACAMOS UN COCHE
-                if(probability > resultOfTheRandomNumber){
-                    //MIRAMOS SI HAY COCHES QUE PODAMOS SACAR
-                    if(!vehiclesSimulated.isEmpty()){
-                        //MIRAMOS EL PRIMER VEHICULO Y ESE ES EL QUE SACAMOS
-                        Vehicle vehicleSimulatedThatIsGoingToBeRemoved = vehiclesSimulated.get(0);
-                        //MIRAMOS LA PLAZA QUE OCUPA RESERVADA
-                        List<Reservation> vehicleReservation = reservationDao.readSpecificReservationOfDb("licencePlate", vehicleSimulatedThatIsGoingToBeRemoved.getVehicleLicense());
-                        Reservation slotThatIsGoingToBeFree = vehicleReservation.get(0);
-                        //CREAMOS EL SLOT LIBRE
-                        slotDAO.insertNewSlotInDb(slotThatIsGoingToBeFree.getNumber(),slotThatIsGoingToBeFree.getFloor(),0,0,slotThatIsGoingToBeFree.getTypeOfPlace());
-                        //AHORA ELIMINAMOS EL VEHICULO Y LA PLAZA RESERVADA
-                        reservationDao.deleteSpecificReservation(String.valueOf(slotThatIsGoingToBeFree.getNumber()));
-                        vehicleDao.deleteSpecificVehicle(vehicleSimulatedThatIsGoingToBeRemoved.getVehicleLicense());
+                            List<Account> simulatorAccount = accountDao.readSpecificAccountOfDb("nameOfUserAccount", "SIMULATOR");
+                            slotDAO.deleteSpecificSlot(String.valueOf(slotThatIsGoingToBeSimulated.getFloor()));
+                            System.out.println("Se va a eliminar la plaza número: " + slotThatIsGoingToBeSimulated.getFloor());
+                        }
                     }
                 }
+
+                 if(probability > resultOfTheRandomNumber){
+                    //MIRAMOS SI HAY COCHES QUE PODAMOS SACAR
+                    System.out.println("🟢1");
+                    if(!vehiclesSimulated.isEmpty()) {
+                        System.out.println("🟢2");
+                        //MIRAMOS LA PRIMERA PLAZA DE RESERVED DE SIMULAOR USER
+                        System.out.println("🟢3");
+                        List<Reservation> vehicleReservation = reservationDao.readSpecificReservationOfDb("userName", "SIMULATOR");
+                        //MIRAMOS EL PRIMER VEHICULO DE ESTA LISTA
+                        List<Vehicle> vehicleSimulatedThatIsGoingToBeRemoved = vehicleDao.readSpecificVehicleOfDb("licencePlate", vehicleReservation.get(0).getLicencePlate());
+                        System.out.println("🟢4");
+                        if(!vehicleReservation.isEmpty()) {
+                            Reservation slotThatIsGoingToBeFree = vehicleReservation.get(0);
+                            //CREAMOS EL SLOT LIBRE
+                            System.out.println("🟢5");
+                            slotDAO.insertNewSlotInDb(slotThatIsGoingToBeFree.getNumber(), slotThatIsGoingToBeFree.getFloor(), 0, 0, slotThatIsGoingToBeFree.getTypeOfPlace());
+                            //AHORA ELIMINAMOS EL VEHICULO Y LA PLAZA RESERVADA
+                            reservationDao.deleteSpecificReservation(String.valueOf(slotThatIsGoingToBeFree.getNumber()));
+                            vehicleDao.deleteSpecificVehicle(vehicleSimulatedThatIsGoingToBeRemoved.get(0).getVehicleLicense());
+                        }
+                    }
+                }
+
 
 
             } catch (FileNotFoundException e) {
