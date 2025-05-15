@@ -10,9 +10,11 @@ import javax.swing.*;
 
 public class AdminEditSlotsController {
     private AdminEditSlots adminEditSlots;
+    private AdminMenuView adminMenuView;
 
-    public AdminEditSlotsController(AdminEditSlots adminEditSlots) {
+    public AdminEditSlotsController(AdminEditSlots adminEditSlots, AdminMenuView adminMenuView) {
         this.adminEditSlots = adminEditSlots;
+        this.adminMenuView = adminMenuView;
         adminEditSlots.getReturnButton().addActionListener(e -> returnToMenu());
         adminEditSlots.getUserProfileButton().addActionListener(e -> openUserProfileView());
         adminEditSlots.getEditButton().addActionListener(e -> EditSlot());
@@ -44,7 +46,7 @@ public class AdminEditSlotsController {
                     JOptionPane.showMessageDialog(adminEditSlots, "Plaza Editada correctamente.");
                     adminEditSlots.dispose();
                     AdminManagement adminManagement = new AdminManagement();
-                    new AdminManagementController(adminManagement);
+                    new AdminManagementController(adminManagement, adminMenuView);
                     adminManagement.setVisible(true);
                 } else {
                     adminEditSlots.setErrorMessage("Error al Editar la plaza.");
@@ -61,14 +63,14 @@ public class AdminEditSlotsController {
         private void openUserProfileView() {
         adminEditSlots.dispose();
         AdminProfileView adminProfileView = new AdminProfileView();
-        new AdminProfileController(adminProfileView);
+        new AdminProfileController(adminProfileView, adminMenuView);
         adminProfileView.setVisible(true);
     }
 
     private void returnToMenu() {
         adminEditSlots.dispose();
         AdminManagement adminManagement = new AdminManagement();
-        new AdminManagementController(adminManagement);
+        new AdminManagementController(adminManagement, adminMenuView);
         adminManagement.setVisible(true);
     }
 }

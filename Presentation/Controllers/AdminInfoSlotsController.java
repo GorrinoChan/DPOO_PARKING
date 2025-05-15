@@ -15,9 +15,11 @@ import Business.Entities.Account;
 
 public class AdminInfoSlotsController {
     private AdminInfoSlots adminInfoSlots;
+    private AdminMenuView adminMenuView;
 
-    public AdminInfoSlotsController(AdminInfoSlots adminInfoSlots) {
+    public AdminInfoSlotsController(AdminInfoSlots adminInfoSlots, AdminMenuView adminMenuView) {
         this.adminInfoSlots = adminInfoSlots;
+        this.adminMenuView = adminMenuView;
         adminInfoSlots.getReturnButton().addActionListener(e -> returnToMenu());
         adminInfoSlots.getCancelButton().addActionListener(e -> openCancelButton());
         adminInfoSlots.getUserProfileButton().addActionListener(e -> openUserProfileView());
@@ -90,7 +92,7 @@ public class AdminInfoSlotsController {
     private void openUserProfileView() {
         adminInfoSlots.dispose();
         AdminProfileView adminProfileView = new AdminProfileView();
-        new AdminProfileController(adminProfileView);
+        new AdminProfileController(adminProfileView,adminMenuView);
         adminProfileView.setVisible(true);
     }
 
@@ -112,7 +114,7 @@ public class AdminInfoSlotsController {
             accountManager.augmentInOneTheNumberOfCancellationsOfUserAccount(nombrebuscado);
             adminInfoSlots.dispose();
             AdminSlotAvaliableView adminSlotAvaliableView = new AdminSlotAvaliableView();
-            new AdminSlotAvaliableController(adminSlotAvaliableView);
+            new AdminSlotAvaliableController(adminSlotAvaliableView, adminMenuView);
             adminSlotAvaliableView.setVisible(true);
         }
     }
@@ -120,7 +122,7 @@ public class AdminInfoSlotsController {
     private void returnToMenu() {
         adminInfoSlots.dispose();
         AdminSlotAvaliableView adminSlotAvaliableView = new AdminSlotAvaliableView();
-        new AdminSlotAvaliableController(adminSlotAvaliableView);
+        new AdminSlotAvaliableController(adminSlotAvaliableView,adminMenuView);
         adminSlotAvaliableView.setVisible(true);
     }
 }

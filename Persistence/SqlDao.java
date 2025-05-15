@@ -34,13 +34,12 @@ public class SqlDao {
         return instance;
     }
 
-    public void connect() {
+    public void connect() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             this.connection = DriverManager.getConnection(url, username, password);
         }  catch (SQLException e) {
-            System.out.println("No funciona");
-            System.out.println(e);
+            throw new SQLException();
 
         } catch (ClassNotFoundException e) {
 

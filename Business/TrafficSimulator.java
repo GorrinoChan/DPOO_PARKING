@@ -25,9 +25,11 @@ public class TrafficSimulator implements Runnable{
     private volatile int i;
 
     public TrafficSimulator() throws FileNotFoundException {
+        this.i=0;
     }
 
     public void run (){
+        this.i = 1;
         //BUCLE INFINITO
         while(i == 1){
 
@@ -59,6 +61,7 @@ public class TrafficSimulator implements Runnable{
 
                 //HEMOS SUPERADO LA PROBABILIDAD METEMOS UN COCHE
                 if (probability < resultOfTheRandomNumber){
+                    System.out.println("Metemos coche");
                     //MIRAMOS SI HAY PLAZAS PARA METER COCHES
                     if(!allSlotsFree.isEmpty()){
                         //MIRAMOS LA PRIMERA PLAZA LIBRE Y GENERAMOS UN VEHICULO QUE CUMPLA LAS CONDICIONES
@@ -86,7 +89,9 @@ public class TrafficSimulator implements Runnable{
                     }
                 }
 
+                //SE TIENE QUE SACAR UN COCHE
                  if(probability > resultOfTheRandomNumber){
+                     System.out.println("Sacamos coche");
                     //MIRAMOS SI HAY COCHES QUE PODAMOS SACAR
                     System.out.println("🟢1");
                     if(!vehiclesSimulated.isEmpty()) {
@@ -95,9 +100,9 @@ public class TrafficSimulator implements Runnable{
                         System.out.println("🟢3");
                         List<Reservation> vehicleReservation = reservationDao.readSpecificReservationOfDb("userName", "SIMULATOR");
                         //MIRAMOS EL PRIMER VEHICULO DE ESTA LISTA
-                        List<Vehicle> vehicleSimulatedThatIsGoingToBeRemoved = vehicleDao.readSpecificVehicleOfDb("licencePlate", vehicleReservation.get(0).getLicencePlate());
                         System.out.println("🟢4");
                         if(!vehicleReservation.isEmpty()) {
+                            List<Vehicle> vehicleSimulatedThatIsGoingToBeRemoved = vehicleDao.readSpecificVehicleOfDb("licencePlate", vehicleReservation.get(0).getLicencePlate());
                             Reservation slotThatIsGoingToBeFree = vehicleReservation.get(0);
                             //CREAMOS EL SLOT LIBRE
                             System.out.println("🟢5");
@@ -128,5 +133,8 @@ public class TrafficSimulator implements Runnable{
 
     public void resumInteger(){
         this.i = 1;
+    }
+    public int getState(){
+        return this.i;
     }
 }

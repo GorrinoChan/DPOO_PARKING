@@ -4,6 +4,7 @@ import Presentation.Views.*;
 import Business.Managers.InitializationManager;
 
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
 public class LoadController {
     private LoadView loadView;
@@ -56,6 +57,10 @@ public class LoadController {
             loadView.setErrorMessage("No se pudo conectar a la base de datos: " + e.getMessage());
             verificacion = false;
 
+        } catch (SQLException e) {
+            System.out.println("Error 3");
+            loadView.setErrorMessage("No se pudo conectar a la base de datos: " + e.getMessage());
+            verificacion = false;
         }
         return verificacion;
     }

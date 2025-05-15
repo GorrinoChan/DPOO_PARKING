@@ -7,9 +7,11 @@ import Presentation.Views.AdminProfileView;
 
 public class AdminGraphController {
     private AdminGraphView admingraphView;
+    private AdminMenuView adminMenuView;
 
-    public AdminGraphController(AdminGraphView admingraphView) {
+    public AdminGraphController(AdminGraphView admingraphView, AdminMenuView adminMenuView) {
         this.admingraphView = admingraphView;
+        this.adminMenuView = adminMenuView;
         admingraphView.getReturnButton().addActionListener(e -> returnToMenu());
         admingraphView.getUserProfileButton().addActionListener(e -> openUserProfileView());
 
@@ -18,14 +20,13 @@ public class AdminGraphController {
     private void openUserProfileView() {
         admingraphView.dispose();
         AdminProfileView adminProfileView = new AdminProfileView();
-        new AdminProfileController(adminProfileView);
+        new AdminProfileController(adminProfileView, adminMenuView);
         adminProfileView.setVisible(true);
     }
 
     private void returnToMenu() {
         admingraphView.dispose();
-        AdminMenuView adminMenuView = new AdminMenuView();
-        new AdminMenuController(adminMenuView);
         adminMenuView.setVisible(true);
+
     }
 }

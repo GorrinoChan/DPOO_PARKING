@@ -11,9 +11,11 @@ import java.util.List;
 
 public class AdminSlotAvaliableController {
     private AdminSlotAvaliableView adminslotAvaliableView;
+    private AdminMenuView adminMenuView;
 
-    public AdminSlotAvaliableController(AdminSlotAvaliableView adminslotAvaliableView) {
+    public AdminSlotAvaliableController(AdminSlotAvaliableView adminslotAvaliableView, AdminMenuView adminMenuView) {
         this.adminslotAvaliableView = adminslotAvaliableView;
+        this.adminMenuView = adminMenuView;
         adminslotAvaliableView.getReturnButton().addActionListener(e -> returnToMenu());
         adminslotAvaliableView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         mostrarTablaParking();
@@ -62,6 +64,7 @@ public class AdminSlotAvaliableController {
                 };
                 model.addRow(fila);
             }
+
             JTable tabla = new JTable(model);
             this.adminslotAvaliableView.setSlotTable(tabla);
             JScrollPane scrollPane = new JScrollPane(tabla);
@@ -70,15 +73,14 @@ public class AdminSlotAvaliableController {
             adminslotAvaliableView.revalidate();
             adminslotAvaliableView.repaint();
 
-
             tabla.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     if (evt.getClickCount() == 1) {
-                        int selectedRow = tabla.getSelectedRow();  // Obtenemos la fila seleccionada
-                        adminslotAvaliableView.dispose();  // Cerramos la vista actual
-                        AdminInfoSlots infoView = new AdminInfoSlots(selectedRow);  // Pasamos la posición
-                        new AdminInfoSlotsController(infoView);  // Iniciamos el controlador de InfoSlots
-                        infoView.setVisible(true);  // Hacemos visible la nueva vista
+                        int selectedRow = tabla.getSelectedRow();
+                        adminslotAvaliableView.dispose();
+                        AdminInfoSlots infoView = new AdminInfoSlots(selectedRow);
+                        new AdminInfoSlotsController(infoView,adminMenuView);
+                        infoView.setVisible(true);
                     }
                 }
             });
@@ -92,15 +94,12 @@ public class AdminSlotAvaliableController {
     private void openUserProfileView() {
         adminslotAvaliableView.dispose();
         AdminProfileView adminProfileView = new AdminProfileView();
-        new AdminProfileController(adminProfileView);
+        new AdminProfileController(adminProfileView, adminMenuView);
         adminProfileView.setVisible(true);
     }
 
-
     private void returnToMenu() {
         adminslotAvaliableView.dispose();
-        AdminMenuView adminMenuView = new AdminMenuView();
-        new AdminMenuController(adminMenuView);
         adminMenuView.setVisible(true);
     }
 }

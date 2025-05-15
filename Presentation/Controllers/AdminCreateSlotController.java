@@ -8,9 +8,11 @@ import javax.swing.*;
 
 public class AdminCreateSlotController {
     private AdminCreateSlot adminCreateSlot;
+    private AdminMenuView adminMenuView;
 
-    public AdminCreateSlotController(AdminCreateSlot adminCreateSlot) {
+    public AdminCreateSlotController(AdminCreateSlot adminCreateSlot, AdminMenuView adminMenuView) {
         this.adminCreateSlot = adminCreateSlot;
+        this.adminMenuView = adminMenuView;
         adminCreateSlot.getReturnButton().addActionListener(e -> returnToMenu());
         adminCreateSlot.getCreateButton().addActionListener(e -> createSlot());
         adminCreateSlot.getUserProfileButton().addActionListener(e -> openUserProfileView());
@@ -41,7 +43,7 @@ public class AdminCreateSlotController {
                     JOptionPane.showMessageDialog(adminCreateSlot, "Plaza creada correctamente.");
                     adminCreateSlot.dispose();
                     AdminManagement adminManagement = new AdminManagement();
-                    new AdminManagementController(adminManagement);
+                    new AdminManagementController(adminManagement, adminMenuView);
                     adminManagement.setVisible(true);
                 } else {
                     adminCreateSlot.setErrorMessage("Error al crear la plaza.");
@@ -55,7 +57,7 @@ public class AdminCreateSlotController {
     private void openUserProfileView() {
         adminCreateSlot.dispose();
         AdminProfileView adminProfileView = new AdminProfileView();
-        new AdminProfileController(adminProfileView);
+        new AdminProfileController(adminProfileView, adminMenuView);
         adminProfileView.setVisible(true);
     }
 
@@ -63,7 +65,7 @@ public class AdminCreateSlotController {
     private void returnToMenu() {
         adminCreateSlot.dispose();
         AdminManagement adminManagement = new AdminManagement();
-        new AdminManagementController(adminManagement);
+        new AdminManagementController(adminManagement, adminMenuView);
         adminManagement.setVisible(true);
     }
 }

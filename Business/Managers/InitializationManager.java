@@ -39,7 +39,7 @@ public class InitializationManager {
         this.configuration = this.sqlConfigurationDao.readJson();
     }
 
-    public void tryToConnectToDb() throws FileNotFoundException {
+    public void tryToConnectToDb() throws FileNotFoundException, SQLException {
         this.sqlDao = new SqlDao(this.sqlConfigurationDao);
         this.sqlDao.connect();
     }

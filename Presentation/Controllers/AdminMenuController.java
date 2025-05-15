@@ -24,47 +24,57 @@ public class AdminMenuController {
 
     private void playPauseTraficSim() {
         running = !running;
+
         if (running) {
-            try {
-                simulator = new TrafficSimulator();
-                simulator.resumInteger();
-                simulatorThread = new Thread(simulator, "TrafficSimulator");
-                simulatorThread.start();
-            } catch (FileNotFoundException ex) {
-                System.out.println("Error al ejecutarse");
+            if (simulator == null || simulatorThread == null || !simulatorThread.isAlive()) {
+                try {
+                    simulator = new TrafficSimulator();
+                    simulator.resumInteger();
+                    simulatorThread = new Thread(simulator, "TrafficSimulator");
+                    simulatorThread.start();
+                } catch (FileNotFoundException ex) {
+                    System.out.println("Error al iniciar simulación");
+                }
+            } else {
+                simulator.resumInteger(); // ya existe, solo la resumimos
             }
+
             adminMenuView.getPlayPauseButton().setText("Stop");
+
         } else {
-            simulator.stopInteger();
+            if (simulator != null) {
+                simulator.stopInteger(); // detenemos sin eliminar
+            }
+
             adminMenuView.getPlayPauseButton().setText("Play");
         }
     }
 
     private void openUserProfileView() {
-        adminMenuView.dispose();
+        adminMenuView.setVisible(false);
         AdminProfileView adminProfileView = new AdminProfileView();
-        new AdminProfileController(adminProfileView);
+        new AdminProfileController(adminProfileView, adminMenuView);
         adminProfileView.setVisible(true);
     }
 
     private void openManagementView() {
-        adminMenuView.dispose();
+        adminMenuView.setVisible(false);
         AdminManagement adminManagement = new AdminManagement();
-        new AdminManagementController(adminManagement);
+        new AdminManagementController(adminManagement, adminMenuView);
         adminManagement.setVisible(true);
     }
 
     private void openSlotAvaliableView() {
-        adminMenuView.dispose();
+        adminMenuView.setVisible(false);
         AdminSlotAvaliableView adminslotAvaliableView = new AdminSlotAvaliableView();
-        new AdminSlotAvaliableController(adminslotAvaliableView);
+        new AdminSlotAvaliableController(adminslotAvaliableView, adminMenuView);
         adminslotAvaliableView.setVisible(true);
     }
 
     private void openGraphView() {
-        adminMenuView.dispose();
+        adminMenuView.setVisible(false);
         AdminGraphView admingraphView = new AdminGraphView();
-        new AdminGraphController(admingraphView);
+        new AdminGraphController(admingraphView,adminMenuView );
         admingraphView.setVisible(true);
     }
 }

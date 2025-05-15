@@ -6,9 +6,11 @@ import Presentation.Views.LogOutView;
 
 public class AdminProfileController {
     private AdminProfileView adminProfileView;
+    private AdminMenuView adminMenuView;
 
-    public AdminProfileController(AdminProfileView adminProfileView) {
+    public AdminProfileController(AdminProfileView adminProfileView, AdminMenuView adminMenuView) {
         this.adminProfileView = adminProfileView;
+        this.adminMenuView = adminMenuView;
 
         adminProfileView.getLogOutButton().addActionListener(e -> openLogOutView());
         adminProfileView.getReturnButton().addActionListener(e -> returnToPreviousView());
@@ -23,8 +25,7 @@ public class AdminProfileController {
 
     private void returnToPreviousView() {
         adminProfileView.dispose();
-        AdminMenuView adminMenuView = new AdminMenuView();
-        new AdminMenuController(adminMenuView);
         adminMenuView.setVisible(true);
+
     }
 }

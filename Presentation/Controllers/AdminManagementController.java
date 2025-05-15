@@ -5,9 +5,11 @@ import Presentation.Views.*;
 
 public class AdminManagementController {
     private AdminManagement adminManagement;
+    private AdminMenuView adminMenuView;
 
-    public AdminManagementController(AdminManagement adminManagement) {
+    public AdminManagementController(AdminManagement adminManagement, AdminMenuView adminMenuView) {
         this.adminManagement = adminManagement;
+        this.adminMenuView = adminMenuView;
 
         adminManagement.getcreate().addActionListener(e -> openAdminCreate());
         adminManagement.getEdit().addActionListener(e -> openAdminEdit());
@@ -20,35 +22,34 @@ public class AdminManagementController {
     private void openUserProfileView() {
         adminManagement.dispose();
         AdminProfileView adminProfileView = new AdminProfileView();
-        new AdminProfileController(adminProfileView);
+        new AdminProfileController(adminProfileView, adminMenuView);
         adminProfileView.setVisible(true);
     }
 
     private void openAdminCreate() {
         adminManagement.dispose();
         AdminCreateSlot adminCreateSlot = new AdminCreateSlot();
-        new AdminCreateSlotController(adminCreateSlot);
+        new AdminCreateSlotController(adminCreateSlot,adminMenuView);
         adminCreateSlot.setVisible(true);
     }
 
     private void openAdminEdit() {
         adminManagement.dispose();
         AdminEditSlots adminEditSlots = new AdminEditSlots();
-        new AdminEditSlotsController(adminEditSlots);
+        new AdminEditSlotsController(adminEditSlots,adminMenuView);
         adminEditSlots.setVisible(true);
     }
 
     private void openAdminDelete() {
         adminManagement.dispose();
         AdminDeleteSlots adminDeleteSlots = new AdminDeleteSlots();
-        new AdminDeleteSlotsController(adminDeleteSlots);
+        new AdminDeleteSlotsController(adminDeleteSlots,adminMenuView);
         adminDeleteSlots.setVisible(true);
     }
 
     private void returnToMenu() {
         adminManagement.dispose();
-        AdminMenuView adminMenuView = new AdminMenuView();
-        new AdminMenuController(adminMenuView);
         adminMenuView.setVisible(true);
+
     }
 }

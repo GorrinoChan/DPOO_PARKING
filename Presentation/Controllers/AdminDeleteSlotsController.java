@@ -14,9 +14,11 @@ import java.util.List;
 
 public class AdminDeleteSlotsController {
     private AdminDeleteSlots adminDeleteSlots;
+    private AdminMenuView adminMenuView;
 
-    public AdminDeleteSlotsController(AdminDeleteSlots adminDeleteSlots) {
+    public AdminDeleteSlotsController(AdminDeleteSlots adminDeleteSlots, AdminMenuView adminMenuView) {
         this.adminDeleteSlots = adminDeleteSlots;
+        this.adminMenuView = adminMenuView;
         adminDeleteSlots.getReturnButton().addActionListener(e -> returnToMenu());
         adminDeleteSlots.getDeleteButton().addActionListener(e -> handleDeleteSlot());
         adminDeleteSlots.getUserProfileButton().addActionListener(e -> openUserProfileView());
@@ -52,7 +54,7 @@ public class AdminDeleteSlotsController {
                     JOptionPane.showMessageDialog(adminDeleteSlots, "Plaza eliminada correctamente.");
                     adminDeleteSlots.dispose();
                     AdminManagement adminManagement = new AdminManagement();
-                    new AdminManagementController(adminManagement);
+                    new AdminManagementController(adminManagement, adminMenuView);
                     adminManagement.setVisible(true);
                 }
                 else{
@@ -74,7 +76,7 @@ public class AdminDeleteSlotsController {
                         JOptionPane.showMessageDialog(adminDeleteSlots, "Plaza eliminada correctamente.");
                         adminDeleteSlots.dispose();
                         AdminManagement adminManagement = new AdminManagement();
-                        new AdminManagementController(adminManagement);
+                        new AdminManagementController(adminManagement, adminMenuView);
                         adminManagement.setVisible(true);
                     }
                     else{
@@ -101,7 +103,7 @@ public class AdminDeleteSlotsController {
                         JOptionPane.showMessageDialog(adminDeleteSlots, "Plaza eliminada correctamente.");
                         adminDeleteSlots.dispose();
                         AdminManagement adminManagement = new AdminManagement();
-                        new AdminManagementController(adminManagement);
+                        new AdminManagementController(adminManagement, adminMenuView);
                         adminManagement.setVisible(true);
                     } else if (reservationDeleted) {
                         adminDeleteSlots.setErrorMessage("Error al Eliminar la plaza.");
@@ -120,14 +122,14 @@ public class AdminDeleteSlotsController {
     private void openUserProfileView() {
         adminDeleteSlots.dispose();
         AdminProfileView adminProfileView = new AdminProfileView();
-        new AdminProfileController(adminProfileView);
+        new AdminProfileController(adminProfileView, adminMenuView);
         adminProfileView.setVisible(true);
     }
 
     private void returnToMenu() {
         adminDeleteSlots.dispose();
         AdminManagement adminManagement = new AdminManagement();
-        new AdminManagementController(adminManagement);
+        new AdminManagementController(adminManagement, adminMenuView);
         adminManagement.setVisible(true);
     }
 }
