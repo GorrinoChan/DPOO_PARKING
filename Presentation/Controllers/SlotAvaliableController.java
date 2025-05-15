@@ -20,6 +20,7 @@ public class SlotAvaliableController {
         slotAvaliableView.getCarButton().addActionListener(e -> updateTable("Car"));
         slotAvaliableView.getLargeCarButton().addActionListener(e -> updateTable("Large Car"));
         slotAvaliableView.getMotorcycleButton().addActionListener(e -> updateTable("Motorcycle"));
+        updateTable("Car");
     }
 
     private void openUserProfileView() {

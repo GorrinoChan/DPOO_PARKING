@@ -35,6 +35,10 @@ public class ReserveSlotView extends JFrame {
         return typeVehicleTextField.getText();
     }
 
+    public JTable getSlotsAvaliableTable() {
+        return slotsAvaliableTable;
+    }
+
     public void setErrorMessage(String message) {
         errorLabel.setText(message);
     }
@@ -78,7 +82,7 @@ public class ReserveSlotView extends JFrame {
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 3;
         gbc.insets = new Insets(4, 0, 4, 0);
         panel.add(titleLabel, gbc);
 
@@ -86,7 +90,7 @@ public class ReserveSlotView extends JFrame {
         subTitleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         gbc.gridx = 1;
         gbc.gridy = 1;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 3;
         panel.add(subTitleLabel, gbc);
 
         plateLabel = new JLabel("Matrícula");
@@ -109,13 +113,14 @@ public class ReserveSlotView extends JFrame {
         gbc.gridy = 5;
         panel.add(typeVehicleTextField, gbc);
 
+        tableModel= new DefaultTableModel(new String[]{"Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);
         slotsAvaliableTable = new JTable(tableModel);
+        JScrollPane scrollPane = new JScrollPane(slotsAvaliableTable);
+        scrollPane.setPreferredSize(new Dimension(400, 150));
         gbc.gridx = 1;
         gbc.gridy = 6;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 3;
         panel.add(slotsAvaliableTable, gbc);
-        slotsAvaliableTable.setFillsViewportHeight(true);
-        JScrollPane scrollPane = new JScrollPane(slotsAvaliableTable);
         panel.add(scrollPane, gbc);
 
         errorLabel = new JLabel("", SwingConstants.CENTER);

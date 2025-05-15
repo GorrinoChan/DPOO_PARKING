@@ -9,6 +9,7 @@ public class SlotControlController {
         slotControlView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         slotControlView.getReserveSlotButton().addActionListener(e -> openReserveSlotView());
         slotControlView.getRemoveReservationButton().addActionListener(e-> openRemoveReservationView());
+        slotControlView.getReservationsButton().addActionListener(e -> openSlotReservationsView());
     }
 
     private void openUserProfileView() {
@@ -37,5 +38,12 @@ public class SlotControlController {
         RemoveReservationView removeReservationView = new RemoveReservationView();
         new RemoveReservationController(removeReservationView);
         removeReservationView.setVisible(true);
+    }
+
+    private void openSlotReservationsView() {
+        slotControlView.dispose();
+        SlotReservationsView slotReservationsView = new SlotReservationsView();
+        new SlotReservationsController(slotReservationsView);
+        slotReservationsView.setVisible(true);
     }
 }

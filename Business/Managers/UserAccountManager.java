@@ -15,7 +15,7 @@ public class UserAccountManager {
 
     AccountDao accountDao;
     VehicleDao vehicleDao;
-    String userName;
+    private static String userName;
 
     public UserAccountManager() {
         this.accountDao = new AccountDao();

@@ -18,6 +18,8 @@ public class LogOutController {
     }
 
     private void logOut() {
+        UserAccountManager userAccountManager = new UserAccountManager();
+        userAccountManager.deleteUserName();
         JOptionPane.showMessageDialog(logOutView, "Sesión cerrada correctamente.");
         logOutView.dispose();
         StartView startView = new StartView();

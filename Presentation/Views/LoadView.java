@@ -12,7 +12,7 @@ public class LoadView extends JFrame {
     }
 
     public LoadView() {
-        setTitle("Parking LS - Start");
+        setTitle("Parking LS - Load");
         setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

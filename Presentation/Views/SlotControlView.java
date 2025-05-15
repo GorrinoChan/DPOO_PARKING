@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SlotControlView extends JFrame {
-    private JButton returnButton, userProfileButton, reserveSlotButton, removeReservationButton;
+    private JButton returnButton, userProfileButton, reserveSlotButton, removeReservationButton, reservationsButton;
     private JLabel titleLabel, subTitleLabel;
 
     public JButton getReturnButton() {
@@ -23,8 +23,10 @@ public class SlotControlView extends JFrame {
         return removeReservationButton;
     }
 
+    public JButton getReservationsButton() { return reservationsButton; }
+
     public SlotControlView() {
-        setTitle("Parking LS - Presentation.Views.SlotControlView");
+        setTitle("Parking LS - SlotControl");
         setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -85,9 +87,15 @@ public class SlotControlView extends JFrame {
         gbc.gridwidth = 1;
         panel.add(reserveSlotButton, gbc);
 
-        removeReservationButton = new JButton("Retirar Reserva");
+        reservationsButton = new JButton("Ver reservas");
         gbc.gridx = 1;
         gbc.gridy = 5;
+        gbc.gridwidth = 1;
+        panel.add(reservationsButton, gbc);
+
+        removeReservationButton = new JButton("Retirar Reserva");
+        gbc.gridx = 1;
+        gbc.gridy = 6;
         gbc.gridwidth = 1;
         panel.add(removeReservationButton, gbc);
 

@@ -1,35 +1,31 @@
 package Presentation.Views;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class CheckPlateInParkingView extends JFrame {
-    private JButton returnButton, userProfileButton, confirmButton;
-    private JLabel titleLabel, plateLabel, errorLabel, subTitleLabel;
-    private JTextField plateTextField;
+public class SlotReservationsView extends JFrame {
+    private JButton returnButton, userProfileButton, carButton, largeCarButton, motorcycleButton;
+    private JLabel titleLabel, subTitleLabel;
+    private JTable reservationsTable;
+    private DefaultTableModel tableModel;
 
     public JButton getUserProfileButton() {
         return userProfileButton;
-    }
-
-    public JButton getConfirmButton() {
-        return confirmButton;
     }
 
     public JButton getReturnButton() {
         return returnButton;
     }
 
-    public void setErrorMessage(String message) {
-        errorLabel.setText(message);
-    }
+    public JButton getCarButton() { return carButton; }
 
-    public String getPlate() {
-        return plateTextField.getText();
-    }
+    public JButton getLargeCarButton() { return largeCarButton; }
 
-    public CheckPlateInParkingView() {
-        setTitle("Parking LS - CheckPlateInParking");
+    public JButton getMotorcycleButton() { return motorcycleButton; }
+
+    public SlotReservationsView() {
+        setTitle("Parking LS - SlotReservations");
         setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -64,50 +60,40 @@ public class CheckPlateInParkingView extends JFrame {
         gbc.insets = new Insets(4, 0, 4, 0);
         panel.add(titleLabel, gbc);
 
-        subTitleLabel = new JLabel("Salir del Parking", SwingConstants.CENTER);
+        subTitleLabel = new JLabel("Reservas", SwingConstants.CENTER);
         subTitleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 2;
         panel.add(subTitleLabel, gbc);
 
-        plateLabel = new JLabel("Matrícula");
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        carButton = new JButton("Coches");
+        largeCarButton = new JButton("Vehículos Grandes");
+        motorcycleButton = new JButton("Motos");
+
+        buttonPanel.add(carButton);
+        buttonPanel.add(largeCarButton);
+        buttonPanel.add(motorcycleButton);
+
         gbc.gridx = 1;
         gbc.gridy = 2;
-        panel.add(plateLabel, gbc);
+        gbc.gridwidth = 3;
+        panel.add(buttonPanel, gbc);
 
-        plateTextField = new JTextField(20);
+        reservationsTable = new JTable(tableModel);
         gbc.gridx = 1;
         gbc.gridy = 3;
-        panel.add(plateTextField, gbc);
-
-        titleLabel = new JLabel(" ", SwingConstants.CENTER);
-        gbc.gridx = 1;
-        gbc.gridy = 4;
-        panel.add(titleLabel, gbc);
-
-        titleLabel = new JLabel(" ", SwingConstants.CENTER);
-        gbc.gridx = 1;
-        gbc.gridy = 5;
-        panel.add(titleLabel, gbc);
-
-        titleLabel = new JLabel(" ", SwingConstants.CENTER);
-        gbc.gridx = 1;
-        gbc.gridy = 6;
-        panel.add(titleLabel, gbc);
-
-        errorLabel = new JLabel("", SwingConstants.CENTER);
-        errorLabel.setForeground(Color.RED);
-        gbc.gridx = 1;
-        gbc.gridy = 7;
-        panel.add(errorLabel, gbc);
-
-        confirmButton = new JButton("Confirmar");
-        gbc.gridx = 1;
-        gbc.gridy = 8;
-        panel.add(confirmButton, gbc);
+        gbc.gridwidth = 2;
+        panel.add(reservationsTable, gbc);
+        reservationsTable.setFillsViewportHeight(true);
+        JScrollPane scrollPane = new JScrollPane(reservationsTable);
+        panel.add(scrollPane, gbc);
 
         c.add(panel, BorderLayout.CENTER);
     }
 
+    public void updateReservationsTable(DefaultTableModel model) {
+        reservationsTable.setModel(model);
+    }
 }

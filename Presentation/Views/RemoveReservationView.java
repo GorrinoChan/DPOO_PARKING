@@ -32,7 +32,7 @@ public class RemoveReservationView extends JFrame {
     }
 
     public RemoveReservationView() {
-        setTitle("Parking LS - RemoveReservationView");
+        setTitle("Parking LS - RemoveReservation");
         setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -105,6 +105,9 @@ public class RemoveReservationView extends JFrame {
         panel.add(removeReservationButton, gbc);
 
         c.add(panel, BorderLayout.CENTER);
+    }
+    public void updateReservationsTable(DefaultTableModel model) {
+        reservationTable.setModel(model);
     }
 
 }
