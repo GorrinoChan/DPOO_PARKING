@@ -80,6 +80,7 @@ public class AdminSlotAvaliableController {
                         adminslotAvaliableView.dispose();
                         AdminInfoSlots infoView = new AdminInfoSlots(selectedRow);
                         new AdminInfoSlotsController(infoView,adminMenuView);
+
                         infoView.setVisible(true);
                     }
                 }
