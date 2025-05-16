@@ -2,10 +2,12 @@ package Presentation.Views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GraphView extends JFrame {
     private JButton returnButton, userProfileButton;
     private JLabel titleLabel;
+    private GraphPanel graphPanel = new GraphPanel();
 
     public JButton getReturnButton() {
         return returnButton;
@@ -50,9 +52,70 @@ public class GraphView extends JFrame {
         gbc.gridy = 0;
         gbc.gridwidth = 3;
         panel.add(titleLabel, gbc);
-
-
         c.add(panel, BorderLayout.CENTER);
+
+        graphPanel.setPreferredSize(new Dimension(600, 400));
+        c.add(graphPanel, BorderLayout.CENTER);
+
     }
+    public void refreshGraph() {
+        graphPanel.repaint();
+    }
+
+
+    public void updateData(ArrayList<Integer> data){
+        graphPanel.setData(data);
+    }
+
+    private class GraphPanel extends JPanel {
+        private final int MAX_VEHICLES = 50;
+        private ArrayList<Integer> data = new ArrayList<>();
+        private static final int BAR_WIDTH = 5;
+        private static final int PADDING = 100;
+
+
+        @Override
+        protected void paintComponent(Graphics g){
+            super.paintComponent(g);
+            if(data != null) {
+                drawBarGraph(g);
+            }
+        }
+        public void setData(ArrayList<Integer> data){
+            this.data = data;
+        }
+
+        public void drawBarGraph(Graphics g) {
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+            int width = getWidth();
+            int height = getHeight();
+            int graphHeight = height - 2 * PADDING;
+            int graphWidth = width - 2 * PADDING;
+
+            g2.setColor(Color.BLACK);
+            g2.drawLine(PADDING, height - PADDING, width - PADDING, height - PADDING); // X-axis
+            g2.drawLine(PADDING, PADDING, PADDING, height - PADDING);
+
+
+            for (int i = 0; i < data.size(); i++) {
+                int x = PADDING + i * BAR_WIDTH;
+                int barHeight = (int) ((double) data.get(i) / MAX_VEHICLES * graphHeight);
+                int y = height - PADDING - barHeight;
+
+                g2.setColor(Color.BLUE);
+                g2.fillRect(x, y, BAR_WIDTH, barHeight); // Bar
+                // Draw labels
+                //g2.setColor(Color.BLACK);
+                //char chars = (char) i;
+                //char[] chars2 = new char[chars];
+                //g2.drawChars(chars2, 0, 1, x + 10, y);
+                //chars2[0] = '\0';
+            }
+        }
+    }
+
+
 
 }
