@@ -1,4 +1,5 @@
 package Presentation.Controllers;
+
 import Business.Entities.Vehicle;
 import Business.Managers.AdminSlotManager;
 import Business.Managers.UserSlotManager;
@@ -12,11 +13,21 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import Business.Entities.Account;
 
-
+/**
+ * Controlador que se encarga de mostrar los detalles de una plaza seleccionada desde la vista de administrador.
+ * <p>
+ * También permite al administrador cancelar la reserva asociada a esa plaza y ver el perfil del usuario, si existe.
+ */
 public class AdminInfoSlotsController {
     private AdminInfoSlots adminInfoSlots;
     private AdminMenuView adminMenuView;
 
+    /**
+     * Constructor que configura los botones de la vista y carga los detalles de la plaza seleccionada.
+     *
+     * @param adminInfoSlots Vista con la información de las plazas.
+     * @param adminMenuView Vista del menú del administrador.
+     */
     public AdminInfoSlotsController(AdminInfoSlots adminInfoSlots, AdminMenuView adminMenuView) {
         this.adminInfoSlots = adminInfoSlots;
         this.adminMenuView = adminMenuView;
@@ -27,8 +38,14 @@ public class AdminInfoSlotsController {
         cargarDetallesPlaza(selectedRow);
     }
 
+    /**
+     * Carga todos los detalles de la plaza seleccionada y los muestra en una tabla.
+     * Se incluye información del usuario si la plaza está ocupada.
+     *
+     * @param selectedRow Fila seleccionada que representa la plaza a mostrar.
+     */
     private void cargarDetallesPlaza(int selectedRow) {
-        String[] columnas = {"Numero", "Planta", "Tipo Vehículo", "Nombre","Correo","Contrseña","Reservas","Vehiculos"};
+        String[] columnas = {"Numero", "Planta", "Tipo Vehículo", "Nombre", "Correo", "Contraseña", "Reservas", "Vehículos"};
         DefaultTableModel model = new DefaultTableModel(columnas, 0);
         try {
             AdminSlotManager adminSlotManager = new AdminSlotManager();
@@ -42,14 +59,14 @@ public class AdminInfoSlotsController {
             String tipoVehiculo = partes[3];
             String ocupacionStr = partes[4];
             String nombrebuscado = partes[5];
+
             String email = "-";
             String password = "-";
             int numeroReservas = 0;
-            int cantidadVehiculos=0;
+            int cantidadVehiculos = 0;
+
             UserAccountManager accountManager = new UserAccountManager();
-            if(nombrebuscado.equals("FREE")){
-                nombrebuscado = "-";
-            } else{
+            if (!nombrebuscado.equals("FREE")) {
                 List<Account> cuentas = accountManager.getAllAccountsInDb();
                 for (Account cuenta : cuentas) {
                     if (cuenta.getNameOfTheAccount().equalsIgnoreCase(nombrebuscado)) {
@@ -61,8 +78,10 @@ public class AdminInfoSlotsController {
                 }
                 List<Vehicle> vehiculos = accountManager.getAllUserVehicles(nombrebuscado);
                 cantidadVehiculos = vehiculos.size();
-
+            } else {
+                nombrebuscado = "-";
             }
+
             Object[] fila = {
                     numero,
                     planta,
@@ -73,7 +92,6 @@ public class AdminInfoSlotsController {
                     numeroReservas,
                     cantidadVehiculos,
             };
-
 
             model.addRow(fila);
             JTable tabla = new JTable(model);
@@ -89,13 +107,20 @@ public class AdminInfoSlotsController {
         }
     }
 
+    /**
+     * Muestra la vista del perfil del administrador.
+     */
     private void openUserProfileView() {
         adminInfoSlots.dispose();
         AdminProfileView adminProfileView = new AdminProfileView();
-        new AdminProfileController(adminProfileView,adminMenuView);
+        new AdminProfileController(adminProfileView, adminMenuView);
         adminProfileView.setVisible(true);
     }
 
+    /**
+     * Cancela la reserva de la plaza seleccionada si está ocupada.
+     * También actualiza los datos del usuario en base a la cancelación.
+     */
     private void openCancelButton() {
         UserSlotManager userSlotManager = new UserSlotManager();
         int slot = adminInfoSlots.getSelectedRow();
@@ -107,6 +132,7 @@ public class AdminInfoSlotsController {
         String number = partes[1];
         String matricula = partes[2];
         int numero = Integer.parseInt(number);
+
         if (!matricula.equals("FREE")) {
             userSlotManager.deleteAReservation(numero);
             UserAccountManager accountManager = new UserAccountManager();
@@ -119,10 +145,13 @@ public class AdminInfoSlotsController {
         }
     }
 
+    /**
+     * Vuelve a la vista de plazas disponibles.
+     */
     private void returnToMenu() {
         adminInfoSlots.dispose();
         AdminSlotAvaliableView adminSlotAvaliableView = new AdminSlotAvaliableView();
-        new AdminSlotAvaliableController(adminSlotAvaliableView,adminMenuView);
+        new AdminSlotAvaliableController(adminSlotAvaliableView, adminMenuView);
         adminSlotAvaliableView.setVisible(true);
     }
 }
