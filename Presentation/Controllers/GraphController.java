@@ -36,8 +36,8 @@ public class GraphController {
         Timer timer = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if (bars.size() == 60) {
-                        for(int i = 0; i < 60; i++) {
+                    if (bars.size() == 40) {
+                        for(int i = 0; i < 40; i++) {
                             bars.remove(i);
                         }
                     }
