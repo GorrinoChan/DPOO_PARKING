@@ -68,7 +68,7 @@ public class GraphView extends JFrame {
     }
 
     private class GraphPanel extends JPanel {
-        private final int MAX_VEHICLES = 50;
+        private final int MAX_VEHICLES = 30;
         private ArrayList<Integer> data = new ArrayList<>();
         private static final int BAR_WIDTH = 5;
         private static final int PADDING = 50;
@@ -101,7 +101,9 @@ public class GraphView extends JFrame {
 
             for (int i = 0; i < data.size(); i++) {
                 int x = PADDING + i * BAR_WIDTH;
-                int barHeight = (int) ((double) data.get(i) / MAX_VEHICLES * graphHeight);
+
+                //int barHeight = (int) ((double) data.get(i) / MAX_VEHICLES * graphHeight);
+                int barHeight = data.get(i) * 10;
                 int y = height - PADDING - barHeight;
 
                 g2.setColor(Color.BLUE);

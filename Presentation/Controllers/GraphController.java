@@ -37,7 +37,9 @@ public class GraphController {
             public void actionPerformed(ActionEvent e) {
                 try {
                     if (bars.size() == 60) {
-                        bars.remove(bars.size() - 1);
+                        for(int i = 0; i < 60; i++) {
+                            bars.remove(i);
+                        }
                     }
                     int size = userSlot.readAllSlot().size();
                     bars.add(size);
