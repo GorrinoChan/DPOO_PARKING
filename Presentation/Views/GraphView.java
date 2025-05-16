@@ -54,8 +54,8 @@ public class GraphView extends JFrame {
         panel.add(titleLabel, gbc);
         c.add(panel, BorderLayout.CENTER);
 
-        graphPanel.setPreferredSize(new Dimension(600, 400));
-        c.add(graphPanel, BorderLayout.CENTER);
+        graphPanel.setPreferredSize(new Dimension(400, 300));
+        c.add(graphPanel, BorderLayout.PAGE_END);
 
     }
     public void refreshGraph() {
@@ -71,7 +71,7 @@ public class GraphView extends JFrame {
         private final int MAX_VEHICLES = 50;
         private ArrayList<Integer> data = new ArrayList<>();
         private static final int BAR_WIDTH = 5;
-        private static final int PADDING = 100;
+        private static final int PADDING = 50;
 
 
         @Override
@@ -89,8 +89,8 @@ public class GraphView extends JFrame {
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-            int width = getWidth();
-            int height = getHeight();
+            int width = 400;
+            int height = 300;
             int graphHeight = height - 2 * PADDING;
             int graphWidth = width - 2 * PADDING;
 
