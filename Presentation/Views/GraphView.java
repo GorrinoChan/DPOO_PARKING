@@ -67,12 +67,17 @@ public class GraphView extends JFrame {
         graphPanel.setData(data);
     }
 
+    /*************************
+     * Clase privada, para hacer cambios en la clase JPanel ya que no se permite librerias externas.
+     * El atributo data, se obtiene desde fuera y equivale a las barras del grafico
+     * BAR_WIDTH y PADDING son constantes que se requieren para no colocar el grafico en alguna esquina o
+     * tocando el limite del JFrame
+    * **********************/
     private class GraphPanel extends JPanel {
-        private final int MAX_VEHICLES = 30;
         private ArrayList<Integer> data = new ArrayList<>();
         private static final int BAR_WIDTH = 5;
         private static final int PADDING = 50;
-
+        private static final int MAX_SIZE = 100;
 
         @Override
         protected void paintComponent(Graphics g){
@@ -97,23 +102,22 @@ public class GraphView extends JFrame {
             g2.setColor(Color.BLACK);
             g2.drawLine(PADDING, height - PADDING, width - PADDING, height - PADDING); // X-axis
             g2.drawLine(PADDING, PADDING, PADDING, height - PADDING);
-
-
+            /* //Esto es para hacer los numeros de abajo, por ahora no se como.
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i <= data.size(); i++) {
+                sb.append(i);
+            }
+            String str = sb.toString();
+            g2.drawString(str, PADDING, height - PADDING + 10);
+             */
             for (int i = 0; i < data.size(); i++) {
                 int x = PADDING + i * BAR_WIDTH;
 
-                //int barHeight = (int) ((double) data.get(i) / MAX_VEHICLES * graphHeight);
                 int barHeight = data.get(i) * 10;
                 int y = height - PADDING - barHeight;
 
                 g2.setColor(Color.BLUE);
                 g2.fillRect(x, y, BAR_WIDTH, barHeight); // Bar
-                // Draw labels
-                //g2.setColor(Color.BLACK);
-                //char chars = (char) i;
-                //char[] chars2 = new char[chars];
-                //g2.drawChars(chars2, 0, 1, x + 10, y);
-                //chars2[0] = '\0';
             }
         }
     }

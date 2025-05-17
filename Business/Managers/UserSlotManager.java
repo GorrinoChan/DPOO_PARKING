@@ -102,6 +102,19 @@ public class UserSlotManager {
         return info;
     }
 
+    public List<Reservation> readAllReservation () throws SQLException {
+        List<Reservation> allReservationInDB;
+        try{
+            allReservationInDB = this.reservedParkingSlotsDao.readAllReservationContentInDb();
+        }catch (SQLException e) {
+            throw new SQLException(e);
+        }catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return allReservationInDB;
+    }
+
+
 
     public List<Slot> readAllSlot () throws SQLException {
         List<Slot> allFreeSlotsInDB;
