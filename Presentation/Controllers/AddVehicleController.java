@@ -36,7 +36,7 @@ public class AddVehicleController {
         UserAccountManager userAccountManager = new UserAccountManager();
         String userName = userAccountManager.getUserName();
 
-        if (type == "Car" || type == "Large Car" || type == "Motorcycle") {
+        if (type.equals("Car") || type.equals("Large Car") || type.equals("Motorcycle")) {
             addVehicleView.setErrorMessage("");
             if (userAccountManager.addAVehicleToUserAccount(plate, userName, type)){
                 JOptionPane.showMessageDialog(null, "Vehículo Registrado Correctamente.");
