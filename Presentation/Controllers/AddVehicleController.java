@@ -36,13 +36,18 @@ public class AddVehicleController {
         UserAccountManager userAccountManager = new UserAccountManager();
         String userName = userAccountManager.getUserName();
 
-        addVehicleView.setErrorMessage("");
-        if (userAccountManager.addAVehicleToUserAccount(plate, userName, type)){
-            JOptionPane.showMessageDialog(null, "Vehículo Registrado Correctamente.");
-            returnToMenu();
+        if (type == "Car" || type == "Large Car" || type == "Motorcycle") {
+            addVehicleView.setErrorMessage("");
+            if (userAccountManager.addAVehicleToUserAccount(plate, userName, type)){
+                JOptionPane.showMessageDialog(null, "Vehículo Registrado Correctamente.");
+                returnToMenu();
+            } else {
+                addVehicleView.setErrorMessage("No se ha podido registrar el vehículo.");
+            }
         } else {
-            addVehicleView.setErrorMessage("No se ha podido registrar el vehículo.");
+            addVehicleView.setErrorMessage("Tipo de vehículo no valido.");
         }
+
 
     }
 }
