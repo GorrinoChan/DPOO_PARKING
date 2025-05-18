@@ -40,15 +40,22 @@ public class CheckPlateInParkingController {
 
         if (plate.isEmpty()) {
             checkPlateInParkingView.setErrorMessage("Introduzca una matrícula valida.");
-        } else if (userSlotManager.licensePlateExist(plate) && userSlotManager.checkIfLicensePlateIsFromTheUser(userName, plate)) {
-                userSlotManager.markVehicleAsNotOccupyingSlot(plate);
-                JOptionPane.showMessageDialog(null, "Ha salido de PARKING LS correctamente.");
-                checkPlateInParkingView.dispose();
-                userMenuView.setVisible(true);
-            } else {
-                checkPlateInParkingView.setErrorMessage("La matrícula no existe.");
-            }
-        }
 
+        } else if (userSlotManager.licensePlateExist(plate) && userSlotManager.checkIfLicensePlateIsFromTheUser(userName, plate)) {
+            if (userSlotManager.checkIfVehicleIsInSlot(plate)){
+                if (userSlotManager.markVehicleAsNotOccupyingSlot(plate)){
+                    JOptionPane.showMessageDialog(null, "Ha salido de PARKING LS correctamente.");
+                    checkPlateInParkingView.dispose();
+                    userMenuView.setVisible(true);
+                } else {
+                    checkPlateInParkingView.setErrorMessage("No se ha podido salir del Parking.");
+                }
+            } else {
+                checkPlateInParkingView.setErrorMessage("Este vehículo no está en el Parking.");
+            }
+        } else {
+            checkPlateInParkingView.setErrorMessage("La matrícula no existe.");
+        }
     }
+}
 

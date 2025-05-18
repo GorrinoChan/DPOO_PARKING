@@ -3,6 +3,7 @@ import Business.Managers.InitializationManager;
 import Business.Managers.UserAccountManager;
 import Presentation.Views.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class LogInController {
@@ -31,6 +32,7 @@ public class LogInController {
             UserMenuView userMenuView = new UserMenuView();
             new UserMenuController(userMenuView);
             userMenuView.setVisible(true);
+
         } else if (checkLogIn.get(2)) {
             logInView.dispose();
             AdminMenuView adminMenuView = new AdminMenuView();

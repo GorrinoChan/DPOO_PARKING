@@ -16,6 +16,7 @@ public class GraphController {
     private UserMenuView userMenuView;
     private UserSlotManager userSlot = new UserSlotManager();
     private ArrayList<Integer> bars = new ArrayList<>();
+    private final static int MAX_NUM_BARS = 60;
 
     public GraphController(GraphView graphView, UserMenuView userMenuView) {
         this.graphView = graphView;
@@ -26,7 +27,7 @@ public class GraphController {
 
 
         try {
-            bars.add(userSlot.readAllSlot().size());
+            bars.add(userSlot.readAllReservation().size());
         }catch(SQLException e){
             bars.add(0);
         }
@@ -36,15 +37,16 @@ public class GraphController {
         Timer timer = new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if (bars.size() == 60) {
-                        bars.remove(bars.size() - 1);
+                    if (bars.size() == MAX_NUM_BARS) {
+                        for(int i = 0; i < (MAX_NUM_BARS - 1); i++) {
+                            bars.remove(0);
+                        }
                     }
-                    int size = userSlot.readAllSlot().size();
+                    int size = userSlot.readAllReservation().size();
                     bars.add(size);
                 }catch(SQLException e1){
                     bars.add(0);
                 }
-
                 graphView.updateData(new ArrayList<>(bars));
                 graphView.refreshGraph();
             }
