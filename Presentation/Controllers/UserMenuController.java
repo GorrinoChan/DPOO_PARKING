@@ -71,10 +71,12 @@ public class UserMenuController {
         InitializationManager initializationManager = new InitializationManager();
         UserAccountManager userAccountManager = new UserAccountManager();
         String userName = userAccountManager.getUserName();
-
+        boolean flag = false;
         int reservationCanceled = initializationManager.getNumberOfReservationOfUserThatHaveBeenCanceledByAdmin(userName);
-        if (reservationCanceled > 0){
+
+        if (reservationCanceled > 0 && !flag){
             JOptionPane.showMessageDialog(null, "Hola " + userName + ", se te han cancelado " + reservationCanceled + " reservas.");
+            flag = true;
         }
         userMenuView.setVisible(false);
         SlotControlView slotControlView = new SlotControlView();
