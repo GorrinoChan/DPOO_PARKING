@@ -33,18 +33,19 @@ public class UserSlotManager {
     public boolean markVehicleAsOccupyingSlot(String licensePlate){
         boolean correct = false;
         try {
-            SqlDao.getInstance().updateIntAndBolean("vehicle", "ocupationStatus", "1", "licencePlate", licensePlate);
+            SqlDao.getInstance().updateIntAndBolean("vehicle", "ocupationStatus", "1", licensePlate, "licencePlate");
             correct = true;
         }catch(SQLException e){
             correct = false;
         }
+        System.out.println(correct);
         return correct;
     }
 
     public boolean markVehicleAsNotOccupyingSlot(String licensePlate){
         boolean correct = false;
         try {
-            SqlDao.getInstance().updateIntAndBolean("reservation", "ocupationStatus", "0", "licencePlate", licensePlate);
+            SqlDao.getInstance().updateIntAndBolean("reservation", "ocupationStatus", "0", licensePlate, "licencePlate");
             correct = true;
         }catch(SQLException e){
             correct = false;
@@ -77,9 +78,6 @@ public class UserSlotManager {
                 int floorNumber = possibleOption.getFloor();
                 int slotNumber = possibleOption.getNumber();
                 int occupationStatus = 1;
-                if (!possibleOption.isOccupation()) {
-                    occupationStatus = 0;
-                }
                 int reservedStatus = 1;
                 if (!possibleOption.isReservation()) {
                     occupationStatus = 0;
@@ -87,7 +85,7 @@ public class UserSlotManager {
                 LocalDateTime date = LocalDateTime.now();
                 System.out.println(possibleOption.getNumber());
                 try {
-                    this.reservedParkingSlotsDao.insertNewReservationInDb(licensePlate, String.valueOf(date), userName, slotNumber, floorNumber, 0, reservedStatus, occupationStatus, vehicleType);
+                    this.reservedParkingSlotsDao.insertNewReservationInDb(licensePlate, String.valueOf(date), userName, slotNumber, floorNumber, 0, 1, 1, vehicleType);
                     info = String.valueOf(floorNumber).concat("/").concat(String.valueOf(slotNumber));
                     System.out.println("Creada la reserva");
                     try{
@@ -321,10 +319,16 @@ public class UserSlotManager {
     public boolean checkIfVehicleIsInSlot(String licensePlate){
         boolean correct = false;
         try {
+            System.out.println(licensePlate +"///");
             List<Reservation> reservations = this.reservedParkingSlotsDao.readSpecificReservationOfDb("licencePlate", licensePlate);
-            if(reservations.get(0).isOccupation()){
-                correct = true;
+            System.out.println("Hola");
+            if(!reservations.isEmpty()) {
+                if (reservations.get(0).isOccupation()) {
+                    System.out.println(reservations.get(0).getOccupation() + "////////////");
+                    correct = true;
+                }
             }
+            System.out.println("&&&&&&&&&&&&&&");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (FileNotFoundException e) {

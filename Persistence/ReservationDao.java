@@ -88,16 +88,16 @@ public class ReservationDao {
 
     public void insertNewReservationInDb (String licencePlate, String date, String userName, int slotNumber, int floorNumber, int canceledStatus, int reservationStatus, int occupationStatus, String typeOfPlace) throws SQLException {
         PreparedStatement orderToDb = null;
-        String codeLineInDb = "INSERT INTO " + "reservation" + " (licencePlate,date,userName,slotNumber,floorNumber,canceledStatus,reservationStatus,ocupationStatus, typeOfPlace) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String codeLineInDb = "INSERT INTO " + "reservation" + " (licencePlate,date,userName,slotNumber,floorNumber,reservationStatus,ocupationStatus, canceledStatus, typeOfPlace) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         orderToDb = SqlDao.getInstance().getConnection().prepareStatement(codeLineInDb);
         orderToDb.setString(1, licencePlate);
         orderToDb.setString(2, date);
         orderToDb.setString(3, userName);
         orderToDb.setInt(4, floorNumber);
         orderToDb.setInt(5, slotNumber);
-        orderToDb.setInt(6, canceledStatus);
-        orderToDb.setInt(7, reservationStatus);
-        orderToDb.setInt(8, occupationStatus);
+        orderToDb.setInt(6, reservationStatus);
+        orderToDb.setInt(7, occupationStatus);
+        orderToDb.setInt(8, canceledStatus);
         orderToDb.setString(9, typeOfPlace);
         orderToDb.executeUpdate();
 
