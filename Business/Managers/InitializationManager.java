@@ -106,7 +106,4 @@ public class InitializationManager {
         return numberOfCancellations;
     }
 
-
-
-
 }

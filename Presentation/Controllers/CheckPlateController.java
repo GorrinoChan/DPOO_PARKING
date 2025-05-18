@@ -42,12 +42,16 @@ public class CheckPlateController {
         if (plate.isEmpty()) {
             checkPlateView.setErrorMessage("Introduzca una matrícula valida.");
         } else {
-            if (userSlotManager.checkIfCarIsInReservedSlot(plate)) {
-                    userSlotManager.markVehicleAsOccupyingSlot(plate);
+            System.out.println(userSlotManager.checkIfVehicleIsInSlot(plate));
+            if (userSlotManager.checkIfCarIsInReservedSlot(plate) && !userSlotManager.checkIfVehicleIsInSlot(plate)) {
+                if (userSlotManager.markVehicleAsOccupyingSlot(plate)){
                     JOptionPane.showMessageDialog(null, "Ha entrado a PARKING LS correctamente.");
                     checkPlateView.dispose();
                     userMenuView.setVisible(true);
-                    
+                } else {
+                    checkPlateView.setErrorMessage("No se ha podido entrar al Parking.");
+                }
+
             } else {
                checkPlateView.dispose();
                CheckTypeVehicleView checkTypeVehicleView = new CheckTypeVehicleView();

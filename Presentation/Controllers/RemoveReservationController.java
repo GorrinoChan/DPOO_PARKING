@@ -69,6 +69,8 @@ public class RemoveReservationController {
         JTable table = removeReservationView.getReservationTable();
         DefaultTableModel model = null;
         int selectedRow = 0;
+        int selectedSlot = 0;
+        UserSlotManager userSlotManager = new UserSlotManager();
 
         model = new DefaultTableModel(new String[]{"Fecha", "Matrícula", "Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);
         if (model.getRowCount() == 0) {
@@ -78,9 +80,17 @@ public class RemoveReservationController {
         if (selectedRow == -1) {
             removeReservationView.setErrorMessage("Seleccione reserva para eliminar.");
         } else {
-            JOptionPane.showMessageDialog(null, "Reserva eliminada correctamente.");
-            removeReservationView.dispose();
-            userMenuView.setVisible(true);
+            removeReservationView.setErrorMessage("");
+            selectedSlot = Integer.parseInt(model.getValueAt(selectedRow, 4).toString());
+            if (userSlotManager.deleteAReservation(selectedSlot)){
+                JOptionPane.showMessageDialog(null, "Reserva eliminada correctamente.");
+                removeReservationView.dispose();
+                userMenuView.setVisible(true);
+            } else {
+                removeReservationView.setErrorMessage("No se ha podido eliminar la reserva.");
+            }
+
+
         }
 
     }
