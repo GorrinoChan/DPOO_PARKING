@@ -18,7 +18,6 @@ public class SlotAvaliableController {
     public SlotAvaliableController(SlotAvaliableView slotAvaliableView, UserMenuView userMenuView) {
         this.slotAvaliableView = slotAvaliableView;
         this.userMenuView = userMenuView;
-
         slotAvaliableView.getReturnButton().addActionListener(e -> returnToMenu());
         slotAvaliableView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         slotAvaliableView.getCarButton().addActionListener(e -> updateTable("Car"));
@@ -41,13 +40,11 @@ public class SlotAvaliableController {
         UserSlotManager userSlotManager = new UserSlotManager();
         List<Slot> availableSlots = null;
         DefaultTableModel model = new DefaultTableModel(new String[]{"Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);;
-
         try {
             availableSlots = userSlotManager.readAllSlot();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         for (Slot slot : availableSlots) {
             if (!slot.isOccupation() && !slot.isReservation() && slot.getTypeOfPlace().equals(vehicleType)) {
                 model.addRow(new Object[]{slot.getTypeOfPlace(), slot.getNumber(), slot.getFloor()});

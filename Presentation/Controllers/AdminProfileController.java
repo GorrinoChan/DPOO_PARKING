@@ -20,7 +20,6 @@ public class AdminProfileController {
     public AdminProfileController(AdminProfileView adminProfileView, AdminMenuView adminMenuView) {
         this.adminProfileView = adminProfileView;
         this.adminMenuView = adminMenuView;
-
         adminProfileView.getLogOutButton().addActionListener(e -> openAdminLogOutView());
         adminProfileView.getReturnButton().addActionListener(e -> returnToPreviousView());
     }

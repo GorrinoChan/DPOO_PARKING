@@ -40,22 +40,17 @@ public class AdminEditSlotsController {
         String slotNumberText = adminEditSlots.getnumber2();       // número nuevo
         String floorNumberText = adminEditSlots.getfloat();
         String typeOfPlace = adminEditSlots.gettipe();
-
-        if (slotNumberText.isEmpty() || slotNumbersearchText.isEmpty() ||
-                floorNumberText.isEmpty() || typeOfPlace == null || typeOfPlace.isEmpty()) {
+        if (slotNumberText.isEmpty() || slotNumbersearchText.isEmpty() || floorNumberText.isEmpty() || typeOfPlace == null || typeOfPlace.isEmpty()) {
             adminEditSlots.setErrorMessage("Todos los campos son obligatorios.");
             return;
         }
-
         try {
-            int slotNumbersearch = Integer.parseInt(slotNumbersearchText.trim());
+            int slotNumberSearch = Integer.parseInt(slotNumbersearchText.trim());
             int slotNumber = Integer.parseInt(slotNumberText.trim());
             int floorNumber = Integer.parseInt(floorNumberText.trim());
-
             AdminSlotManager slotManager = new AdminSlotManager();
-
-            if (slotManager.parkingSlotAlreadyExists(slotNumbersearch)) {
-                boolean edit = slotManager.updateParkingSlot(slotNumbersearch, floorNumber, slotNumber, typeOfPlace);
+            if (slotManager.parkingSlotAlreadyExists(slotNumberSearch)) {
+                boolean edit = slotManager.updateParkingSlot(slotNumberSearch, floorNumber, slotNumber, typeOfPlace);
                 if (edit) {
                     adminEditSlots.setErrorMessage("");
                     JOptionPane.showMessageDialog(adminEditSlots, "Plaza editada correctamente.");

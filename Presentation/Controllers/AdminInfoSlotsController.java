@@ -45,55 +45,50 @@ public class AdminInfoSlotsController {
      * @param selectedRow Fila seleccionada que representa la plaza a mostrar.
      */
     private void cargarDetallesPlaza(int selectedRow) {
-        String[] columnas = {"Numero", "Planta", "Tipo Vehículo", "Nombre", "Correo", "Contraseña", "Reservas", "Vehículos"};
-        DefaultTableModel model = new DefaultTableModel(columnas, 0);
+        String[] columns = {"Numero", "Planta", "Tipo Vehículo", "Nombre", "Correo", "Contraseña", "Reservas", "Vehículos"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
         try {
             AdminSlotManager adminSlotManager = new AdminSlotManager();
-            List<String> infoPlazas = adminSlotManager.allSlotsAndReservationInformationForTable();
-            String detallesPlaza = infoPlazas.get(selectedRow);
-            String[] partes = detallesPlaza.split("/");
-
-            String numero = partes[1];
-            String planta = partes[0];
-            String matricula = partes[2];
-            String tipoVehiculo = partes[3];
-            String ocupacionStr = partes[4];
-            String nombrebuscado = partes[5];
-
+            List<String> infoOfSlot = adminSlotManager.allSlotsAndReservationInformationForTable();
+            String specificInfoOfSlot = infoOfSlot.get(selectedRow);
+            String[] partes = specificInfoOfSlot.split("/");
+            String numberOfSlot = partes[1];
+            String floorOfSlot = partes[0];
+            String licensePlateOfVehicleInSlot = partes[2];
+            String typeOfVehicle = partes[3];
+            String occupationStateOfSlot = partes[4];
+            String nameThatIsBeingSearched = partes[5];
             String email = "-";
             String password = "-";
-            int numeroReservas = 0;
-            int cantidadVehiculos = 0;
-
+            int numberOfReservations = 0;
+            int numberOfVehicles = 0;
             UserAccountManager accountManager = new UserAccountManager();
-            if (!nombrebuscado.equals("FREE")) {
-                List<Account> cuentas = accountManager.getAllAccountsInDb();
-                for (Account cuenta : cuentas) {
-                    if (cuenta.getNameOfTheAccount().equalsIgnoreCase(nombrebuscado)) {
-                        email = cuenta.getEmailOfTheAccount();
-                        password = cuenta.getPassword();
-                        numeroReservas = cuenta.getNumberOfReservations();
+            if (!nameThatIsBeingSearched.equals("FREE")) {
+                List<Account> accounts = accountManager.getAllAccountsInDb();
+                for (Account account : accounts) {
+                    if (account.getNameOfTheAccount().equalsIgnoreCase(nameThatIsBeingSearched)) {
+                        email = account.getEmailOfTheAccount();
+                        password = account.getPassword();
+                        numberOfReservations = account.getNumberOfReservations();
                         break;
                     }
                 }
-                List<Vehicle> vehiculos = accountManager.getAllUserVehicles(nombrebuscado);
-                cantidadVehiculos = vehiculos.size();
+                List<Vehicle> vehiculos = accountManager.getAllUserVehicles(nameThatIsBeingSearched);
+                numberOfVehicles = vehiculos.size();
             } else {
-                nombrebuscado = "-";
+                nameThatIsBeingSearched = "-";
             }
-
-            Object[] fila = {
-                    numero,
-                    planta,
-                    tipoVehiculo,
-                    nombrebuscado,
+            Object[] row = {
+                    numberOfSlot,
+                    floorOfSlot,
+                    typeOfVehicle,
+                    nameThatIsBeingSearched,
                     email,
                     password,
-                    numeroReservas,
-                    cantidadVehiculos,
+                    numberOfReservations,
+                    numberOfVehicles,
             };
-
-            model.addRow(fila);
+            model.addRow(row);
             JTable tabla = new JTable(model);
             this.adminInfoSlots.setSlotTable(tabla);
             JScrollPane scrollPane = new JScrollPane(tabla);
@@ -125,19 +120,18 @@ public class AdminInfoSlotsController {
         UserSlotManager userSlotManager = new UserSlotManager();
         int slot = adminInfoSlots.getSelectedRow();
         AdminSlotManager adminSlotManager = new AdminSlotManager();
-        List<String> infoPlazas = adminSlotManager.allSlotsAndReservationInformationForTable();
-        String detallesPlaza = infoPlazas.get(slot);
-        String[] partes = detallesPlaza.split("/");
-        String nombrebuscado = partes[5];
-        String number = partes[1];
-        String matricula = partes[2];
-        int numero = Integer.parseInt(number);
-
-        if (!matricula.equals("FREE")) {
-            userSlotManager.deleteAReservation(numero);
+        List<String> infoOfSlots = adminSlotManager.allSlotsAndReservationInformationForTable();
+        String specificInfoOfSlot = infoOfSlots.get(slot);
+        String[] parts = specificInfoOfSlot.split("/");
+        String nameThatIsBeingSearch = parts[5];
+        String number = parts[1];
+        String licensePlateOfVehicle = parts[2];
+        int numberInInt = Integer.parseInt(number);
+        if (!licensePlateOfVehicle.equals("FREE")) {
+            userSlotManager.deleteAReservation(numberInInt);
             UserAccountManager accountManager = new UserAccountManager();
-            accountManager.reduceInOneTheNumberOfReservationsOfUserAccount(nombrebuscado);
-            accountManager.augmentInOneTheNumberOfCancellationsOfUserAccount(nombrebuscado);
+            accountManager.reduceInOneTheNumberOfReservationsOfUserAccount(nameThatIsBeingSearch);
+            accountManager.augmentInOneTheNumberOfCancellationsOfUserAccount(nameThatIsBeingSearch);
             adminInfoSlots.dispose();
             AdminSlotAvaliableView adminSlotAvaliableView = new AdminSlotAvaliableView();
             new AdminSlotAvaliableController(adminSlotAvaliableView, adminMenuView);

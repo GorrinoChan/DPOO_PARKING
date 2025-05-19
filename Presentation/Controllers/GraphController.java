@@ -21,11 +21,8 @@ public class GraphController {
     public GraphController(GraphView graphView, UserMenuView userMenuView) {
         this.graphView = graphView;
         this.userMenuView = userMenuView;
-
         graphView.getReturnButton().addActionListener(e -> returnToMenu());
         graphView.getUserProfileButton().addActionListener(e -> openUserProfileView());
-
-
         try {
             bars.add(userSlot.readAllReservation().size());
         }catch(SQLException e){
@@ -52,7 +49,6 @@ public class GraphController {
             }
         });
         timer.start();
-
     }
 
     private void openUserProfileView() {

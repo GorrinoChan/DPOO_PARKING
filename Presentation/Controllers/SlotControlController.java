@@ -7,7 +7,6 @@ public class SlotControlController {
     public SlotControlController(SlotControlView slotControlView, UserMenuView userMenuView) {
         this.slotControlView = slotControlView;
         this.userMenuView = userMenuView;
-
         slotControlView.getReturnButton().addActionListener(e -> returnToMenu());
         slotControlView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         slotControlView.getReserveSlotButton().addActionListener(e -> openReserveSlotView());
