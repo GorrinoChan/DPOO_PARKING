@@ -97,7 +97,8 @@ public class InitializationManager {
         try{
             account = accountDao.readSpecificAccountOfDb("nameOfUserAccount",userName);
             numberOfCancellations = account.get(0).getSlotCancelations();
-            SqlDao.getInstance().updateIntAndBolean("account", "slotCancelations", "0","nameOfUserAccount",userName);
+            System.out.println(numberOfCancellations);
+            SqlDao.getInstance().updateIntAndBolean("account", "slotCancelations", "0",userName,"nameOfUserAccount");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (FileNotFoundException e) {
@@ -105,8 +106,5 @@ public class InitializationManager {
         }
         return numberOfCancellations;
     }
-
-
-
 
 }

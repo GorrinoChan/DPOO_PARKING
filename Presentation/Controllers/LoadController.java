@@ -43,7 +43,7 @@ public class LoadController {
         try {
             initializationManager.readJsonForConfigDb();
         } catch (FileNotFoundException e) {
-            loadView.setErrorMessage("Error al leer configuración de la base de datos: " + e.getMessage());
+            loadView.setErrorMessage("Error al leer configuración de la base de datos");
             verificacion = false;
 
         }
@@ -51,11 +51,11 @@ public class LoadController {
         try {
             initializationManager.tryToConnectToDb();
         } catch (FileNotFoundException e) {
-            loadView.setErrorMessage("No se pudo conectar a la base de datos: " + e.getMessage());
+            loadView.setErrorMessage("No se ha encotrado el fichero de la base de datos");
             verificacion = false;
 
         } catch (SQLException e) {
-            loadView.setErrorMessage("No se pudo conectar a la base de datos: " + e.getMessage());
+            loadView.setErrorMessage("La contraseña de la base de datos no es correcta");
             verificacion = false;
         }
         return verificacion;

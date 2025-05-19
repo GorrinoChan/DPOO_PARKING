@@ -1,7 +1,10 @@
 package Presentation.Controllers;
+import Business.Managers.InitializationManager;
+import Business.Managers.UserAccountManager;
 import Business.TrafficSimulator;
 import Presentation.Views.*;
 
+import javax.swing.*;
 import java.io.FileNotFoundException;
 
 public class UserMenuController {
@@ -65,6 +68,14 @@ public class UserMenuController {
     }
 
     private void openSlotControlView() {
+        InitializationManager initializationManager = new InitializationManager();
+        UserAccountManager userAccountManager = new UserAccountManager();
+        String userName = userAccountManager.getUserName();
+        int reservationCanceled = initializationManager.getNumberOfReservationOfUserThatHaveBeenCanceledByAdmin(userName);
+
+        if (reservationCanceled > 0){
+            JOptionPane.showMessageDialog(null, "Hola " + userName + ", se te han cancelado " + reservationCanceled + " reservas.");
+        }
         userMenuView.setVisible(false);
         SlotControlView slotControlView = new SlotControlView();
         new SlotControlController(slotControlView, userMenuView);
