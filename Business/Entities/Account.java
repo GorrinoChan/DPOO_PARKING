@@ -1,23 +1,21 @@
 package Business.Entities;
 
-import java.util.ArrayList;
-
 public class Account {
 
     private String nameOfTheAccount;
     private String emailOfTheAccount;
     private String password;
     private int numberOfReservations;
-    private int slotCancelations;
+    private int slotCancellations;
     private boolean admin;
 
 
-    public Account(String nameOfTheAccount, String emailOfTheAccount, String password, int numberOfReservations, int slotCancelations, boolean admin) {
+    public Account(String nameOfTheAccount, String emailOfTheAccount, String password, int numberOfReservations, int slotCancellations, boolean admin) {
         this.nameOfTheAccount = nameOfTheAccount;
         this.emailOfTheAccount = emailOfTheAccount;
         this.password = password;
         this.numberOfReservations = numberOfReservations;
-        this.slotCancelations = slotCancelations;
+        this.slotCancellations = slotCancellations;
         this.admin = admin;
     }
     public String getNameOfTheAccount() {
@@ -44,11 +42,11 @@ public class Account {
     public void setNumberOfReservations(int numberOfReservations) {
         this.numberOfReservations = numberOfReservations;
     }
-    public int getSlotCancelations() {
-        return slotCancelations;
+    public int getSlotCancellations() {
+        return slotCancellations;
     }
-    public void setSlotCancelations(int slotCancelations) {
-        this.slotCancelations = slotCancelations;
+    public void setSlotCancellations(int slotCancellations) {
+        this.slotCancellations = slotCancellations;
     }
     public boolean isAdmin() {
         return admin;

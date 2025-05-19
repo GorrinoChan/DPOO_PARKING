@@ -12,11 +12,11 @@ public class SqlDao {
     private final String iniciUrl = "jdbc:mysql://";
 
     public SqlDao(SqlConfigurationDao configurationDao) throws FileNotFoundException {
-        this.username = configurationDao.readJson().getDatabaseUsername();
+        this.username = configurationDao.readJson().getDataBaseUsername();
         System.out.println(this.username);
-        this.password = configurationDao.readJson().getDatabasePassword();
+        this.password = configurationDao.readJson().getDataBasePassword();
         System.out.println(this.password);
-        this.url = iniciUrl + configurationDao.readJson().getDatabaseHost() + ":" + configurationDao.readJson().getDatabasePort() + "/" + configurationDao.readJson().getDatabaseName();
+        this.url = iniciUrl + configurationDao.readJson().getDataBaseHost() + ":" + configurationDao.readJson().getDataBasePort() + "/" + configurationDao.readJson().getDataBaseName();
         System.out.println(this.url);
     }
 

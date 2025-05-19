@@ -2,9 +2,7 @@ package Business.Managers;
 
 import Business.Entities.Account;
 import Business.Entities.Configuration;
-import Business.Entities.Reservation;
 import Persistence.AccountDao;
-import Persistence.ReservationDao;
 import Persistence.SqlConfigurationDao;
 import Persistence.SqlDao;
 
@@ -15,16 +13,14 @@ import java.util.List;
 
 public class InitializationManager {
 
-    Configuration configuration;
-    SqlConfigurationDao sqlConfigurationDao;
-    SqlDao sqlDao;
-    AccountDao  accountDao;
-    ReservationDao reservationDao;
+    private Configuration configuration;
+    private SqlConfigurationDao sqlConfigurationDao;
+    private SqlDao sqlDao;
+    private AccountDao  accountDao;
 
 
     public InitializationManager() {
         this.accountDao = new AccountDao();
-        this.reservationDao = new ReservationDao();
     }
 
     public void prepareReadJson(){
@@ -90,9 +86,8 @@ public class InitializationManager {
         List<Account> account;
         int numberOfCancellations = 0;
         try{
-            account = accountDao.readSpecificAccountOfDb("nameOfUserAccount",userName);
-            numberOfCancellations = account.get(0).getSlotCancelations();
-            System.out.println(numberOfCancellations);
+            account = this.accountDao.readSpecificAccountOfDb("nameOfUserAccount",userName);
+            numberOfCancellations = account.get(0).getSlotCancellations();
             SqlDao.getInstance().updateIntAndBolean("account", "slotCancelations", "0",userName,"nameOfUserAccount");
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -14,9 +14,9 @@ import java.util.List;
 
 public class AdminSlotManager   {
 
-    SlotDAO slotDAO;
-    VehicleDao vehicleDao;
-    ReservationDao reservationDao;
+    private SlotDAO slotDAO;
+    private VehicleDao vehicleDao;
+    private ReservationDao reservationDao;
 
     public AdminSlotManager() {
         this.slotDAO = new SlotDAO();
@@ -50,7 +50,7 @@ public class AdminSlotManager   {
     public boolean parkingSlotAlreadyExists(int slotNumber) {
         boolean exists = false;
         try {
-            List<Slot> result = slotDAO.readSpecificSlotOfDb("slotNumber", String.valueOf(slotNumber));
+            List<Slot> result = this.slotDAO.readSpecificSlotOfDb("slotNumber", String.valueOf(slotNumber));
             if (!result.isEmpty()) {
                 exists = true;
             }
@@ -82,7 +82,7 @@ public class AdminSlotManager   {
     public boolean updateParkingSlot(int existingSlotNumber, int newFloor, int newSlotNumber, String newTypeOfPlace) {
         boolean slotUpdated = false;
         try {
-            slotDAO.updateSlotInDb(existingSlotNumber, newFloor, newSlotNumber, newTypeOfPlace);
+            this.slotDAO.updateSlotInDb(existingSlotNumber, newFloor, newSlotNumber, newTypeOfPlace);
             slotUpdated = true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -152,7 +152,7 @@ public class AdminSlotManager   {
             List<Reservation> reservations;
             boolean correct = false;
             try{
-                reservations = reservationDao.readSpecificReservationOfDb("slotNumber", slotNumber);
+                reservations = this.reservationDao.readSpecificReservationOfDb("slotNumber", slotNumber);
                 if(!reservations.isEmpty()){
                     correct = true;
                 }

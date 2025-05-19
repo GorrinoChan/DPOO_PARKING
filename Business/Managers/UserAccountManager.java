@@ -13,9 +13,9 @@ import java.util.List;
 
 public class UserAccountManager {
 
-    AccountDao accountDao;
-    VehicleDao vehicleDao;
-    private String userName;
+    private AccountDao accountDao;
+    private VehicleDao vehicleDao;
+    private static String userName;
 
     public UserAccountManager() {
         this.accountDao = new AccountDao();
@@ -24,12 +24,12 @@ public class UserAccountManager {
     }
 
     public void createNewAccount(String userName, String emailOfTheAccount, String password) {
-        accountDao.insertNewAccountInDb(userName,emailOfTheAccount,password);
+        this.accountDao.insertNewAccountInDb(userName,emailOfTheAccount,password);
     }
 
     public List<Account> getAllAccountsInDb () {
         try {
-            return accountDao.readAllAccountContentInDb();
+            return this.accountDao.readAllAccountContentInDb();
         }catch (SQLException | FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -37,7 +37,7 @@ public class UserAccountManager {
 
     private boolean verifyLengthInPassword (String password){
         boolean length = false;
-        if(password.length() >= 8){
+        if(password.length() >= 8) {
             length = true;
         }
         return length;
@@ -76,7 +76,7 @@ public class UserAccountManager {
     public boolean deleteExistingAccount (String userName){
         boolean correctAction;
         try{
-            accountDao.deleteSpecificAccount(userName);
+            this.accountDao.deleteSpecificAccount(userName);
             correctAction = true;
         } catch (FileNotFoundException e) {
             correctAction = false;
@@ -87,7 +87,7 @@ public class UserAccountManager {
     public boolean augmentInOneTheNumberOfReservationsOfUserAccount(String userName){
         boolean actionCorrect;
         try{
-            List<Account> account = accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
+            List<Account> account = this.accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
             int numberOfReservations = account.get(0).getNumberOfReservations();
             SqlDao.getInstance().updateIntAndBolean("account", "slotReservations", String.valueOf(numberOfReservations + 1), userName, "nameOfUserAccount");
             actionCorrect = true;
@@ -103,7 +103,7 @@ public class UserAccountManager {
         boolean actionCorrect;
 
         try{
-            List<Account> account = accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
+            List<Account> account = this.accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
             int numberOfReservations = account.get(0).getNumberOfReservations();
             SqlDao.getInstance().updateIntAndBolean("account", "slotReservations", String.valueOf(numberOfReservations - 1), userName, "nameOfUserAccount");
             actionCorrect = true;
@@ -117,10 +117,9 @@ public class UserAccountManager {
 
     public boolean augmentInOneTheNumberOfCancellationsOfUserAccount(String userName){
         boolean actionCorrect;
-
         try{
-            List<Account> account = accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
-            int numberOfCancellation = account.get(0).getSlotCancelations();
+            List<Account> account = this.accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
+            int numberOfCancellation = account.get(0).getSlotCancellations();
             SqlDao.getInstance().updateIntAndBolean("account", "slotCancelations", String.valueOf(numberOfCancellation + 1), userName, "nameOfUserAccount");
             actionCorrect = true;
         } catch (SQLException e) {

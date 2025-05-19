@@ -17,10 +17,9 @@ import java.util.List;
 
 public class UserSlotManager {
 
-    ReservationDao reservedParkingSlotsDao;
-    VehicleDao  vehicleDao;
-    SlotDAO slotDao;
-    String userName;
+    private ReservationDao reservedParkingSlotsDao;
+    private VehicleDao  vehicleDao;
+    private SlotDAO slotDao;
 
 
     public UserSlotManager() {
@@ -64,14 +63,8 @@ public class UserSlotManager {
             }
             if (!allAvailableSlotsWithSameVehicleType.isEmpty()) {
                 Slot possibleOption = allAvailableSlotsWithSameVehicleType.get(0);
-
                 int floorNumber = possibleOption.getFloor();
                 int slotNumber = possibleOption.getNumber();
-                int occupationStatus = 1;
-                int reservedStatus = 1;
-                if (!possibleOption.isReservation()) {
-                    occupationStatus = 0;
-                }
                 LocalDateTime date = LocalDateTime.now();
                 System.out.println(possibleOption.getNumber());
                 try {
