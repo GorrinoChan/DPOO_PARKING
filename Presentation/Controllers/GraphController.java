@@ -16,7 +16,7 @@ public class GraphController {
     private UserMenuView userMenuView;
     private UserSlotManager userSlot = new UserSlotManager();
     private ArrayList<Integer> bars = new ArrayList<>();
-    private final static int MAX_NUM_BARS = 60;
+    private final static int MAX_NUM_BARS = 36;
 
     public GraphController(GraphView graphView, UserMenuView userMenuView) {
         this.graphView = graphView;
