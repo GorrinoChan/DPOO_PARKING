@@ -53,7 +53,7 @@ public class AdminCreateSlot extends JFrame {
      * Obtiene el valor del campo de texto del piso.
      * @return Texto del piso.
      */
-    public String getfloaat() { return floatTextField.getText(); }
+    public String getfloor() { return floatTextField.getText(); }
 
     /**
      * Obtiene el valor del campo de texto del tipo de vehículo.

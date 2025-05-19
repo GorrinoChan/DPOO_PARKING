@@ -40,7 +40,7 @@ public class AdminCreateSlotController {
      */
     private void createSlot() {
         String slotNumberText = adminCreateSlot.getnumber();
-        String floorNumberText = adminCreateSlot.getfloaat();
+        String floorNumberText = adminCreateSlot.getfloor();
         String typeOfPlace = adminCreateSlot.gettipe();
 
         if (slotNumberText.isEmpty() || floorNumberText.isEmpty() || typeOfPlace == null || typeOfPlace.isEmpty()) {
