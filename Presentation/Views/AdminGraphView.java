@@ -1,7 +1,10 @@
 package Presentation.Views;
 
+import Business.Managers.UserSlotManager;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Vista gráfica del administrador para mostrar estadísticas o gráficas relacionadas
@@ -17,6 +20,8 @@ public class AdminGraphView extends JFrame {
 
     // Etiqueta del título de la vista
     private JLabel titleLabel;
+
+    private GraphPanel graphPanel = new GraphPanel();
 
     /**
      * Devuelve el botón de retorno para volver a la vista anterior.
@@ -80,6 +85,17 @@ public class AdminGraphView extends JFrame {
         panel.add(titleLabel, gbc);
 
         c.add(panel, BorderLayout.CENTER);
+
+        graphPanel.setPreferredSize(new Dimension(650, 400));
+        c.add(graphPanel, BorderLayout.PAGE_END);
+    }
+    public void refreshGraph() {
+        graphPanel.repaint();
+    }
+
+
+    public void updateData(ArrayList<Integer> data){
+        graphPanel.setData(data);
     }
 
 }
