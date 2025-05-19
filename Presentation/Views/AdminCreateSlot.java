@@ -59,7 +59,7 @@ public class AdminCreateSlot extends JFrame {
      * Obtiene el valor del campo de texto del tipo de vehículo.
      * @return Texto del tipo de vehículo.
      */
-    public String gettipe() { return tipeTextField.getText(); }
+    public String gettype() { return tipeTextField.getText(); }
 
     /**
      * Establece el mensaje de error a mostrar en la vista.
