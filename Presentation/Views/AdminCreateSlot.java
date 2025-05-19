@@ -11,7 +11,7 @@ import java.awt.*;
 public class AdminCreateSlot extends JFrame {
 
     // Botón para regresar a la vista anterior
-    private JButton returnButton, CreateButton, userProfileButton;
+    private JButton returnButton, createButton, userProfileButton;
 
     // Etiquetas para los campos de entrada y título
     private JLabel numberLabel, floatLabel, tipeLabel, titleLabel, errorLabel;
@@ -40,7 +40,7 @@ public class AdminCreateSlot extends JFrame {
      * @return JButton de creación.
      */
     public JButton getCreateButton() {
-        return CreateButton;
+        return createButton;
     }
 
     /**
@@ -154,10 +154,10 @@ public class AdminCreateSlot extends JFrame {
         panel.add(errorLabel, gbc);
 
         // Botón de creación
-        CreateButton = new JButton("Crear");
+        createButton = new JButton("Crear");
         gbc.gridx = 1;
         gbc.gridy = 10;
-        panel.add(CreateButton, gbc);
+        panel.add(createButton, gbc);
 
         c.add(panel, BorderLayout.CENTER);
     }
