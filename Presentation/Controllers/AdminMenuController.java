@@ -23,7 +23,6 @@ public class AdminMenuController {
      */
     public AdminMenuController(AdminMenuView adminMenuView) {
         this.adminMenuView = adminMenuView;
-
         adminMenuView.getSlots().addActionListener(e -> openManagementView());
         adminMenuView.getslotAvaliableButton().addActionListener(e -> openSlotAvaliableView());
         adminMenuView.getgraphButton().addActionListener(e -> openGraphView());
@@ -39,7 +38,6 @@ public class AdminMenuController {
      */
     private void playPauseTraficSim() {
         running = !running;
-
         if (running) {
             if (simulator == null || simulatorThread == null || !simulatorThread.isAlive()) {
                 try {
@@ -53,13 +51,11 @@ public class AdminMenuController {
             } else {
                 simulator.resumInteger();
             }
-
             adminMenuView.getPlayPauseButton().setText("Stop");
         } else {
             if (simulator != null) {
                 simulator.stopInteger();
             }
-
             adminMenuView.getPlayPauseButton().setText("Play");
         }
     }

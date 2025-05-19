@@ -22,7 +22,6 @@ public class LogInController {
         String userName = logInView.getUsername();
         String password = logInView.getPassword();
         ArrayList<Boolean> checkLogIn = initializationManager.logIn(userName, password);
-
         if (userName.isEmpty() || password.isEmpty()) {
             logInView.setErrorMessage("Todos los campos son obligatorios.");
         } else if (!checkLogIn.get(0) || !checkLogIn.get(1)){
@@ -32,7 +31,6 @@ public class LogInController {
             UserMenuView userMenuView = new UserMenuView();
             new UserMenuController(userMenuView);
             userMenuView.setVisible(true);
-
         } else if (checkLogIn.get(2)) {
             logInView.dispose();
             AdminMenuView adminMenuView = new AdminMenuView();
@@ -48,6 +46,7 @@ public class LogInController {
         new SignInController(signInView);
         signInView.setVisible(true);
     }
+
     private void returnToStart() {
         logInView.dispose();
         StartView startView = new StartView();

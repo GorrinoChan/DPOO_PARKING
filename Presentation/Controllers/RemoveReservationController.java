@@ -21,7 +21,6 @@ public class RemoveReservationController {
     public RemoveReservationController(RemoveReservationView removeReservationView, UserMenuView userMenuView) {
         this.removeReservationView = removeReservationView;
         this.userMenuView = userMenuView;
-
         removeReservationView.getReturnButton().addActionListener(e -> returnToMenu());
         removeReservationView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         removeReservationView.getRemoveReservationButton().addActionListener(e-> eliminateSlotReservation());
@@ -44,21 +43,18 @@ public class RemoveReservationController {
         new SlotControlController(slotControlView, userMenuView);
         slotControlView.setVisible(true);
     }
+
     private void updateTable(String vehicleType) {
         UserSlotManager userSlotManager = new UserSlotManager();
         UserAccountManager userAccountManager = new UserAccountManager();
         String userName = userAccountManager.getUserName();
         List<Reservation> reservations = null;
         DefaultTableModel model = null;
-
         reservations = userSlotManager.readUserReservationByUserName(userName);
-
         model = new DefaultTableModel(new String[]{"Fecha", "Matrícula", "Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);
-
         for (Reservation reservation : reservations) {
             if (reservation.getTypeOfPlace().equals(vehicleType) && !reservation.isCancelled()) {
                 model.addRow(new Object[]{reservation.getDate(), reservation.getLicencePlate(), reservation.getTypeOfPlace(), reservation.getNumber(), reservation.getFloor()});
-
             }
             removeReservationView.updateReservationsTable(model);
         }
@@ -71,7 +67,6 @@ public class RemoveReservationController {
         int selectedRow = 0;
         int selectedSlot = 0;
         UserSlotManager userSlotManager = new UserSlotManager();
-
         model = new DefaultTableModel(new String[]{"Fecha", "Matrícula", "Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);
         if (model.getRowCount() == 0) {
             removeReservationView.setErrorMessage("No hay reservas para eliminar.");
@@ -89,9 +84,6 @@ public class RemoveReservationController {
             } else {
                 removeReservationView.setErrorMessage("No se ha podido eliminar la reserva.");
             }
-
-
         }
-
     }
 }

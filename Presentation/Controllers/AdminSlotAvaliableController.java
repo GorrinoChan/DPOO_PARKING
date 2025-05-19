@@ -29,7 +29,6 @@ public class AdminSlotAvaliableController {
     public AdminSlotAvaliableController(AdminSlotAvaliableView adminslotAvaliableView, AdminMenuView adminMenuView) {
         this.adminslotAvaliableView = adminslotAvaliableView;
         this.adminMenuView = adminMenuView;
-
         adminslotAvaliableView.getReturnButton().addActionListener(e -> returnToMenu());
         adminslotAvaliableView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         mostrarTablaParking();
@@ -43,49 +42,43 @@ public class AdminSlotAvaliableController {
      * Al hacer clic en una fila, se muestra una vista con más información sobre la plaza.
      */
     private void mostrarTablaParking() {
-        String[] columnas = {"Numero", "Planta", "Tipo Vehículo", "Ocupación", "Reserva", "Matrícula"};
-        DefaultTableModel model = new DefaultTableModel(columnas, 0);
-
+        String[] columns = {"Numero", "Planta", "Tipo Vehículo", "Ocupación", "Reserva", "Matrícula"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
         try {
             AdminSlotManager adminSlotManager = new AdminSlotManager();
-            List<String> infoPlazas = adminSlotManager.allSlotsAndReservationInformationForTable();
-
-            for (String linea : infoPlazas) {
-                String[] partes = linea.split("/");
-
-                String numero = partes[1];
-                String planta = partes[0];
-                String matricula = partes[2];
-                String tipoVehiculo = partes[3];
-                String ocupacionStr = partes[4];
-                String ocupacion;
-                String reserva;
-
-                if (matricula.equals("FREE")) {
-                    ocupacion = "Libre";
-                    reserva = "Disponible";
-                    matricula = "";
+            List<String> infoOfAllSlots = adminSlotManager.allSlotsAndReservationInformationForTable();
+            for (String lineOfInfo : infoOfAllSlots) {
+                String[] parts = lineOfInfo.split("/");
+                String numberOfSlot = parts[1];
+                String floorOfSlot = parts[0];
+                String licensePlateOfVehicleInSlot = parts[2];
+                String typeOfVehicle = parts[3];
+                String occupationState = parts[4];
+                String occupation;
+                String reservation;
+                if (licensePlateOfVehicleInSlot.equals("FREE")) {
+                    occupation = "Libre";
+                    reservation = "Disponible";
+                    licensePlateOfVehicleInSlot = "";
                 } else {
-                    if (ocupacionStr.equals("true")) {
-                        ocupacion = "Ocupado";
-                        reserva = "Reservado";
+                    if (occupationState.equals("true")) {
+                        occupation = "Ocupado";
+                        reservation = "Reservado";
                     } else {
-                        ocupacion = "Libre";
-                        reserva = "Reservado";
+                        occupation = "Libre";
+                        reservation = "Reservado";
                     }
                 }
-
-                Object[] fila = {
-                        numero,
-                        planta,
-                        tipoVehiculo,
-                        ocupacion,
-                        reserva,
-                        matricula
+                Object[] row = {
+                        numberOfSlot,
+                        floorOfSlot,
+                        typeOfVehicle,
+                        occupation,
+                        reservation,
+                        licensePlateOfVehicleInSlot
                 };
-                model.addRow(fila);
+                model.addRow(row);
             }
-
             JTable tabla = new JTable(model);
             this.adminslotAvaliableView.setSlotTable(tabla);
             JScrollPane scrollPane = new JScrollPane(tabla);
@@ -93,7 +86,6 @@ public class AdminSlotAvaliableController {
             adminslotAvaliableView.getContentPane().add(scrollPane);
             adminslotAvaliableView.revalidate();
             adminslotAvaliableView.repaint();
-
             // Listener para ver detalles al hacer clic en una fila
             tabla.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -106,7 +98,6 @@ public class AdminSlotAvaliableController {
                     }
                 }
             });
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(adminslotAvaliableView, "Error al cargar la tabla: " + e.getMessage());
             e.printStackTrace();

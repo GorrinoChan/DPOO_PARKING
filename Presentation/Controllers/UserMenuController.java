@@ -15,7 +15,6 @@ public class UserMenuController {
 
     public UserMenuController(UserMenuView userMenuView) {
         this.userMenuView = userMenuView;
-
         userMenuView.getEnterButton().addActionListener(e -> openEnterParkingView());
         userMenuView.getSlotControlButton().addActionListener(e -> openSlotControlView());
         userMenuView.getSlotAvaliableButton().addActionListener(e -> openSlotAvaliableView());
@@ -27,7 +26,6 @@ public class UserMenuController {
 
     private void playPauseTraficSim() {
         running = !running;
-
         if (running) {
             if (simulator == null || simulatorThread == null || !simulatorThread.isAlive()) {
                 try {
@@ -41,14 +39,11 @@ public class UserMenuController {
             } else {
                 simulator.resumInteger();
             }
-
             userMenuView.getPlayPauseButton().setText("Stop");
-
         } else {
             if (simulator != null) {
                 simulator.stopInteger();
             }
-
             userMenuView.getPlayPauseButton().setText("Play");
         }
     }
@@ -72,7 +67,6 @@ public class UserMenuController {
         UserAccountManager userAccountManager = new UserAccountManager();
         String userName = userAccountManager.getUserName();
         int reservationCanceled = initializationManager.getNumberOfReservationOfUserThatHaveBeenCanceledByAdmin(userName);
-
         if (reservationCanceled > 0){
             JOptionPane.showMessageDialog(null, "Hola " + userName + ", se te han cancelado " + reservationCanceled + " reservas.");
         }
