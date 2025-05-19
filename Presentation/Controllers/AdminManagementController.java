@@ -21,7 +21,7 @@ public class AdminManagementController {
     public AdminManagementController(AdminManagement adminManagement, AdminMenuView adminMenuView) {
         this.adminManagement = adminManagement;
         this.adminMenuView = adminMenuView;
-        adminManagement.getCreate().addActionListener(e -> openAdminCreate());
+        adminManagement.getcreate().addActionListener(e -> openAdminCreate());
         adminManagement.getEdit().addActionListener(e -> openAdminEdit());
         adminManagement.getDelete().addActionListener(e -> openAdminDelete());
         adminManagement.getReturnButton().addActionListener(e -> returnToMenu());

@@ -78,7 +78,7 @@ public class UserMenuController {
 
     private void openSlotAvaliableView() {
         userMenuView.setVisible(false);
-        SlotAvailableView slotAvaliableView = new SlotAvailableView();
+        SlotAvaliableView slotAvaliableView = new SlotAvaliableView();
         new SlotAvaliableController(slotAvaliableView, userMenuView);
         slotAvaliableView.setVisible(true);
     }

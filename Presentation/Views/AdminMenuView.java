@@ -73,12 +73,15 @@ public class AdminMenuView extends JFrame {
         setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
+
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(4, 0, 4, 0);
+
         // Botón de play/pause
         playPauseButton = new JButton("Play");
         gbc.gridx = 0;
@@ -86,6 +89,7 @@ public class AdminMenuView extends JFrame {
         gbc.gridwidth = 1;
         gbc.insets = new Insets(4, 0, 4, 20);
         panel.add(playPauseButton, gbc);
+
         // Botón de perfil de usuario
         userProfileButton = new JButton("User");
         gbc.gridx = 4;
@@ -93,6 +97,7 @@ public class AdminMenuView extends JFrame {
         gbc.gridwidth = 1;
         gbc.insets = new Insets(4, 20, 4, 0);
         panel.add(userProfileButton, gbc);
+
         // Título principal
         gbc.insets = new Insets(4, 0, 4, 0);
         titleLabel = new JLabel("PARKING LS", SwingConstants.CENTER);
@@ -101,6 +106,7 @@ public class AdminMenuView extends JFrame {
         gbc.gridy = 0;
         gbc.gridwidth = 3;
         panel.add(titleLabel, gbc);
+
         // Subtítulo
         subTitleLabel = new JLabel("Menu", SwingConstants.CENTER);
         subTitleLabel.setFont(new Font("Arial", Font.BOLD, 16));
@@ -108,21 +114,25 @@ public class AdminMenuView extends JFrame {
         gbc.gridy = 1;
         gbc.gridwidth = 3;
         panel.add(subTitleLabel, gbc);
+
         // Botón de gestión de plazas
         Slots = new JButton("Gestion de las plazas");
         gbc.gridx = 1;
         gbc.gridy = 2;
         panel.add(Slots, gbc);
+
         // Botón de plazas disponibles
         slotAvaliableButton = new JButton("Ver plazas disponibles");
         gbc.gridx = 1;
         gbc.gridy = 4;
         panel.add(slotAvaliableButton, gbc);
+
         // Botón de gráfica de última hora
         graphButton = new JButton("Gráfico de última hora");
         gbc.gridx = 1;
         gbc.gridy = 5;
         panel.add(graphButton, gbc);
+
         // Añadir panel al contenedor
         c.add(panel, BorderLayout.CENTER);
     }

@@ -36,10 +36,10 @@ public class AdminEditSlotsController {
      * Comprueba que los campos sean válidos, y si la plaza existe, intenta actualizarla con los nuevos datos.
      */
     private void EditSlot() {
-        String slotNumbersearchText = adminEditSlots.getNumberOfSlotThatIsGoingToBeSearchAndEdit(); // número actual
-        String slotNumberText = adminEditSlots.getNumberOfSlotThatIsGoingToBeAssigned();       // número nuevo
-        String floorNumberText = adminEditSlots.getFloorOfSlot();
-        String typeOfPlace = adminEditSlots.getTypeOfVehicleThatIsGoingToBeAssign();
+        String slotNumbersearchText = adminEditSlots.getnumber1(); // número actual
+        String slotNumberText = adminEditSlots.getnumber2();       // número nuevo
+        String floorNumberText = adminEditSlots.getfloat();
+        String typeOfPlace = adminEditSlots.gettipe();
         if (slotNumberText.isEmpty() || slotNumbersearchText.isEmpty() || floorNumberText.isEmpty() || typeOfPlace == null || typeOfPlace.isEmpty()) {
             adminEditSlots.setErrorMessage("Todos los campos son obligatorios.");
             return;
