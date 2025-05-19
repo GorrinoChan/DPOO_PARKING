@@ -21,7 +21,7 @@ public class Configuration {
         return databaseHost;
     }
 
-    public String getDatebaseName() {
+    public String getDatabaseName() {
         return databaseName;
     }
 

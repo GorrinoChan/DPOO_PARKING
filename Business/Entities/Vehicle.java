@@ -13,22 +13,10 @@ public class Vehicle {
     public String getVehicleLicense() {
         return vehicleLicense;
     }
-    public void setVehicleLicense(String vehicleLicense) {
-        this.vehicleLicense = vehicleLicense;
-    }
     public String getVehicleType() {
         return vehicleType;
-    }
-    public void setVehicleType(String vehicleType) {
-        this.vehicleType = vehicleType;
     }
     public Account getVehicleAccountAssociated() {
         return vehicleAccountAssociated;
     }
-    public void setVehicleAccountAssociated(Account vehicleAccountAssociated) {
-        this.vehicleAccountAssociated = vehicleAccountAssociated;
-    }
-
-
-
 }

@@ -26,7 +26,6 @@ public class AdminSlotManager   {
 
     public boolean deleteParkingSlot(int slotNumber) {
         boolean wasDeleted = false;
-
         try {
             this.slotDAO.deleteSpecificSlot(String.valueOf(slotNumber));
             wasDeleted = true;
@@ -58,7 +57,6 @@ public class AdminSlotManager   {
         } catch (SQLException | FileNotFoundException e) {
             exists = false;
         }
-
         return exists;
     }
 
@@ -79,7 +77,6 @@ public class AdminSlotManager   {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-
         return allReservationWithOutTheCanceled;
     }
     public boolean updateParkingSlot(int existingSlotNumber, int newFloor, int newSlotNumber, String newTypeOfPlace) {
@@ -165,6 +162,4 @@ public class AdminSlotManager   {
                 throw new RuntimeException(e);
             }            return correct;
         }
-
-
 }

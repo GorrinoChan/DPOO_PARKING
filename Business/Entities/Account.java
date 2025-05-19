@@ -19,7 +19,6 @@ public class Account {
         this.numberOfReservations = numberOfReservations;
         this.slotCancelations = slotCancelations;
         this.admin = admin;
-
     }
     public String getNameOfTheAccount() {
         return nameOfTheAccount;
