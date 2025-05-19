@@ -92,8 +92,8 @@ public class AdminDeleteSlotsController {
 
                 if (!reassigned.equals("00")) {
                     // Se reasignó correctamente
-                    String[] partes = reassigned.split("/");
-                    String number = partes[0];
+                    String[] parts = reassigned.split("/");
+                    String number = parts[0];
                     userSlotManager.deleteSlot(number);
                     boolean deleted = userSlotManager.deleteAReservation(slotNumbersearch);
                     adminSlotManager.deleteParkingSlot(slotNumbersearch);
@@ -115,11 +115,11 @@ public class AdminDeleteSlotsController {
                     // Se actualiza la info del usuario asociado a la reserva
                     List<String> infoPlazas = adminSlotManager.allSlotsAndReservationInformationForTable();
                     for (String linea : infoPlazas) {
-                        String[] partes = linea.split("/");
-                        String numero = partes[1];
+                        String[] parts = linea.split("/");
+                        String numero = parts[1];
                         int search = Integer.parseInt(numero);
                         if (search == slotNumbersearch) {
-                            String nombrebuscado = partes[5];
+                            String nombrebuscado = parts[5];
                             UserAccountManager accountManager = new UserAccountManager();
                             accountManager.reduceInOneTheNumberOfReservationsOfUserAccount(nombrebuscado);
                             accountManager.augmentInOneTheNumberOfCancellationsOfUserAccount(nombrebuscado);
