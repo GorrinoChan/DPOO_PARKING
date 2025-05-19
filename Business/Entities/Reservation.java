@@ -23,9 +23,6 @@ public class Reservation extends Slot {
     public boolean isCancelled() {
         return cancelled;
     }
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
-    }
     public String getLicencePlate() {
         return licencePlate;
     }

@@ -1,7 +1,6 @@
 package Persistence;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.*;
 
 public class SqlDao {
@@ -17,7 +16,7 @@ public class SqlDao {
         System.out.println(this.username);
         this.password = configurationDao.readJson().getDatabasePassword();
         System.out.println(this.password);
-        this.url = iniciUrl + configurationDao.readJson().getDatabaseHost() + ":" + configurationDao.readJson().getDatabasePort() + "/" + configurationDao.readJson().getDatebaseName();
+        this.url = iniciUrl + configurationDao.readJson().getDatabaseHost() + ":" + configurationDao.readJson().getDatabasePort() + "/" + configurationDao.readJson().getDatabaseName();
         System.out.println(this.url);
     }
 

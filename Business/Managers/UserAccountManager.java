@@ -15,70 +15,13 @@ public class UserAccountManager {
 
     AccountDao accountDao;
     VehicleDao vehicleDao;
-    private static String userName;
+    private String userName;
 
     public UserAccountManager() {
         this.accountDao = new AccountDao();
         this.vehicleDao = new VehicleDao();
 
     }
-    //Esta por arreglar
-    /***
-    public boolean accountUsernameExistByUsername(String userName) {
-        boolean exist = true;
-        List<Account> specificSqlAccount = null;
-        try {
-            specificSqlAccount = accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
-        } catch (SQLException | FileNotFoundException e) {
-            exist = false;
-        }
-        if (specificSqlAccount == null){
-            exist = false;
-        }
-        if(specificSqlAccount.isEmpty()){
-            exist = false;
-        }
-            return exist;
-    }
-
-
-    //Esta por arreglar
-    public boolean accountUsernameExistByMail(String mailOfUser) {
-        boolean exist = true;
-        List<Account> specificSqlAccount = null;
-        try {
-            specificSqlAccount = accountDao.readSpecificAccountOfDb("emailOfUserAccount", mailOfUser);
-        } catch (SQLException | FileNotFoundException e) {
-            exist = false;
-        }
-        if (specificSqlAccount == null) {
-            exist = false;
-        }
-        if(specificSqlAccount.isEmpty()){
-            exist = false;
-        }
-        return exist;
-    }
-
-    public boolean passwordIsCorrect(String userName, String password){
-        boolean correct;
-        try{
-            List<Account> specificSqlAccount = accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
-            if(specificSqlAccount.isEmpty()) {
-                if (specificSqlAccount.get(0).getPassword().equals(password)) {
-                    correct = true;
-                } else {
-                    correct = false;
-                }
-            }else{
-                correct = false;
-            }
-        } catch (SQLException | FileNotFoundException e) {
-            correct = false;
-        }
-        return correct;
-    }
-     ****/
 
     public void createNewAccount(String userName, String emailOfTheAccount, String password) {
         accountDao.insertNewAccountInDb(userName,emailOfTheAccount,password);
@@ -188,22 +131,6 @@ public class UserAccountManager {
         return actionCorrect;
     }
 
-    public boolean reduceInOneTheNumberOfCancellationsOfUserAccount(String userName){
-        boolean actionCorrect;
-
-        try{
-            List<Account> account = accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
-            int numberOfCancellation = account.get(0).getSlotCancelations();
-            SqlDao.getInstance().updateIntAndBolean("account", "slotCancelations", String.valueOf(numberOfCancellation - 1), userName, "nameOfUserAccount");
-            actionCorrect = true;
-        } catch (SQLException e) {
-            actionCorrect = false;
-        } catch (FileNotFoundException e) {
-            actionCorrect = false;
-        }
-        return actionCorrect;
-    }
-
     public List<Vehicle> getAllUserVehicles(String userName){
         List<Vehicle> userVehicles;
         try{
@@ -219,54 +146,44 @@ public class UserAccountManager {
     public ArrayList<Boolean> signUp (String userName, String email, String password, String secondPassword ){
         ArrayList<Boolean> arrayWithAllInfoInSignUpAnalysis = new ArrayList<>();
         //Primer boolean si el usuario es correcto, password tiene más de 8 caracteres, si tiene almenos una mayuscula, si tiene almenos una minuscula, si tiene al menos un numero, mirar si las contraseñass coinciden, si el correo es correcto(minimo tiene un arroba)
-
         try{
             List<Account> accountThatAlreadyExist = this.accountDao.readSpecificAccountOfDb("nameOfUserAccount", userName);
-
             if(accountThatAlreadyExist.isEmpty()){
                 arrayWithAllInfoInSignUpAnalysis.add(true);
             }else{
                 arrayWithAllInfoInSignUpAnalysis.add(false);
             }
-
             if(verifyLengthInPassword(password)){
                 arrayWithAllInfoInSignUpAnalysis.add(true);
             }else{
                 arrayWithAllInfoInSignUpAnalysis.add(false);
             }
-
             if(verifyIfThereIsMayusInPassword(password)){
                 arrayWithAllInfoInSignUpAnalysis.add(true);
             }else{
                 arrayWithAllInfoInSignUpAnalysis.add(false);
             }
-
             if(verifyIfThereIsMinusInPassword(password)){
                 arrayWithAllInfoInSignUpAnalysis.add(true);
             }else{
                 arrayWithAllInfoInSignUpAnalysis.add(false);
             }
-
             if(verifyIfThereIsNumberInPassword(password)){
                 arrayWithAllInfoInSignUpAnalysis.add(true);
             }else{
                 arrayWithAllInfoInSignUpAnalysis.add(false);
             }
-
             if(password.equals(secondPassword)){
                 arrayWithAllInfoInSignUpAnalysis.add(true);
             }else{
                 arrayWithAllInfoInSignUpAnalysis.add(false);
             }
-
             int itIsEmail = email.indexOf("@");
             if(itIsEmail == -1) {
                 arrayWithAllInfoInSignUpAnalysis.add(false);
             }else{
                 arrayWithAllInfoInSignUpAnalysis.add(true);
             }
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (FileNotFoundException e) {
@@ -289,7 +206,6 @@ public class UserAccountManager {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-
         return correctAction;
     }
     public void setUserName(String userName){

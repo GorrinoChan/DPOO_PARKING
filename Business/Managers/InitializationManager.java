@@ -19,7 +19,6 @@ public class InitializationManager {
     SqlConfigurationDao sqlConfigurationDao;
     SqlDao sqlDao;
     AccountDao  accountDao;
-
     ReservationDao reservationDao;
 
 
@@ -46,7 +45,6 @@ public class InitializationManager {
 
     public void tryToDisconectDB(){
         this.sqlDao.disconnect();
-
     }
 
     public ArrayList<Boolean> logIn (String emailOrUserName, String password){
@@ -60,12 +58,10 @@ public class InitializationManager {
             }else{
                 account = this.accountDao.readSpecificAccountOfDb("emailOfUserAccount", emailOrUserName);
             }
-
             if(account.isEmpty()){
                 arrayWithAllInfoInLogInAnalysis.add(false);
                 arrayWithAllInfoInLogInAnalysis.add(false);
                 arrayWithAllInfoInLogInAnalysis.add(false);
-
             }else{
                 arrayWithAllInfoInLogInAnalysis.add(true);
                 if(account.get(0).getPassword().equals(password)){
@@ -87,7 +83,6 @@ public class InitializationManager {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-
         return arrayWithAllInfoInLogInAnalysis;
     }
 
