@@ -23,6 +23,7 @@ public class AdminLogOutController {
     public AdminLogOutController(AdminLogOutView adminLogOutView, AdminMenuView adminMenuView) {
         this.adminLogOutView = adminLogOutView;
         this.adminMenuView = adminMenuView;
+
         adminLogOutView.getConfirmButton().addActionListener(e -> logOut());
         adminLogOutView.getReturnButton().addActionListener(e -> goBack());
     }

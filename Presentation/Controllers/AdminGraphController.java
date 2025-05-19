@@ -14,6 +14,7 @@ public class AdminGraphController {
         this.adminMenuView = adminMenuView;
         admingraphView.getReturnButton().addActionListener(e -> returnToMenu());
         admingraphView.getUserProfileButton().addActionListener(e -> openUserProfileView());
+
     }
 
     private void openUserProfileView() {
@@ -26,5 +27,6 @@ public class AdminGraphController {
     private void returnToMenu() {
         admingraphView.dispose();
         adminMenuView.setVisible(true);
+
     }
 }

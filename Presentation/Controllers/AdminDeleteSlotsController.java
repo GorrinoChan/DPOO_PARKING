@@ -43,31 +43,36 @@ public class AdminDeleteSlotsController {
     private void handleDeleteSlot() {
         UserSlotManager userSlotManager = new UserSlotManager();
         AdminSlotManager adminSlotManager = new AdminSlotManager();
-        String slotNumberSearchText = adminDeleteSlots.getnumber();
-        if (slotNumberSearchText.isEmpty()) {
+        String slotNumbersearchText = adminDeleteSlots.getnumber();
+
+        if (slotNumbersearchText.isEmpty()) {
             adminDeleteSlots.setErrorMessage("Todos los campos son obligatorios.");
             return;
         }
-        try {
-            int slotNumberSearch = Integer.parseInt(slotNumberSearchText.trim());
-            String SlotNumberSearch = String.valueOf(slotNumberSearch);
 
-            if (!adminSlotManager.parkingSlotAlreadyExists(slotNumberSearch) &&
-                    !adminSlotManager.parkingReservedSlotAlreadyExist(SlotNumberSearch)) {
+        try {
+            int slotNumbersearch = Integer.parseInt(slotNumbersearchText.trim());
+            String SlotNumbersearch = String.valueOf(slotNumbersearch);
+
+            if (!adminSlotManager.parkingSlotAlreadyExists(slotNumbersearch) &&
+                    !adminSlotManager.parkingReservedSlotAlreadyExist(SlotNumbersearch)) {
                 JOptionPane.showMessageDialog(adminDeleteSlots, "La plaza no existe.");
                 return;
             }
+
             List<Reservation> reservations = adminSlotManager.getAllReservationThatHaveBeenDone();
             Reservation targetReservation = null;
+
             for (Reservation r : reservations) {
-                if (r.getNumber() == slotNumberSearch && !r.isCancelled()) {
+                if (r.getNumber() == slotNumbersearch && !r.isCancelled()) {
                     targetReservation = r;
                     break;
                 }
             }
+
             if (targetReservation == null) {
                 // No hay reserva activa, se puede eliminar directamente
-                boolean deleted = adminSlotManager.deleteParkingSlot(slotNumberSearch);
+                boolean deleted = adminSlotManager.deleteParkingSlot(slotNumbersearch);
                 if (deleted) {
                     JOptionPane.showMessageDialog(adminDeleteSlots, "Plaza eliminada correctamente.");
                     adminDeleteSlots.dispose();
@@ -84,13 +89,15 @@ public class AdminDeleteSlotsController {
                         targetReservation.getLicencePlate(),
                         targetReservation.getTypeOfPlace()
                 );
+
                 if (!reassigned.equals("00")) {
                     // Se reasignó correctamente
-                    String[] parts = reassigned.split("/");
-                    String number = parts[0];
+                    String[] partes = reassigned.split("/");
+                    String number = partes[0];
                     userSlotManager.deleteSlot(number);
-                    boolean deleted = userSlotManager.deleteAReservation(slotNumberSearch);
-                    adminSlotManager.deleteParkingSlot(slotNumberSearch);
+                    boolean deleted = userSlotManager.deleteAReservation(slotNumbersearch);
+                    adminSlotManager.deleteParkingSlot(slotNumbersearch);
+
                     if (!deleted) {
                         JOptionPane.showMessageDialog(adminDeleteSlots, "Plaza eliminada correctamente.");
                         adminDeleteSlots.dispose();
@@ -102,22 +109,24 @@ public class AdminDeleteSlotsController {
                     }
                 } else {
                     // No se pudo reasignar la reserva
-                    boolean reservationDeleted = userSlotManager.deleteAReservation(slotNumberSearch);
-                    adminSlotManager.deleteParkingSlot(slotNumberSearch);
+                    boolean reservationDeleted = userSlotManager.deleteAReservation(slotNumbersearch);
+                    adminSlotManager.deleteParkingSlot(slotNumbersearch);
+
                     // Se actualiza la info del usuario asociado a la reserva
                     List<String> infoPlazas = adminSlotManager.allSlotsAndReservationInformationForTable();
                     for (String linea : infoPlazas) {
-                        String[] parts = linea.split("/");
-                        String number = parts[1];
-                        int search = Integer.parseInt(number);
-                        if (search == slotNumberSearch) {
-                            String nameWeLookingFor = parts[5];
+                        String[] partes = linea.split("/");
+                        String numero = partes[1];
+                        int search = Integer.parseInt(numero);
+                        if (search == slotNumbersearch) {
+                            String nombrebuscado = partes[5];
                             UserAccountManager accountManager = new UserAccountManager();
-                            accountManager.reduceInOneTheNumberOfReservationsOfUserAccount(nameWeLookingFor);
-                            accountManager.augmentInOneTheNumberOfCancellationsOfUserAccount(nameWeLookingFor);
+                            accountManager.reduceInOneTheNumberOfReservationsOfUserAccount(nombrebuscado);
+                            accountManager.augmentInOneTheNumberOfCancellationsOfUserAccount(nombrebuscado);
                             break;
                         }
                     }
+
                     if (!reservationDeleted) {
                         JOptionPane.showMessageDialog(adminDeleteSlots, "Plaza eliminada correctamente.");
                         adminDeleteSlots.dispose();

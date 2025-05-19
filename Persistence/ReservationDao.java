@@ -33,6 +33,7 @@ public class ReservationDao {
         String userName;
         String typeOfPlace;
         List<Reservation> allSqlReservationTransformToObjectReservation = new ArrayList<>();
+
         try {
             while (sqlInfoOfDB.next()){
                 licensePlate = sqlInfoOfDB.getString("licencePlate");

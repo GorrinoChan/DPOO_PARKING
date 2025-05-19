@@ -17,6 +17,7 @@ public class CheckTypeVehicleController {
     public CheckTypeVehicleController(CheckTypeVehicleView checkTypeVehicleView, String plate, UserMenuView userMenuView) {
         this.checkTypeVehicleView = checkTypeVehicleView;
         this.userMenuView = userMenuView;
+
         checkTypeVehicleView.getReturnButton().addActionListener(e -> returnToEnterParking());
         checkTypeVehicleView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         checkTypeVehicleView.getConfirmButton().addActionListener(e -> confirmEntrance(plate));
@@ -45,6 +46,7 @@ public class CheckTypeVehicleController {
         String slot = userSlotManager.assignVehicleToFirstAvailableSLot(userName, plate, type);
         String[] informationSlot = null;
         System.out.println (checkType);
+
         if (checkType){
             if (!slot.equals("00")) {
                 informationSlot = slot.split("/");
@@ -57,6 +59,8 @@ public class CheckTypeVehicleController {
             }
         } else {
             checkTypeVehicleView.setErrorMessage("El tipo de vehículo no es correcto.");
+
         }
+
     }
 }

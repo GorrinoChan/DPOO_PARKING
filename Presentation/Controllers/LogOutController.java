@@ -15,6 +15,7 @@ public class LogOutController {
     public LogOutController(LogOutView logOutView, UserMenuView userMenuView) {
         this.logOutView = logOutView;
         this.userMenuView = userMenuView;
+
         logOutView.getConfirmButton().addActionListener(e -> logOut());
         logOutView.getReturnButton().addActionListener(e -> goBack());
     }

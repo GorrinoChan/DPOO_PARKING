@@ -14,6 +14,7 @@ public class DeleteAccountController {
     public DeleteAccountController(DeleteAccountView deleteAccountView, UserMenuView userMenuView) {
         this.deleteAccountView = deleteAccountView;
         this.userMenuView = userMenuView;
+
         deleteAccountView.getConfirmButton().addActionListener(e -> deleteAccount());
         deleteAccountView.getReturnButton().addActionListener(e -> returnUserProfileView());
     }
@@ -21,6 +22,7 @@ public class DeleteAccountController {
     private void deleteAccount() {
         UserAccountManager userAccountManager = new UserAccountManager();
         String userName = userAccountManager.getUserName();
+
         if (userAccountManager.deleteExistingAccount(userName)) {
             JOptionPane.showMessageDialog(deleteAccountView, "Cuenta eliminada correctamente.");
             deleteAccountView.dispose();
@@ -31,6 +33,7 @@ public class DeleteAccountController {
             JOptionPane.showMessageDialog(deleteAccountView, "Cuenta no existe");
             returnUserProfileView();
         }
+
     }
 
     private void returnUserProfileView() {

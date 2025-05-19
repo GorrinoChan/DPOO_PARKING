@@ -22,7 +22,9 @@ public class SignInController {
         String password = signInView.getPassword();
         String confirmPassword = signInView.getPasswordConfirmation();
         UserAccountManager userAccountManager = new UserAccountManager();
+
         ArrayList<Boolean> validateSignIn = userAccountManager.signUp(userName, email, password, confirmPassword);
+
         if (userName.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             signInView.setErrorMessage("Todos los campos son obligatorios.");
         } else if (!validateSignIn.get(0)) {

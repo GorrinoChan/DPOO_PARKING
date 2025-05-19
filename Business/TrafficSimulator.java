@@ -32,6 +32,7 @@ public class TrafficSimulator implements Runnable{
         this.i = 1;
         //BUCLE INFINITO
         while(i == 1){
+
             //LEEMOS EK FICHERO EN BUSCA DEL TIEMPO
             try{
                 Configuration configuration = sqlConfigurationDao.readJson();
@@ -45,16 +46,22 @@ public class TrafficSimulator implements Runnable{
                 //NUMERO DE PLAZAS DISPONIBLES
                 List<Slot> allSlotsFree = slotDAO.readAllSlotsContentInDb();
                 int amountOfSlots = allSlotsFree.size();
+
                 //CON EL NUMERO DE VEHICLES SIMULATED TENEMOS EEL NUMERO DE PLAZAS RESERVADAS POR NO USUARIOS
                 List<Vehicle> vehiclesSimulated =  vehicleDao.readSpecificVehicleOfDb("nameOfUserAccount", "SIMULATOR");
                 int amountOfReservedButNotUserSlots = vehiclesSimulated.size();
+
                 //CALCULAMOS LAS PROBABILIDAD (PLAZAS  RESERVADAS POR NO USUAARIO DIVIDIDO EL TOTAL D EPLAZAS TANTO LIBRES COMO NO DE USUARIOS)
                 float probability = (float) amountOfReservedButNotUserSlots / (amountOfSlots + amountOfReservedButNotUserSlots);
+
                 //GENERAMOS UN NUMERO RANDOM
                 Random randomNumbers = new Random();
                 int resultOfTheRandomNumber = randomNumbers.nextInt(2);
+                System.out.println(probability + "/" + resultOfTheRandomNumber);
+
                 //HEMOS SUPERADO LA PROBABILIDAD METEMOS UN COCHE
                 if (probability < resultOfTheRandomNumber){
+                    System.out.println("Metemos coche");
                     //MIRAMOS SI HAY PLAZAS PARA METER COCHES
                     if(!allSlotsFree.isEmpty()){
                         //MIRAMOS LA PRIMERA PLAZA LIBRE Y GENERAMOS UN VEHICULO QUE CUMPLA LAS CONDICIONES
@@ -81,6 +88,7 @@ public class TrafficSimulator implements Runnable{
                         }
                     }
                 }
+
                 //SE TIENE QUE SACAR UN COCHE
                  if(probability > resultOfTheRandomNumber){
                      System.out.println("Sacamos coche");
@@ -105,17 +113,24 @@ public class TrafficSimulator implements Runnable{
                         }
                     }
                 }
+
+
+
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+
+
         }
+
     }
 
     public void stopInteger (){
         this.i = 0;
     }
+
     public void resumInteger(){
         this.i = 1;
     }

@@ -16,6 +16,7 @@ public class CheckPlateController {
     public CheckPlateController(CheckPlateView checkPlateView, UserMenuView userMenuView) {
         this.checkPlateView = checkPlateView;
         this.userMenuView = userMenuView;
+
         checkPlateView.getReturnButton().addActionListener(e -> returnToEnterParkingView());
         checkPlateView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         checkPlateView.getConfirmButton().addActionListener(e-> confirmEntrance());
@@ -34,10 +35,10 @@ public class CheckPlateController {
         new EnterParkingController(enterParkingView, userMenuView);
         enterParkingView.setVisible(true);
     }
-
     private void confirmEntrance() {
         String plate = checkPlateView.getPlate();
         UserSlotManager userSlotManager = new UserSlotManager();
+
         if (plate.isEmpty()) {
             checkPlateView.setErrorMessage("Introduzca una matrícula valida.");
         } else {

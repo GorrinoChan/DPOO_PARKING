@@ -1,6 +1,7 @@
 package Persistence;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
 
 public class SqlDao {
@@ -12,11 +13,11 @@ public class SqlDao {
     private final String iniciUrl = "jdbc:mysql://";
 
     public SqlDao(SqlConfigurationDao configurationDao) throws FileNotFoundException {
-        this.username = configurationDao.readJson().getDataBaseUsername();
+        this.username = configurationDao.readJson().getDatabaseUsername();
         System.out.println(this.username);
-        this.password = configurationDao.readJson().getDataBasePassword();
+        this.password = configurationDao.readJson().getDatabasePassword();
         System.out.println(this.password);
-        this.url = iniciUrl + configurationDao.readJson().getDataBaseHost() + ":" + configurationDao.readJson().getDataBasePort() + "/" + configurationDao.readJson().getDataBaseName();
+        this.url = iniciUrl + configurationDao.readJson().getDatabaseHost() + ":" + configurationDao.readJson().getDatabasePort() + "/" + configurationDao.readJson().getDatebaseName();
         System.out.println(this.url);
     }
 

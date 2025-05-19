@@ -1,40 +1,40 @@
 package Business.Entities;
 
 public class Configuration {
-    private String dataBaseHost;
-    private String dataBaseName;
-    private String dataBaseUsername;
-    private String dataBasePassword;
-    private int dataBasePort;
+    private String databaseHost;
+    private String databaseName;
+    private String databaseUsername;
+    private String databasePassword;
+    private int databasePort;
     private double timeVehicle;
 
-    public Configuration(String dataBaseHost, String dataBaseName, String dataBaseUsername, String dataBasePassword, int dataBasePort, double timeVehicle) {
-        this.dataBaseHost = dataBaseHost;
-        this.dataBaseName = dataBaseName;
-        this.dataBaseUsername = dataBaseUsername;
-        this.dataBasePassword = dataBasePassword;
-        this.dataBasePort = dataBasePort;
+    public Configuration(String databaseHost, String datebaseName, String databaseUsername, String databasePassword, int databasePort, double timeVehicle) {
+        this.databaseHost = databaseHost;
+        this.databaseName = datebaseName;
+        this.databaseUsername = databaseUsername;
+        this.databasePassword = databasePassword;
+        this.databasePort = databasePort;
         this.timeVehicle = timeVehicle;
     }
 
-    public String getDataBaseHost() {
-        return dataBaseHost;
+    public String getDatabaseHost() {
+        return databaseHost;
     }
 
-    public String getDataBaseName() {
-        return dataBaseName;
+    public String getDatebaseName() {
+        return databaseName;
     }
 
-    public String getDataBaseUsername() {
-        return dataBaseUsername;
+    public String getDatabaseUsername() {
+        return databaseUsername;
     }
 
-    public String getDataBasePassword() {
-        return dataBasePassword;
+    public String getDatabasePassword() {
+        return databasePassword;
     }
 
-    public int getDataBasePort() {
-        return dataBasePort;
+    public int getDatabasePort() {
+        return databasePort;
     }
 
     public double getTimeVehicle() {

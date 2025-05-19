@@ -9,6 +9,7 @@ public class UserProfileController {
     public UserProfileController(UserProfileView userProfileView, UserMenuView userMenuView) {
         this.userProfileView = userProfileView;
         this.userMenuView = userMenuView;
+
         userProfileView.getLogOutButton().addActionListener(e -> openLogOutView());
         userProfileView.getDeleteAccountButton().addActionListener(e -> openDeleteAccountView());
         userProfileView.getReturnButton().addActionListener(e -> returnToPreviousView());

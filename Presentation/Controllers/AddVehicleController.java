@@ -13,6 +13,7 @@ public class AddVehicleController {
     public AddVehicleController(AddVehicleView addVehicleView, UserMenuView userMenuView) {
         this.addVehicleView = addVehicleView;
         this.userMenuView = userMenuView;
+
         addVehicleView.getReturnButton().addActionListener(e -> returnToMenu());
         addVehicleView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         addVehicleView.getConfirmButton().addActionListener(e-> confirmVehicle());
@@ -29,12 +30,12 @@ public class AddVehicleController {
         addVehicleView.dispose();
         userMenuView.setVisible(true);
     }
-
     private void confirmVehicle() {
         String plate = addVehicleView.getPlateTextField();
         String type = addVehicleView.getTypeVehicleTextField();
         UserAccountManager userAccountManager = new UserAccountManager();
         String userName = userAccountManager.getUserName();
+
         if (type.equals("Car") || type.equals("Large Car") || type.equals("Motorcycle")) {
             addVehicleView.setErrorMessage("");
             if (userAccountManager.addAVehicleToUserAccount(plate, userName, type)){
@@ -46,5 +47,7 @@ public class AddVehicleController {
         } else {
             addVehicleView.setErrorMessage("Tipo de vehículo no valido.");
         }
+
+
     }
 }

@@ -20,6 +20,7 @@ public class SlotReservationsController {
     public SlotReservationsController(SlotReservationsView slotReservationsView, UserMenuView userMenuView) {
         this.slotReservationsView = slotReservationsView;
         this.userMenuView = userMenuView;
+
         slotReservationsView.getReturnButton().addActionListener(e -> returnToPrevious());
         slotReservationsView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         slotReservationsView.getCarButton().addActionListener(e -> updateTable("Car"));
@@ -48,9 +49,11 @@ public class SlotReservationsController {
         String userName = userAccountManager.getUserName();
         List<Reservation> reservations = userSlotManager.readUserReservationByUserName(userName);
         DefaultTableModel model = new DefaultTableModel(new String[]{"Fecha", "Matrícula", "Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);
+
         for (Reservation reservation : reservations) {
             if (reservation.getTypeOfPlace().equals(vehicleType) && !reservation.isCancelled()) {
                 model.addRow(new Object[]{reservation.getDate(), reservation.getLicencePlate(), reservation.getTypeOfPlace(), reservation.getNumber(), reservation.getFloor()});
+
             }
             slotReservationsView.updateReservationsTable(model);
         }

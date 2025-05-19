@@ -40,8 +40,8 @@ public class AdminCreateSlotController {
      */
     private void createSlot() {
         String slotNumberText = adminCreateSlot.getnumber();
-        String floorNumberText = adminCreateSlot.getfloor();
-        String typeOfPlace = adminCreateSlot.gettype();
+        String floorNumberText = adminCreateSlot.getfloaat();
+        String typeOfPlace = adminCreateSlot.gettipe();
 
         if (slotNumberText.isEmpty() || floorNumberText.isEmpty() || typeOfPlace == null || typeOfPlace.isEmpty()) {
             adminCreateSlot.setErrorMessage("Todos los campos son obligatorios.");

@@ -11,6 +11,7 @@ public class LoadController {
 
     public LoadController(LoadView loadView) {
         this.loadView = loadView;
+
         InitializationManager initializationManager = new InitializationManager();
         new Thread(() -> {
             try {
@@ -21,10 +22,12 @@ public class LoadController {
                     new LogInController(logInView);
                     logInView.setVisible(true);
                 }
+
             } catch (Exception e) {
                 loadView.setErrorMessage("Error: " + e.getMessage());
             }
         }).start();
+
     }
 
     private boolean verificarInicializacion(InitializationManager initializationManager) {
@@ -34,18 +37,23 @@ public class LoadController {
         } catch (RuntimeException e) {
             loadView.setErrorMessage("Archivo JSON no encontrado: " + e.getMessage());
             verificacion = false;
+
         }
+
         try {
             initializationManager.readJsonForConfigDb();
         } catch (FileNotFoundException e) {
             loadView.setErrorMessage("Error al leer configuración de la base de datos");
             verificacion = false;
+
         }
+
         try {
             initializationManager.tryToConnectToDb();
         } catch (FileNotFoundException e) {
             loadView.setErrorMessage("No se ha encotrado el fichero de la base de datos");
             verificacion = false;
+
         } catch (SQLException e) {
             loadView.setErrorMessage("La contraseña de la base de datos no es correcta");
             verificacion = false;

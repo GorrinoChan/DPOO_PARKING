@@ -11,7 +11,7 @@ import java.awt.*;
 public class AdminCreateSlot extends JFrame {
 
     // Botón para regresar a la vista anterior
-    private JButton returnButton, createButton, userProfileButton;
+    private JButton returnButton, CreateButton, userProfileButton;
 
     // Etiquetas para los campos de entrada y título
     private JLabel numberLabel, floatLabel, tipeLabel, titleLabel, errorLabel;
@@ -40,7 +40,7 @@ public class AdminCreateSlot extends JFrame {
      * @return JButton de creación.
      */
     public JButton getCreateButton() {
-        return createButton;
+        return CreateButton;
     }
 
     /**
@@ -53,13 +53,13 @@ public class AdminCreateSlot extends JFrame {
      * Obtiene el valor del campo de texto del piso.
      * @return Texto del piso.
      */
-    public String getfloor() { return floatTextField.getText(); }
+    public String getfloaat() { return floatTextField.getText(); }
 
     /**
      * Obtiene el valor del campo de texto del tipo de vehículo.
      * @return Texto del tipo de vehículo.
      */
-    public String gettype() { return tipeTextField.getText(); }
+    public String gettipe() { return tipeTextField.getText(); }
 
     /**
      * Establece el mensaje de error a mostrar en la vista.
@@ -154,10 +154,10 @@ public class AdminCreateSlot extends JFrame {
         panel.add(errorLabel, gbc);
 
         // Botón de creación
-        createButton = new JButton("Crear");
+        CreateButton = new JButton("Crear");
         gbc.gridx = 1;
         gbc.gridy = 10;
-        panel.add(createButton, gbc);
+        panel.add(CreateButton, gbc);
 
         c.add(panel, BorderLayout.CENTER);
     }

@@ -2,7 +2,9 @@ package Business.Managers;
 
 import Business.Entities.Account;
 import Business.Entities.Configuration;
+import Business.Entities.Reservation;
 import Persistence.AccountDao;
+import Persistence.ReservationDao;
 import Persistence.SqlConfigurationDao;
 import Persistence.SqlDao;
 
@@ -17,10 +19,12 @@ public class InitializationManager {
     private SqlConfigurationDao sqlConfigurationDao;
     private SqlDao sqlDao;
     private AccountDao  accountDao;
+    private ReservationDao reservationDao;
 
 
     public InitializationManager() {
         this.accountDao = new AccountDao();
+        this.reservationDao = new ReservationDao();
     }
 
     public void prepareReadJson(){
@@ -41,6 +45,7 @@ public class InitializationManager {
 
     public void tryToDisconectDB(){
         this.sqlDao.disconnect();
+
     }
 
     public ArrayList<Boolean> logIn (String emailOrUserName, String password){
@@ -54,10 +59,12 @@ public class InitializationManager {
             }else{
                 account = this.accountDao.readSpecificAccountOfDb("emailOfUserAccount", emailOrUserName);
             }
+
             if(account.isEmpty()){
                 arrayWithAllInfoInLogInAnalysis.add(false);
                 arrayWithAllInfoInLogInAnalysis.add(false);
                 arrayWithAllInfoInLogInAnalysis.add(false);
+
             }else{
                 arrayWithAllInfoInLogInAnalysis.add(true);
                 if(account.get(0).getPassword().equals(password)){
@@ -79,6 +86,7 @@ public class InitializationManager {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+
         return arrayWithAllInfoInLogInAnalysis;
     }
 
@@ -86,8 +94,9 @@ public class InitializationManager {
         List<Account> account;
         int numberOfCancellations = 0;
         try{
-            account = this.accountDao.readSpecificAccountOfDb("nameOfUserAccount",userName);
-            numberOfCancellations = account.get(0).getSlotCancellations();
+            account = accountDao.readSpecificAccountOfDb("nameOfUserAccount",userName);
+            numberOfCancellations = account.get(0).getSlotCancelations();
+            System.out.println(numberOfCancellations);
             SqlDao.getInstance().updateIntAndBolean("account", "slotCancelations", "0",userName,"nameOfUserAccount");
         } catch (SQLException e) {
             throw new RuntimeException(e);

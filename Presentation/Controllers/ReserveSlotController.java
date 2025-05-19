@@ -20,6 +20,7 @@ public class ReserveSlotController {
     public ReserveSlotController(ReserveSlotView reserveSlotView, UserMenuView userMenuView) {
         this.reserveSlotView = reserveSlotView;
         this.userMenuView = userMenuView;
+
         reserveSlotView.getReturnButton().addActionListener(e -> returnToPrevious());
         reserveSlotView.getUserProfileButton().addActionListener(e -> openUserProfileView());
         reserveSlotView.getConfirmButton().addActionListener(e -> confirmReservation());
