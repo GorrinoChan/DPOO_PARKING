@@ -55,15 +55,12 @@ public class AdminSlotAvaliableView extends JFrame {
         setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
-
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(4, 0, 4, 0);
-
         // Botón de retorno
         returnButton = new JButton("<");
         returnButton.setBorderPainted(false);
@@ -71,7 +68,6 @@ public class AdminSlotAvaliableView extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(returnButton, gbc);
-
         // Botón de perfil
         userProfileButton = new JButton("User");
         gbc.gridx = 4;
@@ -79,7 +75,6 @@ public class AdminSlotAvaliableView extends JFrame {
         gbc.gridwidth = 1;
         gbc.insets = new Insets(4, 20, 4, 0);
         panel.add(userProfileButton, gbc);
-
         // Título
         gbc.insets = new Insets(4, 0, 4, 0);
         titleLabel = new JLabel("PARKING LS", SwingConstants.CENTER);
@@ -88,7 +83,6 @@ public class AdminSlotAvaliableView extends JFrame {
         gbc.gridy = 0;
         gbc.gridwidth = 3;
         panel.add(titleLabel, gbc);
-
         // Tabla y scroll
         slotTable = new JTable();
         scrollPane = new JScrollPane(slotTable);

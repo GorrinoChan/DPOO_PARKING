@@ -2,8 +2,7 @@ package Presentation.Controllers;
 
 import Business.Entities.Slot;
 import Business.Managers.UserSlotManager;
-import Presentation.Views.AdminMenuView;
-import Presentation.Views.SlotAvaliableView;
+import Presentation.Views.SlotAvailableView;
 import Presentation.Views.UserMenuView;
 import Presentation.Views.UserProfileView;
 
@@ -12,10 +11,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class SlotAvaliableController {
-    private SlotAvaliableView slotAvaliableView;
+    private SlotAvailableView slotAvaliableView;
     private UserMenuView userMenuView;
 
-    public SlotAvaliableController(SlotAvaliableView slotAvaliableView, UserMenuView userMenuView) {
+    public SlotAvaliableController(SlotAvailableView slotAvaliableView, UserMenuView userMenuView) {
         this.slotAvaliableView = slotAvaliableView;
         this.userMenuView = userMenuView;
         slotAvaliableView.getReturnButton().addActionListener(e -> returnToMenu());
@@ -50,6 +49,6 @@ public class SlotAvaliableController {
                 model.addRow(new Object[]{slot.getTypeOfPlace(), slot.getNumber(), slot.getFloor()});
             }
         }
-        slotAvaliableView.updateSlotsAvaliableTable(model);
+        slotAvaliableView.updateSlotsAvailableTable(model);
     }
 }

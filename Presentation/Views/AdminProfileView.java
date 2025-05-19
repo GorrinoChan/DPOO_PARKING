@@ -46,15 +46,12 @@ public class AdminProfileView extends JFrame {
         setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
-
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(100, 0, 100, 0);
-
         // Botón de retorno
         returnButton = new JButton("<");
         returnButton.setBorderPainted(false);
@@ -62,7 +59,6 @@ public class AdminProfileView extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(returnButton, gbc);
-
         // Título del perfil
         titleLabel = new JLabel("Usuario", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
@@ -70,14 +66,12 @@ public class AdminProfileView extends JFrame {
         gbc.gridy = 0;
         gbc.gridwidth = 6;
         panel.add(titleLabel, gbc);
-
         // Botón de cerrar sesión
         gbc.insets = new Insets(8, 0, 8, 0);
         logOutButton = new JButton("Cerrar Sesión");
         gbc.gridx = 1;
         gbc.gridy = 1;
         panel.add(logOutButton, gbc);
-
         // Etiquetas vacías para espaciado
         gbc.insets = new Insets(10, 0, 10, 0);
         for (int i = 2; i <= 5; i++) {
@@ -85,7 +79,6 @@ public class AdminProfileView extends JFrame {
             gbc.gridy = i;
             panel.add(titleLabel, gbc);
         }
-
         c.add(panel, BorderLayout.CENTER);
     }
 }

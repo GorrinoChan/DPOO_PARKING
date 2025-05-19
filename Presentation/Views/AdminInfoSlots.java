@@ -81,15 +81,12 @@ public class AdminInfoSlots extends JFrame {
         setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
-
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(4, 0, 4, 0);
-
         // Botón de regreso
         returnButton = new JButton("<");
         returnButton.setBorderPainted(false);
@@ -97,7 +94,6 @@ public class AdminInfoSlots extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(returnButton, gbc);
-
         // Botón de perfil de usuario
         userProfileButton = new JButton("User");
         gbc.gridx = 4;
@@ -105,7 +101,6 @@ public class AdminInfoSlots extends JFrame {
         gbc.gridwidth = 1;
         gbc.insets = new Insets(4, 20, 4, 0);
         panel.add(userProfileButton, gbc);
-
         // Título
         gbc.insets = new Insets(4, 0, 4, 0);
         titleLabel = new JLabel("PARKING LS", SwingConstants.CENTER);
@@ -114,15 +109,12 @@ public class AdminInfoSlots extends JFrame {
         gbc.gridy = 0;
         gbc.gridwidth = 3;
         panel.add(titleLabel, gbc);
-
         // Botón de cancelación
         cancelButton = new JButton("Cancel");
         gbc.gridx = 1;
         gbc.gridy = 2;
         panel.add(cancelButton, gbc);
-
         c.add(panel, BorderLayout.NORTH);
-
         // Tabla vacía por defecto
         slotTable = new JTable();
         scrollPane = new JScrollPane(slotTable);

@@ -39,9 +39,9 @@ public class AdminCreateSlotController {
      * Valida los datos introducidos y llama al manager para intentar crear la plaza.
      */
     private void createSlot() {
-        String slotNumberText = adminCreateSlot.getnumber();
-        String floorNumberText = adminCreateSlot.getfloor();
-        String typeOfPlace = adminCreateSlot.gettype();
+        String slotNumberText = adminCreateSlot.getNumberOfSlot();
+        String floorNumberText = adminCreateSlot.getFloorOfSlot();
+        String typeOfPlace = adminCreateSlot.getTypeOfVehicle();
 
         if (slotNumberText.isEmpty() || floorNumberText.isEmpty() || typeOfPlace == null || typeOfPlace.isEmpty()) {
             adminCreateSlot.setErrorMessage("Todos los campos son obligatorios.");

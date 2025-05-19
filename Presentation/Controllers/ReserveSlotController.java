@@ -59,7 +59,7 @@ public class ReserveSlotController {
                     model.addRow(new Object[]{slot.getTypeOfPlace(), slot.getNumber(), slot.getFloor()});
                 }
             }
-            reserveSlotView.updateSlotsAvaliableTable(model);
+            reserveSlotView.updateSlotsAvailableTable(model);
         }
 
     }
@@ -67,7 +67,7 @@ public class ReserveSlotController {
     private void confirmReservation() {
         String plate = reserveSlotView.getPlateTextField();
         String type = reserveSlotView.getTypeVehicleTextField();
-        JTable table = reserveSlotView.getSlotsAvaliableTable();
+        JTable table = reserveSlotView.getSlotsAvailableTable();
         DefaultTableModel model = new DefaultTableModel(new String[]{"Tipo de Vehículo", "Planta", "Número de Plaza"}, 0);;
         int selectedRow = 0;
         int selectedSlot = 0;

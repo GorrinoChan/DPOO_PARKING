@@ -23,7 +23,7 @@ public class AdminEditSlots extends JFrame {
      * Obtiene el número de plaza que se desea buscar y editar.
      * @return Número de plaza a editar como cadena.
      */
-    public String getnumber1() {
+    public String getNumberOfSlotThatIsGoingToBeSearchAndEdit() {
         return numbersearchTextField.getText();
     }
 
@@ -31,7 +31,7 @@ public class AdminEditSlots extends JFrame {
      * Obtiene el nuevo número que se desea asignar a la plaza.
      * @return Nuevo número como cadena.
      */
-    public String getnumber2() {
+    public String getNumberOfSlotThatIsGoingToBeAssigned() {
         return numberTextField.getText();
     }
 
@@ -39,7 +39,7 @@ public class AdminEditSlots extends JFrame {
      * Obtiene el nuevo piso que se desea asignar a la plaza.
      * @return Nuevo piso como cadena.
      */
-    public String getfloat() {
+    public String getFloorOfSlot() {
         return floatTextField.getText();
     }
 
@@ -47,7 +47,7 @@ public class AdminEditSlots extends JFrame {
      * Obtiene el nuevo tipo de vehículo que se desea asignar a la plaza.
      * @return Tipo de vehículo como cadena.
      */
-    public String gettipe() {
+    public String getTypeOfVehicleThatIsGoingToBeAssign() {
         return tipeTextField.getText();
     }
 
@@ -92,15 +92,12 @@ public class AdminEditSlots extends JFrame {
         setSize(700, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
-
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(4, 0, 4, 0);
-
         // Botón de retorno
         returnButton = new JButton("<");
         returnButton.setBorderPainted(false);
@@ -108,7 +105,6 @@ public class AdminEditSlots extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(returnButton, gbc);
-
         // Botón de perfil de usuario
         userProfileButton = new JButton("User");
         gbc.gridx = 4;
@@ -116,7 +112,6 @@ public class AdminEditSlots extends JFrame {
         gbc.gridwidth = 1;
         gbc.insets = new Insets(4, 20, 4, 0);
         panel.add(userProfileButton, gbc);
-
         // Título de la ventana
         gbc.insets = new Insets(4, 0, 4, 0);
         titleLabel = new JLabel("PARKING LS", SwingConstants.CENTER);
@@ -125,66 +120,55 @@ public class AdminEditSlots extends JFrame {
         gbc.gridy = 0;
         gbc.gridwidth = 3;
         panel.add(titleLabel, gbc);
-
         // Etiqueta y campo para número a editar
         numbereditLabel = new JLabel("Numero de Plaza a Editar");
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
         panel.add(numbereditLabel, gbc);
-
         numbersearchTextField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 2;
         panel.add(numbersearchTextField, gbc);
-
         // Etiqueta y campo para nuevo número
         numberLabel = new JLabel("Numero");
         gbc.gridx = 1;
         gbc.gridy = 3;
         gbc.gridwidth = 1;
         panel.add(numberLabel, gbc);
-
         numberTextField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 4;
         panel.add(numberTextField, gbc);
-
         // Etiqueta y campo para nuevo piso
         floatLabel = new JLabel("Piso");
         gbc.gridx = 1;
         gbc.gridy = 5;
         panel.add(floatLabel, gbc);
-
         floatTextField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 6;
         panel.add(floatTextField, gbc);
-
         // Etiqueta y campo para nuevo tipo de vehículo
         tipeLabel = new JLabel("Tipo de vehiculo");
         gbc.gridx = 1;
         gbc.gridy = 7;
         panel.add(tipeLabel, gbc);
-
         tipeTextField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 8;
         panel.add(tipeTextField, gbc);
-
         // Etiqueta de error
         errorLabel = new JLabel(" ", SwingConstants.CENTER);
         errorLabel.setForeground(Color.RED);
         gbc.gridx = 1;
         gbc.gridy = 9;
         panel.add(errorLabel, gbc);
-
         // Botón de edición
         EditButton = new JButton("Editar");
         gbc.gridx = 1;
         gbc.gridy = 10;
         panel.add(EditButton, gbc);
-
         c.add(panel, BorderLayout.CENTER);
     }
 
